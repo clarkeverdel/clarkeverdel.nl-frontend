@@ -15,7 +15,7 @@ module.exports = {
         Object.assign({}, pages, {
           [`/post/${post.slug}`]: {
             page: '/post',
-            query: { slug: post.slug }
+            query: { slug: post.slug, apiRoute: 'post' }
           }
         }),
       {}
@@ -26,7 +26,7 @@ module.exports = {
         Object.assign({}, pages, {
           [`/project/${project.slug}`]: {
             page: '/post',
-            query: { slug: project.slug }
+            query: { slug: project.slug, apiRoute: 'projects' }
           }
         }),
       {}
@@ -36,8 +36,8 @@ module.exports = {
       (list, page) =>
         Object.assign({}, list, {
           [`/${page.slug}`]: {
-            page: '/post',
-            query: { slug: page.slug }
+            page: (page.slug == 'contact' ? '/contact' : '/post'),
+            query: { slug: page.slug, apiRoute: 'page' }
           }
         }),
       {}
