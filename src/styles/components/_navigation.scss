@@ -1,0 +1,65 @@
+.navbar {
+  min-height: 115px;
+
+  .navar-collapse {
+
+  }
+
+  .navbar-nav {
+    > .nav-item {
+      margin-left: 64px;
+
+      &.nav-item-text {
+        overflow: hidden;
+      }
+
+      > .nav-link {
+        font-weight: 700;
+        font-size: 0.875rem;
+        color: #5f6468;
+        @include text-transition(all);
+
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-image: linear-gradient(
+                        to right,
+                        $theme-color-light,
+                        $theme-color-light 50%,
+                        #5f6468 50%);
+        background-size: 200% 100%;
+        background-position: 100%;
+
+        &:hover,
+        &:focus {
+          color: #FFF;
+          background-position: 0%;
+        }
+      }
+    }
+  }
+}
+
+// .main-menu-container {
+//   .logo {
+//     display: block;
+//     margin: 20px auto;
+//     width:400px;
+//     text-align: center;
+//
+//     .loader-active {
+//       display: inline-block;
+//     }
+//
+//     svg {
+//       margin: 0px auto;
+//
+//     }
+//   }
+//
+//   .main-menu {
+//     a {
+//       text-decoration: none;
+//     }
+//   }
+//
+// }

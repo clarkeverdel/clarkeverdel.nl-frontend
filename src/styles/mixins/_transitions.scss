@@ -1,0 +1,7 @@
+@mixin text-transition($property){
+  transition: $property .3s ease-in-out;
+}
+
+@mixin fill-transition(){
+  transition: fill .3s ease-in-out;
+}

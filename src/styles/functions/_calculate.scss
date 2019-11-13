@@ -1,0 +1,9 @@
+@function vw($px){
+  $vw-unit: ($px / 1920) * 100;
+  @return #{$vw-unit}vw;
+}
+
+@function rem($size) {
+  $remSize: $size / 16;
+  @return #{$remSize}rem;
+}

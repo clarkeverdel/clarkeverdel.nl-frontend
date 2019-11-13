@@ -1,0 +1,177 @@
+.btn {
+  padding: 0.875rem 1.5rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  border-radius: 0;
+  font-size: 1rem;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  border: none;
+
+  &-dark {
+    background-color: $black;
+  }
+
+  &-primary {
+    background-color: $theme-color-blue;
+  }
+
+}
+
+// Animated button styles
+.btn-animated {
+  background-color: transparent;
+  overflow: hidden;
+  height: 56px;
+
+  .btn__part1 {
+    position: absolute;
+    left: 1px;
+    top: 1px;
+    z-index: 1;
+    margin: 0px;
+    height: 54px;
+    display: block;
+    width: 139px;
+
+    &:after {
+      content: "";
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 54px 31px 0 0;
+      position: absolute;
+      right: -31px;
+      top: 0;
+    }
+  }
+
+  .btn__part2 {
+    overflow: hidden;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+  }
+
+  .btn__part3 {
+    // Put the closing blue tags here
+    // Must be above all moving elements, but below the text.
+    // Windows closing left to right, right to left.
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    z-index: 2;
+    left: 0;
+    top: 0;
+
+    .slide {
+      display: block;
+      position: absolute;
+      height: 100%;
+
+      &-left {
+        width: calc(80%);
+        transform: translate(calc(-100%), 0);
+        z-index: 3;
+
+        &:before {
+          content: "";
+          width: calc(100% - 31px);
+          height: 100%;
+          background-color: $theme-color-blue;
+          display: inline-block;
+        }
+
+        &:after {
+          border-style: solid;
+          display: inline-block;
+          content: "";
+          width: 0;
+          height: 0;
+          top: 0px;
+          border-width: 56px 31px 0 0;
+          border-color:  $theme-color-blue transparent transparent  transparent;
+        }
+      }
+
+      &-right {
+        width: calc(20% + 32px);
+        transform: translate(calc(100%), 0);
+        right: 0;
+        z-index: 4;
+
+        &:before {
+          border-style: solid;
+          display: inline-block;
+          content: "";
+          width: 0;
+          height: 0;
+          top: 0px;
+          border-width: 0 0 56px 31px;
+          border-color: transparent  transparent $theme-color-blue  transparent;
+        }
+
+        &:after {
+          content: "";
+          width: calc(100% - 31px);
+          height: 100%;
+          background-color: $theme-color-blue;
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  .btn__text {
+    position: relative;
+    display: block;
+    z-index: 2;
+
+    span.text {
+      overflow: hidden;
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    span.arrow{
+      content: "";
+      width: 14px;
+      height: 16px;
+      display: inline-block;
+      position: relative;
+      vertical-align: middle;
+      background-image: url(/static/images/BTN_ARROW.svg);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-position: contain;
+    }
+  }
+
+  // Color variations
+  &.btn-dark {
+    .btn__part1 {
+      background-color: $theme-color-dark;
+
+      &:after {
+        border-color: $theme-color-dark transparent transparent transparent;
+      }
+    }
+    .btn__part2 {
+      background-color: $black;
+    }
+
+    &:hover{
+      background-image: none;
+
+      .btn__part3 {
+
+      }
+    }
+  }
+}

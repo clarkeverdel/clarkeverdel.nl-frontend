@@ -1,0 +1,17 @@
+<svg width="200" height="300" viewBox="0 0 200 300">
+
+
+      <radialGradient id="SVGID_1_123" cx="160.6982" cy="160.3057" r="129.5064" gradientUnits="userSpaceOnUse">
+          <stop  offset="0" style="stop-color:#00AEEF;"/>
+          <stop  offset="0.0608" style="stop-color:#00A2E4;"/>
+          <stop  offset="0.1969" style="stop-color:#008DCF;"/>
+          <stop  offset="0.3346" style="stop-color:#3D78BD;"/>
+          <stop  offset="0.4714" style="stop-color:#5D67B0;"/>
+          <stop  offset="0.607" style="stop-color:#6E58A5;"/>
+          <stop  offset="0.741" style="stop-color:#784B9E;"/>
+          <stop  offset="0.8728" style="stop-color:#7D429A;"/>
+          <stop  offset="1" style="stop-color:#7F3F98;"/>
+      </radialGradient>
+      <polygon style="fill:url(#SVGID_1_123);" points="0,210.045 464.004,0 646.908,404.045 182.903,614.09 "></polygon>
+
+</svg>
