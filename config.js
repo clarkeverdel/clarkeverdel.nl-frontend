@@ -1,1 +1,1 @@
-export const Config = {apiUrl: 'https://www.yourwoo.com'}
+export const Config = {apiUrl: 'https://cms.clarkeverdel.nl'}
