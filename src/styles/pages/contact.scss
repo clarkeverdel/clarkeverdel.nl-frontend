@@ -1,0 +1,73 @@
+@import "../variables";
+
+.navbar {
+  min-height: 115px;
+
+  .navbar-nav {
+    > .nav-item {
+      margin-left: 64px;
+
+      &.nav-item-text {
+        overflow: hidden;
+      }
+
+      > .nav-link {
+        font-weight: 700;
+        font-size: 0.875rem;
+        color: #FFF;
+
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-image: linear-gradient(
+                        to right,
+                        red,
+                        red 50%,
+                        #FFF 50%);
+        background-size: 200% 100%;
+        background-position: 100%;
+
+        &:hover,
+        &:focus {
+          color: red;
+          background-position: 0%;
+        }
+      }
+    }
+  }
+}
+
+.contact-heading {
+  margin-top: 3vw;
+
+  &__title {
+    max-width: 330px;
+
+    @media only screen AND (max-width: $screen-lg-max){
+      max-width: 300px;
+    }
+    @media only screen AND (max-width: $screen-md-max){
+      max-width: 270px;
+    }
+    @media only screen AND (max-width: $screen-sm-max){
+      max-width: 240px;
+    }
+  }
+
+  &__subtitle {
+    max-width: 400px;
+
+    @media only screen AND (max-width: $screen-lg-max){
+      max-width: 360px;
+    }
+    @media only screen AND (max-width: $screen-md-max){
+      max-width: 330px;
+    }
+    @media only screen AND (max-width: $screen-sm-max){
+      max-width: 300px;
+    }
+  }
+}
+
+.form--contact{
+  padding: 5vw 0 8vw;
+}

@@ -25,10 +25,39 @@ html {
 body {
   font-family: $theme-font;
 }
+
+
+h1,h2,h3,h4,h5,h6,
+.h1,.h2,.h3,.h4,.h5,.h6 {
+  font-family: $heading-font-family;
+  font-weight: $font__weight__black;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+
 h1 {
-  
+  font-size: 4.75rem;
+
+  @media only screen AND (max-width: $screen-lg-max){
+    font-size: 4.25rem;
+  }
+  @media only screen AND (max-width: $screen-md-max){
+    font-size: 3.75rem;
+  }
+  @media only screen AND (max-width: $screen-sm-max){
+    font-size: 3.25rem;
+  }
+}
+
+
+h1 {
+
 }
 
 h2 {
 
+}
+
+p {
+  line-height: 1.1;
 }

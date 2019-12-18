@@ -1,4 +1,14 @@
 .footer {
   padding: 1vw 5vw;
-  font-size: 1rem;
+  font-size: 0.8125rem;
+  text-align: center;
+  position: relative;
+  display: block;
+  align-items: center;
+
+  &__logo {
+    display: inline-flex;
+    align-items: center;
+    margin: 0 0 0 .5rem;
+  }
 }

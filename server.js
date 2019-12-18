@@ -1,12 +1,12 @@
 const express = require("express");
 const next = require("next");
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
-const handle = app.getRequestHandler()
+const handle = app.getRequestHandler();
 
-const mailer = require('./mailer')
+const mailer = require('./mailer');
 
 app
     .prepare()
@@ -22,16 +22,21 @@ app
         // })
 
         server.post('/api/contact', (req, res) => {
-          const { email = '', name = '', message = '' } = req.body
+          const { email = '', name = '', reason = '', description = '' } = req.body;
+          const emailHeading = `<p><strong>Reason of contacting: ${reason}</strong></p>`;
+          const emailBody = `<p>${description}</p>`;
+          let status = '';
 
-          mailer({ email, name, text: message }).then(() => {
-            console.log('successo')
-            res.send('successo')
+          mailer({ email, name, text: emailHeading + emailBody }).then((response) => {
+            status = 'Successfully sent an email via the contact form.';
+            res.send(status);
           }).catch((error) => {
-            console.log('failed', error)
-            res.send('badddd')
-          })
-        })
+            status = 'Failed sending the contact form';
+            res.send(status);
+          });
+
+          return status;
+        });
 
         server.get("/post/:slug", (req, res) => {
             const actualPage = "/post";

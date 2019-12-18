@@ -1,14 +1,18 @@
 const path = require('path')
 const glob = require('glob')
 const fetch = require('isomorphic-unfetch')
+const withTM = require('next-transpile-modules');
 
-module.exports = {
+module.exports = withTM({
+
+  transpileModules: ['gsap', 'gsap/CSSRulePlugin'],
+
   async exportPathMap(defaultPathMap) {
     const [postList, projectList, pageList] = await Promise.all([
       fetch("https://cms.clarkeverdel.nl/wp-json/wp/v2/posts").then(res => res.json()),
       fetch("https://cms.clarkeverdel.nl/wp-json/wp/v2/projects").then(res => res.json()),
       fetch("https://cms.clarkeverdel.nl/wp-json/wp/v2/pages").then(res => res.json())
-    ])
+    ]);
 
     const posts = postList.reduce(
       (pages, post) =>
@@ -19,7 +23,7 @@ module.exports = {
           }
         }),
       {}
-    )
+    );
 
     const projects = projectList.reduce(
       (pages, project) =>
@@ -30,7 +34,7 @@ module.exports = {
           }
         }),
       {}
-    )
+    );
 
     const pages = pageList.reduce(
       (list, page) =>
@@ -41,7 +45,7 @@ module.exports = {
           }
         }),
       {}
-    )
+    );
 
     return Object.assign({}, posts, pages, projects, {
       '/post': {
@@ -55,8 +59,17 @@ module.exports = {
       }
     })
   },
-  webpack: (config, { dev }) => {
+  webpack: (config, options) => {
     config.module.rules.push(
+      // {
+      //   test: [/\.js$/, /\.jsx$/],
+      //   exclude: ['/node_modules/', '/.next/', '/out/'],
+      //   loader: 'eslint-loader',
+      //   enforce: 'pre',
+      //   options: {
+      //     emitWarning: true,
+      //   },
+      // },
       {
         test: /\.(css|scss)/,
         loader: 'emit-file-loader',
@@ -80,8 +93,23 @@ module.exports = {
             }
           }
         ]
-      }
+      },
+      {
+        test: /\.svg$/,
+        use: [{
+          loader: '@svgr/webpack',
+          options: {
+            svgoConfig: {
+              plugins: {
+                removeViewBox: false
+              }
+            },
+            ref: true
+          }
+        }]
+      },
     );
     return config
   }
-};
+
+});

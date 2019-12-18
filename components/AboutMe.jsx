@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 
 class AboutMe extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
-  render () {
+  render() {
     return (
       <section className="wrapper about-me" id="about-me">
         <div className="about-me__wrapper">

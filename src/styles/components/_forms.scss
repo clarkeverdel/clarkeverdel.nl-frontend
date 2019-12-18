@@ -1,18 +1,107 @@
-.form-control {
-  color: $theme-color-blue;
-  background-color: rgba($theme-color-dark, .55);
-  border: none;
-  border-radius: 0;
-  font-size: 1.188rem;
-  font-weight: 500;
-  padding: 1.57rem 1.25rem;
 
-  &:focus {
-    background-color: rgba($theme-color-dark, .35);
+.form {
+  $parent: &;
+
+  &-control {
     color: #FFF;
+    height: auto;
+    background-color: rgba($theme-color-dark, .55);
+    border: none;
+    border-radius: 0;
+    font-size: 1.188rem;
+    font-weight: 500;
+    padding: rem(11) 1.25rem;
+    transition: background ease-in-out $default-transition-duration;
+    background-clip: unset;
+
+    &:focus {
+      background-color: rgba($theme-color-dark, .35);
+      color: #FFF;
+    }
+
+    @include placeholder {
+      color: $theme-color-blue;
+    }
   }
 
-  @include placeholder {
-    color: $theme-color-blue;
+  &-group {
+    margin-bottom: rem(30);
+
+    &-radios {
+      margin-bottom: rem(25);
+    }
+  }
+
+  &__element {
+    &__errors{
+      display: flex;
+    }
+    &__error {
+      margin-top: rem(5);
+      font-size: rem(14);
+      padding: rem(6) 0;
+      color: $theme-color-light;
+      animation: slide-in-from-bottom 1s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+
+      &:nth-child(1){
+        margin-top: 0;
+      }
+    }
+  }
+
+  &__button {
+    margin: 3rem auto 0;
+    display: block;
+  }
+
+  &__label,
+  &__legend{
+    color: $form-style-color;
+    font-weight: $font__weight__medium;
+    font-size: rem(17);
+  }
+
+  &--animated {
+    #{$parent}__element {
+      &--overflow {
+        overflow: hidden;
+      }
+      &--slide-from-bottom {
+        -webkit-transform: translateY(200%);
+        transform: translateY(200%);
+        -webkit-animation: slide-in-from-bottom 1s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+        animation: slide-in-from-bottom 1s cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+      }
+      &--delay-1 {
+        animation-delay: .2s;
+      }
+      &--delay-2 {
+        animation-delay: .4s;
+      }
+      &--delay-3 {
+        animation-delay: .6s;
+      }
+    }
+  }
+}
+
+@-webkit-keyframes slide-from-bottom {
+  0% {
+    -webkit-transform: translateY(200%);
+    transform: translateY(200%)
+  }
+  to {
+    -webkit-transform: translateY(0);
+    transform: translateY(0)
+  }
+}
+@keyframes slide-in-from-bottom{
+  0% {
+    -webkit-transform: translateY(200%);
+    transform: translateY(200%)
+  }
+  to {
+    -webkit-transform: translateY(0);
+    transform: translateY(0)
   }
 }

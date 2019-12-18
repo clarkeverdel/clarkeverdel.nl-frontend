@@ -1,4 +1,4 @@
-const nodemailer = require('nodemailer')
+const nodemailer = require('nodemailer');
 
 const username = "hello@clarkeverdel.nl";
 const password = "Hon76564";
@@ -14,23 +14,27 @@ const transporter = nodemailer.createTransport({
   tls: {
       ciphers: 'SSLv3'
   }
-})
+});
 
 const send = ({ email, name, text }) => {
-  const from = name && email ? `${name} <${email}>` : `${name || email}`
+  const senderEmail = "hello@clarkeverdel.nl";
+  const senderName = "Clarke Verdel";
+  const from = name && senderEmail ? `${name} <${senderEmail}>` : `${name || senderEmail}`;
+  const to = senderName && senderEmail ? `${senderName} <${senderEmail}>` : `${senderName || senderEmail}`;
+  const replyTo = name && email ? `${name} <${email}>` : `${name || email}`;
   const message = {
-    from,
-    to: 'hello@clarkeverdel.nl',
-    subject: `New message from ${from}`,
-    text,
-    replyTo: from
-  }
+    from: from,
+    to: to,
+    subject: `New message from ${name}`,
+    html: text,
+    replyTo: replyTo,
+  };
 
   return new Promise((resolve, reject) => {
     transporter.sendMail(message, (error, info) =>
       error ? reject(error) : resolve(info)
     )
-  })
-}
+  });
+};
 
-module.exports = send
+module.exports = send;

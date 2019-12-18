@@ -3,7 +3,7 @@
 <svg version="1.1" id="aboutme_text" class="aboutme_text" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 width="39.7px" height="212.6px" viewBox="0 0 39.7 212.6" style="enable-background:new 0 0 39.7 212.6;" xml:space="preserve">
 <style type="text/css">
-	.aboutme_text .st0{fill:#5F6468;}
+	#aboutme_text .st0{fill:#5F6468;}
 </style>
 <g>
 	<path class="st0" d="M4.5,195.9v-4l32.3-13.8v5.1l-8,3.2v15.4l8,3.2v5.1L4.5,195.9z M25,188.1l-14.8,6v0.1l14.8,6.1V188.1z"/>

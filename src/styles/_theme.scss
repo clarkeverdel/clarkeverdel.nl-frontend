@@ -1,0 +1,87 @@
+body {
+  margin: 0;
+  background-color: transparent;
+
+  &:not(.sb-show-main) {
+    background-color: $theme-color-dark;
+  }
+
+  h1, h2 {
+    color: $theme-color-light;
+  }
+
+  &.blue-bg {
+    background-color: $theme-color-blue;
+  }
+}
+
+.loader:empty {
+  position: absolute;
+  top: calc(50% - 4em);
+  left: calc(50% - 4em);
+  width: 6em;
+  height: 6em;
+  border: 1.1em solid rgba(0, 0, 0, 0.2);
+  border-left: 1.1em solid #000000;
+  border-radius: 50%;
+  animation: load8 1.1s infinite linear;
+}
+
+@keyframes load8 {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+svg {
+  max-width: 100%;
+}
+
+a {
+  color: #FFF;
+}
+
+.loader-hidden {
+  display: none;
+}
+.loader-active {
+  display: block;
+}
+
+.container-fluid {
+  padding: 0 8.75vw;
+}
+
+.container {
+  max-width: calc(815px + (8.75vw * 2);
+  padding: 0 8.75vw;
+}
+
+
+// text styles
+.text-dark {
+  color: $text-dark;
+}
+
+.lead {
+  font-size: rem(24);
+  font-weight: 400;
+
+  @media only screen AND (max-width: $screen-lg-max){
+    font-size: rem(22);
+  }
+  @media only screen AND (max-width: $screen-md-max){
+    font-size: rem(20);
+  }
+  @media only screen AND (max-width: $screen-sm-max){
+    font-size: rem(18);
+  }
+}
+
+
+.gs-dev-tools {
+  z-index: 999;
+}

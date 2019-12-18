@@ -1,6 +1,10 @@
 // Header
 header {
-  position: absolute;
+  position: relative;
   width: 100%;
   z-index: 999;
+
+  .container-fluid {
+    padding-right: 35px;
+  }
 }

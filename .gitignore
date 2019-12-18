@@ -3,6 +3,8 @@ node_modules
 .idea
 /out
 
+gsap-bonus.tgz
+
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
