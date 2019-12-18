@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import fetch from 'isomorphic-unfetch';
 import Error from 'next/error';
 
-import FormValidators from '../../functions/FormValidators';
+import FormValidators from '../../functions/formValidators';
 
 import {
   Alert, Button, Form, Input, FormGroup, Label, FormFeedback, Row, Col
