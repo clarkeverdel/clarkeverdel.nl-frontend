@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-unfetch';
-import Error from 'next/error';
-
 import FormValidators from '../../functions/formValidators';
 
 import {
-  Alert, Button, Form, Input, FormGroup, Label, FormFeedback, Row, Col
+  Button, Form, Input, FormGroup, Label, FormFeedback, Col
 } from 'reactstrap';
 
 import 'isomorphic-fetch';
@@ -170,7 +168,7 @@ class ContactForm extends Component {
     this.resetValidators();
   }
 
-  render(props, state) {
+  render() {
     const { userInfo, message, formIsValid, buttonClicked } = this.state;
     let {showForm} = this.state;
     let showMessage;
@@ -202,7 +200,7 @@ class ContactForm extends Component {
           ? (
             <Form className="form form--contact form--animated" onSubmit={(e) => { this.handleSubmit(e); }} noValidate>
               <FormGroup row>
-                <Col md={6} className="form__element--overflow">
+                <Col md={6} className="form__element form__element--overflow">
                   <div className="form__element--slide-from-bottom">
                     <Label for="name" className="form__label">Name</Label>
                     <Input
@@ -217,14 +215,14 @@ class ContactForm extends Component {
                     { this.displayValidationErrors('name') }
                   </div>
                 </Col>
-                <Col md={6} className="form__element--overflow">
+                <Col md={6} className="form__element form__element--overflow">
                   <div className="form__element--slide-from-bottom form__element--delay-1">
                     <Label for="email" className="form__label">Email</Label>
                     <Input
                       value={this.state.email}
                       type="email"
                       name="email"
-                      id="name"
+                      id="email"
                       placeholder="What's your email address?"
                       required
                       onChange={event => this.handleInputChange(event, 'email')}
@@ -239,7 +237,7 @@ class ContactForm extends Component {
                   </div>
                 </Col>
               </FormGroup>
-              <FormGroup row tag="fieldset" className="form-group-radios form__element--overflow">
+              <FormGroup row tag="fieldset" className="form-group-radios form__element form__element--overflow">
                 <Col md={12}>
                   <div className="form__element--slide-from-bottom form__element--delay-2">
                     <legend className="form__legend">Clarke, I need you for</legend>
@@ -314,7 +312,7 @@ class ContactForm extends Component {
                 </Col>
               </FormGroup>
 
-              <FormGroup row className="form-group-radios form__element--overflow">
+              <FormGroup row className="form-group-radios form__element form__element--overflow">
                 <Col md={12}>
                   <div className="form__element--slide-from-bottom form__element--delay-3">
                     <Label for="description" className="form__label">Description</Label>

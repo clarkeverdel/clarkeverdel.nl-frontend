@@ -2,8 +2,10 @@ const path = require('path')
 const glob = require('glob')
 const fetch = require('isomorphic-unfetch')
 const withTM = require('next-transpile-modules');
-
-module.exports = withTM({
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
+module.exports = withBundleAnalyzer(withTM({
 
   transpileModules: ['gsap', 'gsap/CSSRulePlugin'],
 
@@ -112,4 +114,4 @@ module.exports = withTM({
     return config
   }
 
-});
+}));

@@ -10,7 +10,7 @@ class AboutMe extends Component {
       <section className="wrapper about-me" id="about-me">
         <div className="about-me__wrapper">
           <div className="about-me__header">
-            <h2 className="about-me__header__title">About me</h2>
+            <h2 className="about-me__header__title h1">About me</h2>
           </div>
         </div>
       </section>

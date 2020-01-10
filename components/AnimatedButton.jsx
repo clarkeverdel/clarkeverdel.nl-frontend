@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import Link from './Link';
 import {
-  TimelineMax, TweenMax, Power0, Power1, Power2, Power3, Percent,
-} from 'gsap/all';
+  TimelineMax, TweenMax, Power0, Power1, Power2, Power3, gsap,
+} from 'gsap';
 
 
 class AnimatedButton extends Component {
@@ -25,7 +25,7 @@ class AnimatedButton extends Component {
   }
 
   componentDidMount() {
-    const { buttonTimeline } = this;
+    const buttonTimeline = gsap.timeline({paused: false}).timeScale(1);
     const buttonElement = this.buttonRef.current;
 
     // set button elements for tweening
@@ -40,14 +40,14 @@ class AnimatedButton extends Component {
     buttonTimeline.fromTo(buttonElement, {
       width: '150px', x: '-50', textAlign: 'right', paddingLeft: '0', paddingRight: '0',
     }, {
-      duration: 0.75, width: '215px', x: 0, textAlign: 'center', clearProps: ['paddingLeft', 'paddingRight'], ease: Power2.easeOut,
+      duration: 0.75, width: '215px', x: 0, textAlign: 'center',  ease: Power2.easeOut,
     }, '0.5');
     buttonTimeline.fromTo(buttonPart1, { x: -170 }, { duration: 0.75, x: 0, ease: Power2.easeOut }, '0.5');
-    buttonTimeline.fromTo(buttonPart2, { width: '52px', Percent: 100 }, {
-      duration: 0.75, width: '100%', xPercent: 0, ease: Power2.easeOut,
+    buttonTimeline.fromTo(buttonPart2, { width: '52px', left: '46px'}, {
+      duration: 0.75, width: '100%', left: 0, ease: Power2.easeOut,
     }, '0.5');
     buttonTimeline.fromTo(buttonText, { width: 0 }, { duration: 0.75, width: '140px', ease: Power0.easeOut }, '0.5');
-    buttonTimeline.fromTo(buttonArrow, { x: -17 }, { duration: 0.75, x: 0 }, '0.5');
+    buttonTimeline.fromTo(buttonArrow, {x: 0 }, { duration: 0.75, x: 0 }, '0.5');
     this.buttonTimeline.play();
 
     if (this.buttonColor) {

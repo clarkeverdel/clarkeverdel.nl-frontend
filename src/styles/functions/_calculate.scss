@@ -7,3 +7,12 @@
   $remSize: $size / 16;
   @return #{$remSize}rem;
 }
+
+
+@function step(){
+  // Need to calculate steps per viewport breakpoint
+  // like 0.9 for LG
+  // like 0.8 for MD
+  // like 0.65 for SM
+  // etc... USE THIS FOR FONTS,SIZES, MARGINS, ETC
+}

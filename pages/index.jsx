@@ -15,7 +15,14 @@ import AboutMe from '../components/AboutMe';
 import stylesheet from '../src/styles/pages/homepage.scss';
 
 class Index extends Component {
-  static async getInitialProps() {
+  static async getInitialProps(context) {
+
+    const { apiRoute } = context.query;
+    const homeRes = await fetch(
+      `${Config.apiUrl}/wp-json/postlight/v1/page/?slug=homepage`,
+    );
+    const home = await homeRes.json();
+
     const pageRes = await fetch(
       `${Config.apiUrl}/wp-json/postlight/v1/page?slug=welcome`,
     );
@@ -37,7 +44,7 @@ class Index extends Component {
     const projects = await projectsRes.json();
 
     return {
-      page, pages, projects,
+      page, pages, projects, home
     };
   }
 
@@ -79,12 +86,12 @@ class Index extends Component {
     //   </ul>
     // ));
 
-    const { headerMenu, projects } = this.props;
+    const { headerMenu, projects, home } = this.props;
 
     return (
       <BodyClassName className="page-home">
 
-        <Layout>
+        <Layout title={home.title.rendered}>
 
           <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
 

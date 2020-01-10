@@ -24,8 +24,12 @@
     }
   }
 
-  &-group {
+  &__element {
     margin-bottom: rem(30);
+  }
+
+  &-group {
+    margin-bottom: 0;
 
     &-radios {
       margin-bottom: rem(25);

@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import fetch from 'isomorphic-unfetch';
-import Error from 'next/error';
-
-import {FormGroup} from 'reactstrap';
-
 import 'isomorphic-fetch';
 
 class InputText extends Component {

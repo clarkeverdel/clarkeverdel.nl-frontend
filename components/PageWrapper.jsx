@@ -1,7 +1,4 @@
 import React from 'react';
-import Router from 'next/router';
-
-import { PageTransition } from 'next-page-transitions';
 import { Config } from '../config.js';
 
 const PageWrapper = (Comp) => (

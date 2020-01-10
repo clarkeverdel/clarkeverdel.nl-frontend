@@ -1,13 +1,20 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
-import Link from './Link';
-import Menu from './Menu';
 import { Config } from '../config.js';
 import stylesheet from '../src/styles/style.scss';
-import 'bootstrap/scss/bootstrap.scss';
+// ES Modules
+import parse from 'html-react-parser';
 
 class Header extends Component {
+
   render() {
+    let {title} = this.props;
+    if(!title){
+      title = 'Clarke Verdel - Full Stack Developer'
+    }else {
+      title = title + ' | Clarke Verdel - Full Stack Developer'
+    }
+
     return (
       <div>
         <Head>
@@ -22,9 +29,7 @@ class Header extends Component {
 
           <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
 
-          <title>
-            Clarke Verdel - Full Stack Developer
-          </title>
+          <title>{parse(title)}</title>
         </Head>
       </div>
     );

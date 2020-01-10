@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import fetch from 'isomorphic-unfetch';
 import Error from 'next/error';
 import BodyClassName from 'react-body-classname';
-import { TimelineMax } from 'gsap';
-import {Alert} from 'reactstrap';
+import { gsap, Power4, Power3, Power0 } from 'gsap';
 
 import Layout from '../components/Layout';
 import PageWrapper from '../components/PageWrapper';
@@ -12,9 +11,9 @@ import ContactForm from '../components/Contact/Form';
 import { Config } from '../config';
 import stylesheet from '../src/styles/pages/contact.scss';
 
-import Cross from '../public/static/images/CROSS.svg';
-import Triangle from '../public/static/images/TRIANGLE.svg';
-import Circle from '../public/static/images/CIRCLE.svg';
+import Cross from '../public/static/images/CROSS_DARK.svg';
+import Triangle from '../public/static/images/TRIANGLE_DARK.svg';
+import Circle from '../public/static/images/CIRCLE_DARK.svg';
 
 import 'isomorphic-fetch';
 
@@ -32,8 +31,14 @@ class Contact extends Component {
         emailState: '',
       },
     };
+
+    this.circleRef = React.createRef('circle');
+    this.crossRef = React.createRef('cross');
+    this.triangleRef = React.createRef('triangle');
+
     this.handleChange = this.handleChange.bind(this);
   }
+
 
   handleChange = async (event) => {
     const { target } = event;
@@ -43,6 +48,28 @@ class Contact extends Component {
       [name]: value,
     });
   };
+
+  onMouseMove(e) {
+    // Forced to pick elements via findDOMNode
+    // because the SVG element objects to no pass any DOM Data.
+    const x = e.pageX - (screen.width / 2);
+    const y = e.pageY - (screen.height / 2);
+    let rotation = (x / 30);
+    const cross = this.crossRef.current;
+    const triangle = this.triangleRef.current;
+    const circle = this.circleRef.current;
+
+    if (e.pageX < (screen.width / 2)) {
+      rotation = (x / 30);
+    }
+
+    // TODO: Use a QuickSetter from Gsap Docs to boost performance
+    gsap.to(circle,{duration: 2.5, css: {x: (x / 20), y: (y / 5)}, ease: Power4.easeOut });
+    gsap.to(triangle,{duration: 2.5, css: {x: (x / 30), y: (y / 10)}, ease: Power3.easeOut });
+    gsap.to(triangle,{duration: 2.5, css: {rotation}, ease: Power0.easeOut });
+    gsap.to(cross,{duration: 2.5, css: {x: (x / 30), y: (y / 10)}, ease: Power4.easeOut });
+    gsap.to(cross,{duration: 2.5, css: {rotation}, ease: Power4.easeOut });
+  }
 
   submitForm(e) {
     e.preventDefault();
@@ -82,54 +109,33 @@ class Contact extends Component {
   }
 
   componentDidMount() {
-    // TweenLite.to("#circle", 1, {morphSVG:"#cv_logo_nieuw"});
+    const tl = gsap.timeline({ repeat: 0});
+    const darkIconColor = 'rgb(23,18,32)';
 
-    const tl = new TimelineMax({ repeat: 0, yoyo: false });
-    tl.to('#SVGID_1_CVLOGO stop', 1, { attr: {}, stopColor: 'rgb(0,0,0)' }, 0)
-      .to('#SVGID_2_CVLOGO stop', 1, { attr: {}, stopColor: 'rgb(0,0,0)' }, 0)
-      .to('#SVGID_3_CVLOGO stop', 1, { attr: {}, stopColor: 'rgb(0,0,0)' }, 0)
-      .to('#cv_logo_nieuw .st4', 1, { attr: {}, fill: 'rgb(0,0,0)' }, 0);
+
+    // Change logo color
+    tl.to('#navbar-brand-img .CV_LOGO_svg__stroke-me stop', { css: {stopColor: darkIconColor}, duration: 1}, 0 );
+    tl.to('#navbar-brand-img .CV_LOGO_svg__st4', { css: {fill: darkIconColor}, duration: 1}, 0);
+
+    // Change mail icon color
+    tl.to('.MAIL_BTN_svg__mail_btn .MAIL_BTN_svg__st0', { css: {fill: darkIconColor, duration: 1}}, 0);
+
+    // Change hamburger icon color
+    tl.to('#HAMBURGER_svg__Group_7 path', { css: {fill: darkIconColor, duration: 1}}, 0);
+
   }
 
 
-  render(props, state) {
-    const self = this;
-    const { email, name, message, validate } = this.state;
-    let {showForm, hideForm} = this.state;
+  render() {
     const { post, headerMenu } = this.props;
 
     if (!post.title) return <Error statusCode={404} />;
-
-    let showMessage;
-
-    if (message === 'success') {
-      showForm = false;
-      showMessage = (
-        <div>
-          <Alert color="success">
-              Your message has been sent. I will contact you shortly.
-          </Alert>
-        </div>
-      );
-    } else if (message === 'error') {
-      hideForm = true;
-      showMessage = (
-        <div>
-          <Alert color="error">
-              There are some errors in your form. Please check them before submitting again.
-          </Alert>
-        </div>
-      );
-    } else {
-      hideForm = true;
-      showMessage = '';
-    }
 
     return (
 
       <BodyClassName className="blue-bg">
 
-        <Layout>
+        <Layout onMouseMove={this.onMouseMove.bind(this)} title={post.title.rendered}>
           <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
 
           <Menu menu={headerMenu} />
@@ -142,6 +148,11 @@ class Contact extends Component {
                 __html: post.content.rendered,
               }}
             />
+          </div>
+          <div className="container-fluid floating-elements-container">
+            <Cross className="cross" ref={this.crossRef} />
+            <Triangle className="triangle" ref={this.triangleRef} />
+            <Circle className="circle" ref={this.circleRef} />
           </div>
 
           <ContactForm />

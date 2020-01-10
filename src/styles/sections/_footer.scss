@@ -1,10 +1,14 @@
 .footer {
-  padding: 1vw 5vw;
+  padding: rem(32) 5vw;
   font-size: 0.8125rem;
   text-align: center;
   position: relative;
   display: block;
   align-items: center;
+
+  @media only screen AND (max-width: $screen-sm-max){
+    padding: rem(24) 5vw;
+  }
 
   &__logo {
     display: inline-flex;

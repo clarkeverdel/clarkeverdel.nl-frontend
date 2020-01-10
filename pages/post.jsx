@@ -17,10 +17,11 @@ class Post extends Component {
   }
 
   render() {
-    if (!this.props.post.title) return <Error statusCode={404} />;
+    const {post} = this.props;
+    if (!post.title) return <Error statusCode={404} />;
 
     return (
-      <Layout>
+      <Layout title={post.title.rendered}>
         <Menu menu={this.props.headerMenu} />
 
         <div className="container">

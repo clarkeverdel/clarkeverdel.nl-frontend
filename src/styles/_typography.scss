@@ -11,6 +11,10 @@ html {
   font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
   text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+
+  @media only screen AND (max-width: $screen-xs-max){
+    font-size: 92.5%;
+  }
 }
 
 ::selection {
@@ -35,7 +39,7 @@ h1,h2,h3,h4,h5,h6,
   margin: 0 0 1rem;
 }
 
-h1 {
+h1,.h1 {
   font-size: 4.75rem;
 
   @media only screen AND (max-width: $screen-lg-max){

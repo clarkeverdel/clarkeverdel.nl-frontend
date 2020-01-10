@@ -1,11 +1,170 @@
 // Homepage HomeOpening
+
+.home-barebone {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  left: 0;
+  top: 0;
+  background-color: $theme-color-light;
+  color: $theme-color-black;
+
+  &__logofull {
+    padding-left: rem(10);
+
+    svg {
+      height: 24px;
+      width: auto;
+    }
+  }
+
+  &__logo {
+    width: 100%;
+    height: 75px; //height: 90%;
+    display: flex;
+    position: absolute;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+
+    svg {
+      height: 75px;
+      max-height: 606px;
+      width: auto;
+      transform: translateY(115px);
+    }
+  }
+
+  &__title {
+    color: $theme-color-black;
+    font-size: rem(160);
+    line-height: 1;
+  }
+  &__subtitle {
+    color: $theme-color-black;
+    font-size: rem(48);
+    font-weight: 300;
+  }
+
+  &__code {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateX(12vw);
+    font-size: rem(14);
+
+    &__wrapper {
+      display: inline-flex;
+      flex-direction: column;
+    }
+  }
+
+  &__block {
+    transform: translateY((115/2)+px);
+  }
+
+  &__vertical-link {
+    position: absolute;
+
+    a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .isvg {
+      display: block;
+      margin: 0px auto;
+      text-align: center;
+    }
+
+    &.left-side {
+      left: 20px;
+    }
+
+    &.right-side {
+      right: 20px;
+    }
+
+    // about me
+    .aboutme__text {
+      height: 68px;
+      margin-bottom: 30px;
+    }
+
+    .aboutme__arrow {
+      height: 200px;
+      clip-path: inset(0 0 0 0);
+    }
+
+    // recent work
+    .recentwork__text {
+      height: 84px;
+      margin-bottom: 30px;
+    }
+
+    .recentwork__arrow {
+      height: 100px;
+      clip-path: inset(0 0 0 0);
+    }
+
+    // Add transitions
+    #AboutMe_svg__aboutme_text,
+    #RecentWork_svg__recentwork_text {
+      .AboutMe_svg__st0,
+      .RecentWork_svg__st0{
+        @include fill-transition();
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-image: linear-gradient(
+            to right,
+            #FFF,
+            #FFF 50%,
+            #5f6468 50%);
+        background-size: 200% 100%;
+        background-position: 100%;
+      }
+    }
+    .aboutme__arrow,
+    .recentwork__arrow {
+      path {
+        @include fill-transition();
+      }
+    }
+
+    // Active transitions
+    &:hover {
+      #AboutMe_svg__aboutme_text,
+      #RecentWork_svg__recentwork_text {
+        .AboutMe_svg__st0,
+        .RecentWork_svg__st0{
+          fill: $theme-color-dark;
+          background-position: 0;
+        }
+      }
+      .aboutme__arrow,
+      .recentwork__arrow {
+        path {
+          fill: $theme-color-blue;
+        }
+      }
+    }
+  }
+}
+
 .home-opening {
   $parent: &;
-  height: 100vh;
   position: relative;
   display: flex;
-  padding: 115px 0px 0;
-  background-color: $theme-color-light;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: $theme-color-dark;
+  clip-path: inset(0% 0% 100% 0%);
 
   &__background {
     width: 100%;
@@ -19,63 +178,28 @@
     z-index: 1;
     top: 0;
     background-color: $theme-color-dark;
-
-    //&:before {
-    //  content: "";
-    //  height: 100%;
-    //  width: 100%;
-    //  background-color: $theme-color-dark;
-    //  position: absolute;
-    //  left: 0;
-    //  top: 0;
-    //  //transition: height 2s ease;
-    //}
   }
 
-  &__backgroundlogo {
-    width: 90vw;
-    height: 70px; //height: 90%;
+  &__logo {
+    width: 100%;
+    height: 75px; //height: 90%;
     display: flex;
     position: absolute;
-    align-items: flex-start;
+    align-items: center;
     justify-content: center;
-    //margin: 100px;
     top: 0;
     left: 0;
-    z-index: 1;
-
-    @include media-breakpoint-up(xl) {
-      max-height: 700px;
-      width: 100%;
-    }
+    margin: 0 rem(32);
 
     svg {
-      max-height: 100%;
-      max-width: 100%;
-      margin: 115px 0 0;
+      height: 75px;
+      max-height: 606px;
+      width: auto;
+      transform: translateY(115px);
     }
-
   }
 
-  //&.animationEnabled {
-  //  .home-opening__background {
-  //    &:before {
-  //      height: 0;
-  //    }
-  //  }
-  //}
-}
-
-
-
-.home-opening-content {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex: 0 0 100%;
-  transform: translateY(calc(-57px + -0.5vw));
-
-  h1 {
+  &__title {
     font-size: 9vw;
     line-height: 1;
     position: relative;
@@ -94,7 +218,72 @@
     }
   }
 
-  .subtitle {
+  &__content {
+    $marginCorrection: (115 / 2);
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex: 0 0 100%;
+    align-items: center;
+    transform: translateY(-(115 / 2)+px);
+
+    .btn {
+      margin-top: vw(40);
+
+      @include media-breakpoint-up(xl) {
+        margin-top: rem(30);
+      }
+    }
+
+    .circle {
+      position: absolute;
+
+      @include media-breakpoint-up(xl){
+        right: -50px;
+        top: -30px;
+      }
+    }
+    .triangle {
+      position: absolute;
+
+      @include media-breakpoint-down(xl){
+        left: 15vw;
+        top: -4vw;
+      }
+
+      @include media-breakpoint-up(xl){
+        left: 140px;
+        top: -80px;
+      }
+    }
+    .cross {
+      transform: translate(0vw, -0.5rem);
+      position: relative;
+      display: inline-block;
+      margin: 0px 0.75rem;
+    }
+
+    &.animationEnabled {
+      .circle,
+      .triangle,
+      .cross {
+        transform: scale(2);
+      }
+    }
+
+    .circle,
+    .triangle,
+    .cross {
+      z-index: 3;
+      filter: blur(0);
+    }
+  }
+
+  &__block {
+    transform: translateY((115/2)+px);
+  }
+
+  &__subtitle {
     font-weight: 300;
     font-size: 3.2857142857vw;
     margin-top: vw(40);
@@ -112,211 +301,164 @@
     }
   }
 
-  .btn {
-    margin-top: vw(40);
-
-    @include media-breakpoint-up(xl) {
-      margin-top: rem(30);
-    }
-  }
-
-  .circle {
+  &__vertical-link {
     position: absolute;
 
-    @include media-breakpoint-up(xl){
-      right: -50px;
-      top: -30px;
-    }
-  }
-  .triangle {
-    position: absolute;
-
-    @include media-breakpoint-down(xl){
-      left: 15vw;
-      top: -4vw;
+    a {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    @include media-breakpoint-up(xl){
-      left: 140px;
-      top: -80px;
+    .isvg {
+      display: block;
+      margin: 0px auto;
+      text-align: center;
     }
-  }
-  .cross {
-    transform: translate(0vw, -0.5rem);
-    position: relative;
-    display: inline-block;
-    margin: 0px 0.75rem;
-  }
 
-  &.animationEnabled {
-    .circle,
-    .triangle,
-    .cross {
-      transform: scale(2);
+    &.left-side {
+      left: 20px;
     }
-  }
 
-  .circle,
-  .triangle,
-  .cross {
-    z-index: 3;
-  }
-}
-
-
-.vertical-link {
-  position: absolute;
-  margin-top: 2vw;
-
-  a {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .isvg {
-    display: block;
-    margin: 0px auto;
-    text-align: center;
-  }
-
-  &.left-side {
-    left: 20px;
-  }
-
-  &.right-side {
-    right: 20px;
-  }
-
-  // about me
-  .aboutme__text {
-    height: 68px;
-    margin-bottom: 30px;
-  }
-
-  .aboutme__arrow {
-    height: 200px;
-  }
-
-  // recent work
-  .recentwork__text {
-    height: 84px;
-    margin-bottom: 30px;
-  }
-
-  .recentwork__arrow {
-    height: 100px;
-  }
-
-  // Add transitions
-  #AboutMe_svg__aboutme_text,
-  #RecentWork_svg__recentwork_text {
-    .AboutMe_svg__st0,
-    .RecentWork_svg__st0{
-      @include fill-transition();
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-image: linear-gradient(
-                      to right,
-                      #FFF,
-                      #FFF 50%,
-                      #5f6468 50%);
-      background-size: 200% 100%;
-      background-position: 100%;
+    &.right-side {
+      right: 20px;
     }
-  }
-  .aboutme__arrow,
-  .recentwork__arrow {
-    path {
-      @include fill-transition();
+
+    // about me
+    .aboutme__text {
+      height: 68px;
+      margin-bottom: 30px;
     }
-  }
 
-  // Active transitions
-  &:hover {
+    .aboutme__arrow {
+      height: 200px;
+    }
 
+    // recent work
+    .recentwork__text {
+      height: 84px;
+      margin-bottom: 30px;
+    }
+
+    .recentwork__arrow {
+      height: 100px;
+    }
+
+    // Add transitions
     #AboutMe_svg__aboutme_text,
     #RecentWork_svg__recentwork_text {
       .AboutMe_svg__st0,
       .RecentWork_svg__st0{
-        fill: $theme-color-light;
-        background-position: 0;
+        @include fill-transition();
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-image: linear-gradient(
+            to right,
+            #FFF,
+            #FFF 50%,
+            #5f6468 50%);
+        background-size: 200% 100%;
+        background-position: 100%;
       }
     }
     .aboutme__arrow,
     .recentwork__arrow {
       path {
-        fill: $theme-color-blue;
+        @include fill-transition();
+      }
+    }
+
+    // Active transitions
+    &:hover {
+
+      #AboutMe_svg__aboutme_text,
+      #RecentWork_svg__recentwork_text {
+        .AboutMe_svg__st0,
+        .RecentWork_svg__st0{
+          fill: $theme-color-light;
+          background-position: 0;
+        }
+      }
+      .aboutme__arrow,
+      .recentwork__arrow {
+        path {
+          fill: $theme-color-blue;
+        }
       }
     }
   }
 }
 
-.animated-name {
-  font-size: 7rem;
 
-  svg {
-    position: absolute;
-    width: 100%;
-    height: 100%;
+
+.home-opening {
+
+  .animated-name {
+    font-size: 7rem;
+
+    svg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+    }
   }
-}
-.text--transparent {
-  fill: transparent;
-}
-
-.anim-shape {
-  -webkit-transform-origin: 0x 150px;
-  -ms-transform-origin: 0x 150px;
-  transform-origin: 0x 150px;
-  -webkit-transform: scale(0, 1) translate(0, 0);
-  -ms-transform: scale(0, 1) translate(0, 0);
-  transform: scale(0, 1) translate(0, 0);
-  -webkit-animation: moving-panel 3s 1 alternate;
-  animation: moving-panel 3s 1 alternate;
-}
-
-.colortext .anim-shape:nth-child(1) {
-  fill: #0E1826;
-}
-
-.colortext .anim-shape:nth-child(2) {
-  fill: #166973;
-}
-
-.colortext .anim-shape:nth-child(3) {
-  fill: #65BFA6;
-}
-
-.colortext .anim-shape:nth-child(4) {
-  fill: #F2CD5C;
-}
-
-.colortext .anim-shape:nth-child(5) {
-  fill: #F26444;
-}
-
-.shadow {
-  -webkit-transform: translate(10px, 10px);
-  -ms-transform: translate(10px, 10px);
-  transform: translate(10px, 10px);
-}
-
-.anim-shape--shadow {
-  fill: #000;
-  fill-opacity: .2;
-}
-
-@-webkit-keyframes moving-panel {
-  100% {
-    -webkit-transform: scale(1, 1) translate(20px, 0);
-    transform: scale(1, 1) translate(20px, 0);
+  .text--transparent {
+    fill: transparent;
   }
-}
 
-@keyframes moving-panel {
-  100% {
-    -webkit-transform: scale(1, 1) translate(20px, 0);
-    transform: scale(1, 1) translate(20px, 0);
+  .anim-shape {
+    -webkit-transform-origin: 0x 150px;
+    -ms-transform-origin: 0x 150px;
+    transform-origin: 0x 150px;
+    -webkit-transform: scale(0, 1) translate(0, 0);
+    -ms-transform: scale(0, 1) translate(0, 0);
+    transform: scale(0, 1) translate(0, 0);
+    -webkit-animation: moving-panel 3s 1 alternate;
+    animation: moving-panel 3s 1 alternate;
+  }
+
+  .colortext .anim-shape:nth-child(1) {
+    fill: #0E1826;
+  }
+
+  .colortext .anim-shape:nth-child(2) {
+    fill: #166973;
+  }
+
+  .colortext .anim-shape:nth-child(3) {
+    fill: #65BFA6;
+  }
+
+  .colortext .anim-shape:nth-child(4) {
+    fill: #F2CD5C;
+  }
+
+  .colortext .anim-shape:nth-child(5) {
+    fill: #F26444;
+  }
+
+  .shadow {
+    -webkit-transform: translate(10px, 10px);
+    -ms-transform: translate(10px, 10px);
+    transform: translate(10px, 10px);
+  }
+
+  .anim-shape--shadow {
+    fill: #000;
+    fill-opacity: .2;
+  }
+
+  @-webkit-keyframes moving-panel {
+    100% {
+      -webkit-transform: scale(1, 1) translate(20px, 0);
+      transform: scale(1, 1) translate(20px, 0);
+    }
+  }
+
+  @keyframes moving-panel {
+    100% {
+      -webkit-transform: scale(1, 1) translate(20px, 0);
+      transform: scale(1, 1) translate(20px, 0);
+    }
   }
 }

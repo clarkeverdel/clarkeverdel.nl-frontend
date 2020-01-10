@@ -42,7 +42,7 @@ app
             const actualPage = "/post";
             const queryParams = { slug: req.params.slug, apiRoute: "post" };
             app.render(req, res, actualPage, queryParams);
-        })
+        });
 
         // server.get("/page/:slug", (req, res) => {
         //     const actualPage = "/post";
@@ -56,10 +56,10 @@ app
             const actualPage = "/post";
             const queryParams = { slug: req.params.slug, apiRoute: "page" };
 
-            const actualPageBlog = "/contact";
+            const actualPageContact = "/contact";
 
             if(req.params.slug === "contact") {
-              app.render(req, res, actualPageBlog, queryParams);
+              app.render(req, res, actualPageContact, queryParams);
             }
             else {
               app.render(req, res, actualPage, queryParams);
@@ -73,13 +73,13 @@ app
             const queryParams = { slug: req.params.slug, apiRoute: "projects" };
             app.render(req, res, actualPage, queryParams);
         });
-/*
-        server.get("/_preview/:id/:wpnonce", (req, res) => {
-            const actualPage = "/preview";
-            const queryParams = { id: req.params.id, wpnonce: req.params.wpnonce };
-            app.render(req, res, actualPage, queryParams);
-        });
-*/
+
+        // server.get("/_preview/:id/:wpnonce", (req, res) => {
+        //     const actualPage = "/preview";
+        //     const queryParams = { id: req.params.id, wpnonce: req.params.wpnonce };
+        //     app.render(req, res, actualPage, queryParams);
+        // });
+
 
         server.get("*", (req, res) => {
             return handle(req, res);

@@ -18,24 +18,50 @@ export default class MyApp extends App {
 
     return (
       <div>
-        <PageTransition timeout={300} classNames="page-transition">
+        <PageTransition timeout={800} classNames="page-transition">
           <Component {...pageProps} key={router.query.slug} />
         </PageTransition>
         <style jsx global>
           {`
-          .page-transition-enter {
-            opacity: 0;
+          .page-transition-enter .menu-panel {
+            transform: translateX(-100%);
           }
-          .page-transition-enter-active {
-            opacity: 1;
-            transition: opacity 300ms;
+          .page-transition-enter-active .menu-panel {
+              animation: .8s cubic-bezier(.86,0,.07,1);
+              animation-name: hundredToZero;
           }
-          .page-transition-exit {
-            opacity: 1;
+          .page-transition-exit .menu-panel{
+            transform: translateX(0%);
           }
-          .page-transition-exit-active {
-            opacity: 0;
-            transition: opacity 300ms;
+          .page-transition-exit-active .menu-panel {
+              animation: .8s cubic-bezier(.86,0,.07,1);
+              animation-name: zeroToHundred;
+          }
+          .page-transition-enter-done .menu-panel {
+            transform: translateX(-100%);
+          }
+
+          @keyframes zeroToHundred {
+            0% {
+              -webkit-transform: translateX(-100%);
+              transform: translateX(-100%)
+            }
+            to {
+              -webkit-transform: translateX(0%);
+              transform: translateX(0%)
+            }
+          }
+
+          @keyframes hundredToZero {
+            0% {
+              -webkit-transform: translateX(0%);
+              transform: translateX(0%)
+            }
+
+            to {
+              -webkit-transform: translateX(100%);
+              transform: translateX(100%)
+            }
           }
         `}
         </style>
