@@ -31,8 +31,8 @@ module.exports = withBundleAnalyzer(withTM({
       (pages, project) =>
         Object.assign({}, pages, {
           [`/project/${project.slug}`]: {
-            page: '/post',
-            query: { slug: project.slug, apiRoute: 'projects' }
+            page: '/project',
+            query: { slug: project.slug, apiRoute: 'project' }
           }
         }),
       {}
@@ -54,7 +54,7 @@ module.exports = withBundleAnalyzer(withTM({
         page: '/post'
       },
       '/project': {
-        page: '/post'
+        page: '/project'
       },
       '/': {
         page: '/index'

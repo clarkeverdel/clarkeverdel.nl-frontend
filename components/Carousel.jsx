@@ -15,12 +15,21 @@ class Carousel extends Component {
       lockButton: false,
     };
 
-    props.children.forEach(child => {
-      this[`${child.key}_ref`] = React.createRef();
-      this[`item_cta-background_${child.key}`] = child.props.children[1].props.children[0].ref;
-      this[`item_cta-arrow_${child.key}`] = child.props.children[1].props.children[1].ref;
-      this[`item_outside_${child.key}`] = child.props.children[2].ref;
-    });
+    // props.children.map((child, index) => {
+    //   // this[`${child.key}_ref`] = React.createRef();
+    //   //console.log(child);
+    //   return child;
+    // });
+
+    // var firstRefs = refs.filter(obj => {
+    //   //console.log(obj[`${first.key}_ref`]);
+    //   return typeof obj[`${first.key}_ref`] !== 'undefined'
+    // });
+    //
+    // console.log(refs[this.itemPositionOrder[0]], first.key);
+    //
+    //
+
 
     this.itemPositionOrder = [0,1,3,4,2];
     this.getChildren = this.getChildren.bind(this);
@@ -30,15 +39,20 @@ class Carousel extends Component {
   }
 
   componentDidUpdate(){
+    const {refs} = this.props;
+
     if(this.state.sliding){
       const sortedItems = this.getChildren();
 
       const first = sortedItems[this.itemPositionOrder[0]];
+
+      console.log(first.props.refs);
+
       const firstItem = first.ref.current;
       const firstItemPosition = firstItem.getBoundingClientRect();
-      const firstItemCtaBackground = this[`item_cta-background_${first.key}`].current;
-      const firstItemCtaArrow = this[`item_cta-arrow_${first.key}`].current;
-      const firstItemOutside = this[`item_outside_${first.key}`].current;
+      const firstItemCtaBackground = first.props.refs[`item_cta-background_${first.key}`].current;
+      const firstItemCtaArrow = first.props.refs[`item_cta-arrow_${first.key}`].current;
+      const firstItemOutside = first.props.refs[`item_outside_${first.key}`].current;
       const secondItem = sortedItems[this.itemPositionOrder[1]].ref.current;
       const secondItemPosition = secondItem.getBoundingClientRect();
       const thirdItem = sortedItems[this.itemPositionOrder[2]].ref.current;
@@ -103,13 +117,12 @@ class Carousel extends Component {
   }
 
   getChildren(){
-    let { children } = this.props;
+    let { children, refs } = this.props;
 
     // Get position from item
     let items = children.map((child, index) => ({
       ...child,
-      position: this.getOrder(index),
-      ref: this[`${child.key}_ref`]
+      position: this.getOrder(index)
     }));
 
     // Sort items by position so it easy to pick the item by position like:
@@ -237,12 +250,11 @@ class Carousel extends Component {
   };
 
   render() {
-    const { children } = this.props;
+    const { children, refs } = this.props;
 
     let items = children.map((child, index) => ({
       ...child,
-      position: this.getOrder(index),
-      ref: this[`${child.key}_ref`]
+      position: this.getOrder(index)
     }));
 
     // Sort items by position so it easy to pick the item by position like:
@@ -260,7 +272,7 @@ class Carousel extends Component {
         <div className="recent-work__slider__wrapper">
           <div className="recent-work__slider__main">
             { sortedItems.slice(0,1).map((child, index) => (
-              <div className={`recent-work__slider__item${this.state.sliding ? ' sliding' : ''}${!this.state.isLocked ? ' finished' : ''}`}  order={child.position} style={{order: child.position}}  key={child.key} ref={this[`${child.key}_ref`]}>
+              <div className={`recent-work__slider__item${this.state.sliding ? ' sliding' : ''}${!this.state.isLocked ? ' finished' : ''}`}  order={child.position} style={{order: child.position}}  key={child.key} ref={child.props.refs[`${child.key}_ref`]}>
                 {child}
               </div>
             ))}
@@ -271,7 +283,7 @@ class Carousel extends Component {
           </div>
           <div className="recent-work__slider__thumbnails">
           { sortedItems.slice(1,5).map((child, index) => (
-            <div className={`recent-work__slider__item${this.state.sliding ? ' sliding' : ''}${!this.state.isLocked ? ' finished' : ''}`}  order={child.position} style={{order: child.position}}  key={child.key} ref={this[`${child.key}_ref`]}>
+            <div className={`recent-work__slider__item${this.state.sliding ? ' sliding' : ''}${!this.state.isLocked ? ' finished' : ''}`}  order={child.position} style={{order: child.position}}  key={child.key} ref={child.props.refs[`${child.key}_ref`]}>
               {child}
             </div>
           ))}
