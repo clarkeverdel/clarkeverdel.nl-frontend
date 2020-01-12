@@ -1,6 +1,7 @@
 .next
 node_modules
 .idea
+.env
 /out
 
 # Elastic Beanstalk Files

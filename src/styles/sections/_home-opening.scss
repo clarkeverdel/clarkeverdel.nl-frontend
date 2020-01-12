@@ -11,6 +11,7 @@
   top: 0;
   background-color: $theme-color-light;
   color: $theme-color-black;
+  overflow: hidden;
 
   &__logofull {
     padding-left: rem(10);
@@ -392,6 +393,7 @@
 
 
 .home-opening {
+  overflow: hidden;
 
   .animated-name {
     font-size: 7rem;

@@ -1,11 +1,19 @@
 const path = require('path')
 const glob = require('glob')
+const webpack = require('webpack')
 const fetch = require('isomorphic-unfetch')
 const withTM = require('next-transpile-modules');
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
+
+require("dotenv").config();
+
 module.exports = withBundleAnalyzer(withTM({
+  env: {
+    // Reference a variable that was defined in the .env file and make it available at Build Time
+    API_URL: process.env.API_URL,
+  },
 
   transpileModules: ['gsap', 'gsap/CSSRulePlugin'],
 
@@ -62,6 +70,7 @@ module.exports = withBundleAnalyzer(withTM({
     })
   },
   webpack: (config, options) => {
+
     config.module.rules.push(
       // {
       //   test: [/\.js$/, /\.jsx$/],
