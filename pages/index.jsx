@@ -82,7 +82,7 @@ class Index extends Component {
     return (
       <BodyClassName className="page-home">
 
-        <Layout title={page.title.rendered}>
+        <Layout title={(page && page.title && page.title.rendered ? page.title.rendered : false)}>
 
           <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
 
