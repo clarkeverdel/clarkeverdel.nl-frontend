@@ -6,7 +6,7 @@
     "es6": true,
     "commonjs": true
   },
-  "plugins": ["react"],
+  "plugins": ["react", "react-hooks"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -47,6 +47,7 @@
     "jsx-a11y/anchor-is-valid": 0,
     "no-underscore-dangle": 0,
     "react/no-find-dom-node": 0,
-    "no-nested-ternary": 0
+    "no-nested-ternary": 0,
+    "react-hooks/rules-of-hooks": "error"
   }
 }
