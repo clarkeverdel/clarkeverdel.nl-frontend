@@ -7091,9 +7091,9 @@ graceful-fs@^4.1.9:
   resolved "https://registry.yarnpkg.com/graceful-readlink/-/graceful-readlink-1.0.1.tgz#4cafad76bc62f02fa039b2f94e9a3dd3a391a725"
   integrity sha1-TK+tdrxi8C+gObL5Tpo906ORpyU=
 
-gsap@./gsap-bonus.tgz:
-  version "3.0.1"
-  resolved "./gsap-bonus.tgz#958bbf2803cbd7a402c4d64ff16871abdb6d394c"
+"gsap@file:./gsap-bonus.tgz":
+  version "3.0.4"
+  resolved "file:./gsap-bonus.tgz#5811f731a39b2aec165e618ff61fded8672b3d2c"
 
 gzip-size@5.0.0:
   version "5.0.0"
