@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-
 import fetch from 'isomorphic-unfetch';
 import BodyClassName from 'react-body-classname';
 import Layout from '../components/Layout';
@@ -16,15 +14,8 @@ import stylesheet from '../src/styles/pages/homepage.scss';
 
 class Index extends Component {
   static async getInitialProps(context) {
-
-    const { apiRoute } = context.query;
-    const homeRes = await fetch(
-      `${Config.apiUrl}/wp-json/postlight/v1/page/?slug=homepage`,
-    );
-    const home = await homeRes.json();
-
     const pageRes = await fetch(
-      `${Config.apiUrl}/wp-json/postlight/v1/page?slug=welcome`,
+      `${Config.apiUrl}/wp-json/postlight/v1/page?slug=homepage`,
     );
     const page = await pageRes.json();
 
@@ -44,7 +35,7 @@ class Index extends Component {
     const projects = await projectsRes.json();
 
     return {
-      page, pages, projects, home
+      page, pages, projects
     };
   }
 
@@ -86,12 +77,12 @@ class Index extends Component {
     //   </ul>
     // ));
 
-    const { headerMenu, projects, home } = this.props;
+    const { headerMenu, projects, page } = this.props;
 
     return (
       <BodyClassName className="page-home">
 
-        <Layout title={home.title.rendered}>
+        <Layout title={page.title.rendered}>
 
           <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
 
@@ -123,15 +114,5 @@ class Index extends Component {
     );
   }
 }
-
-Index.propTypes = {
-  headerMenu: PropTypes.element,
-  projects: PropTypes.element,
-};
-
-Index.defaultProps = {
-  headerMenu: null,
-  projects: null,
-};
 
 export default PageWrapper(Index);
