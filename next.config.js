@@ -72,15 +72,15 @@ module.exports = withBundleAnalyzer(withTM({
   webpack: (config, options) => {
 
     config.module.rules.push(
-      {
-        test: [/\.js$/, /\.jsx$/],
-        exclude: ['/node_modules/', '/.next/', '/out/'],
-        loader: 'eslint-loader',
-        enforce: 'pre',
-        options: {
-          emitWarning: true,
-        },
-      },
+      // {
+      //   test: [/\.js$/, /\.jsx$/],
+      //   exclude: ['/node_modules/', '/.next/', '/out/'],
+      //   loader: 'eslint-loader',
+      //   enforce: 'pre',
+      //   options: {
+      //     emitWarning: true,
+      //   },
+      // },
       {
         test: /\.(css|scss)/,
         loader: 'emit-file-loader',
