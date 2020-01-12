@@ -10,7 +10,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 require("dotenv").config();
 
 module.exports = withBundleAnalyzer(withTM({
-  target: 'serverless',
+  target: 'server',
   env: {
     // Reference a variable that was defined in the .env file and make it available at Build Time
     API_URL: process.env.API_URL,
