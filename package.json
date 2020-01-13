@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "node server.js",
         "build": "next build",
-        "start": "next start",
+        "start": "NODE_ENV=production node server.js",
         "export": "next build && next export",
         "docker:build": "docker build -t frontend .",
         "docker:clean": "docker rm -f frontend || true",
@@ -48,6 +48,7 @@
         "react-loaders": "^3.0.1",
         "react-router-dom": "^4.3.1",
         "reactstrap": "^6.4.0",
+        "serverless-http": "^2.3.0",
         "stylelint": "^9.9.0"
     },
     "devDependencies": {

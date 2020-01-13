@@ -62,9 +62,7 @@
       z-index: 1;
       display: block;
       max-width: 100%;
-      @include media-breakpoint-down(lg) {
-        max-width: 100%;
-      }
+      height: auto;
     }
     &__mask {
       position: absolute;
@@ -72,10 +70,7 @@
       top: 0;
       display: block;
       max-width: 100%;
-
-      @include media-breakpoint-down(lg) {
-        max-width: 100%;
-      }
+      height: auto;
     }
   }
 
