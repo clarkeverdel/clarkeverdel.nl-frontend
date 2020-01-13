@@ -88,11 +88,11 @@ class HomeOpening extends Component {
       GSDevTools.getById('main').kill();
     }
 
-    GSDevTools.create({
-      id: 'main',
-      animation: 'homeAnimationTimeline',
-      paused: true,
-    });
+    // GSDevTools.create({
+    //   id: 'main',
+    //   animation: 'homeAnimationTimeline',
+    //   paused: true,
+    // });
   }
 
   componentWillUnmount() {
@@ -427,9 +427,9 @@ class HomeOpening extends Component {
                   <Cross className="cross" ref={this.crossRef} />
                   <span className="label">technical brilliance</span>
                 </div>
-                <Link href="/contact">
-                  <AnimatedButton color="dark" text="Find out more" href="#" />
-                </Link>
+
+                <AnimatedButton className="home-opening__button" color="dark" text="Find out more" slug="services" apiRoute="page" href="/services" />
+
               </div>
             </div>
 

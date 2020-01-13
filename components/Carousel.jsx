@@ -45,9 +45,6 @@ class Carousel extends Component {
       const sortedItems = this.getChildren();
 
       const first = sortedItems[this.itemPositionOrder[0]];
-
-      console.log(first.props.refs);
-
       const firstItem = first.ref.current;
       const firstItemPosition = firstItem.getBoundingClientRect();
       const firstItemCtaBackground = first.props.refs[`item_cta-background_${first.key}`].current;
@@ -58,9 +55,7 @@ class Carousel extends Component {
       const thirdItem = sortedItems[this.itemPositionOrder[2]].ref.current;
       const thirdItemPosition = thirdItem.getBoundingClientRect();
       const fourthItem = sortedItems[this.itemPositionOrder[3]].ref.current;
-      const fourthItemPosition = fourthItem.getBoundingClientRect();
       const fifthItem = sortedItems[this.itemPositionOrder[4]].ref.current;
-      const fifthItemPosition = fifthItem.getBoundingClientRect();
 
       gsap.set(firstItem, {
         clearProps: "x,y"

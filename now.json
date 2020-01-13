@@ -1,0 +1,10 @@
+{
+  "env": {
+    "API_URL": "http://localhost:8081"
+  },
+  "build": {
+    "env": {
+      "API_URL": "@api-url"
+    }
+  }
+}

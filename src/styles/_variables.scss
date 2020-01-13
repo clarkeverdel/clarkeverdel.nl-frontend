@@ -5,7 +5,7 @@ $theme-color-grey: #e1e1e1;
 $theme-color-darkgrey: #5f6468;
 $theme-color-blue: #206bff;
 $theme-color-black: #000;
-
+$theme-color-white: #FFF;
 $theme-color-dark-transparent:  rgba(16,18,19, .45);
 
 $form-style-color: $theme-color-dark-transparent;
@@ -20,16 +20,16 @@ $default-transition-duration: 200ms;
 $theme-font: "Lato", sans-serif;
 $heading-font-family: "Lato", sans-serif;
 
-$font__weight__light: 300;
-$font__weight__regular: 400;
-$font__weight__medium: 500;
-$font__weight__semi-bold: 600;
-$font__weight__bold: 700;
-$font__weight__black: 900;
+$font-weight__light: 300;
+$font-weight__regular: 400;
+$font-weight__medium: 500;
+$font-weight__semi-bold: 600;
+$font-weight__bold: 700;
+$font-weight__black: 900;
 
 
 $cubic-bezier: cubic-bezier(0.420, 0.000, 0.000, 1.000);
-
+$power4: cubic-bezier(0.64, 0, 0.78, 0);
 
 
 // Extra small screen / phone

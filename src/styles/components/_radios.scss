@@ -37,7 +37,7 @@ $custom-radio-disabled-pip-color:   lighten(black, 80%);
 
     span {
       padding-left: rem(10);
-      font-weight: $font__weight__medium;
+      font-weight: $font-weight__medium;
       color: $form-style-color;
       transition: color ease-in-out $custom-radio-transition-speed;
     }

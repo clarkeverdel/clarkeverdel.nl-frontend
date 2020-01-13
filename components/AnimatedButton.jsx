@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import Link from './Link';
 import {
-  TimelineMax, TweenMax, Power0, Power1, Power2, Power3, gsap,
+  TimelineMax,  Power0, Power1, Power2, Power3, gsap,
 } from 'gsap';
+import CustomEase from 'gsap/CustomEase';
+import GSDevTools from 'gsap/GSDevTools';
+
+// Register gsap modules
+gsap.registerPlugin(GSDevTools, CustomEase);
 
 
 class AnimatedButton extends Component {
@@ -21,12 +26,32 @@ class AnimatedButton extends Component {
     };
 
     this.buttonRef = React.createRef();
-    this.buttonTimeline = new TimelineMax();
+
+    // Timeline
+    this.buttonTimeline = gsap.timeline({
+      id: 'buttonTimeline',
+      delay: 0,
+    });
+
+    CustomEase.create("custom", "M0,0 C0,0 0.0247,0.00211 0.03707,0.00714 0.05152,0.01303 0.06423,0.01886 0.07459,0.03038 0.10351,0.06254 0.12546,0.08977 0.14735,0.12981 0.17564,0.18153 0.18831,0.21797 0.20917,0.2765 0.26882,0.44384 0.29416,0.54487 0.35353,0.70816 0.36667,0.74432 0.37878,0.76627 0.39883,0.79818 0.41618,0.82579 0.42964,0.84466 0.45302,0.8665 0.48414,0.89557 0.50894,0.91582 0.54618,0.93582 0.58624,0.95734 0.61812,0.96822 0.6633,0.97943 0.71261,0.99167 0.74622,0.99524 0.79841,0.99842 0.87552,1.00313 1,1 1,1 ");
+    this.customEase = "custom";
   }
 
   componentDidMount() {
-    const buttonTimeline = gsap.timeline({paused: false}).timeScale(1);
+
+    if (GSDevTools.getById('buttonTool')) {
+      GSDevTools.getById('buttonTool').kill();
+    }
+
+    // GSDevTools.create({
+    //   id: 'buttonTool',
+    //   animation: 'buttonTimeline',
+    //   paused: false,
+    // });d
+
+    const buttonTimeline = this.buttonTimeline;
     const buttonElement = this.buttonRef.current;
+    const buttonElementPosition = buttonElement.getBoundingClientRect();
 
     // set button elements for tweening
     const buttonPart1 = buttonElement.children[0];
@@ -37,23 +62,54 @@ class AnimatedButton extends Component {
 
     // Button animation
     // 52px is the width of the arrow + padding in the 2nd part
-    buttonTimeline.fromTo(buttonElement, {
-      width: '150px', x: '-50', textAlign: 'right', paddingLeft: '0', paddingRight: '0',
+    buttonTimeline.fromTo(buttonElement,
+    {
+       x: '-50',
+      textAlign: 'right'
+    },
+     {
+      duration: 0.75,
+      x: 0,
+      textAlign: 'center',
+      ease: this.customEase
+    },
+      '0.5');
+
+    buttonTimeline.fromTo(buttonPart1,
+      { x: -170 },
+      {
+        duration: 0.75, x: 0,
+        ease: this.customEase
+      }
+    , '.5');
+
+    buttonTimeline.fromTo(buttonPart2, {
+      left: -30,
+      clipPath: `inset(0% 0% 0% ${buttonElementPosition.width - 46}px)`
     }, {
-      duration: 0.75, width: '215px', x: 0, textAlign: 'center',  ease: Power2.easeOut,
+      duration: 0.75,
+      left: 0,
+      ease: this.customEase,
+      clipPath: `inset(0% 0% 0% 0px)`
     }, '0.5');
-    buttonTimeline.fromTo(buttonPart1, { x: -170 }, { duration: 0.75, x: 0, ease: Power2.easeOut }, '0.5');
-    buttonTimeline.fromTo(buttonPart2, { width: '52px', left: '46px'}, {
-      duration: 0.75, width: '100%', left: 0, ease: Power2.easeOut,
-    }, '0.5');
-    buttonTimeline.fromTo(buttonText, { width: 0 }, { duration: 0.75, width: '140px', ease: Power0.easeOut }, '0.5');
+
+    buttonTimeline.fromTo(buttonTextContainer, {width: '20%', x: -23}, { width: '100%', x: 0}, '0.6');
+    buttonTimeline.fromTo(buttonText, { clipPath: 'inset(0% 0% 0% 100%)' }, { duration: 0.4, ease: this.customEase, clipPath: 'inset(0% 0% 0% 0%)',}, '0.6');
     buttonTimeline.fromTo(buttonArrow, {x: 0 }, { duration: 0.75, x: 0 }, '0.5');
+    // buttonTimeline.set(buttonElement, { border: '1px solid rgba(27,29,31,.4)'});
+
     this.buttonTimeline.play();
 
     if (this.buttonColor) {
       this.setState({
         buttonClass: `btn btn-action btn-animated btn-${this.buttonColor}`,
       });
+    }
+  }
+
+  componentWillUnmount() {
+    if (GSDevTools.getById('buttonTool')) {
+      GSDevTools.getById('buttonTool').kill();
     }
   }
 
@@ -68,9 +124,9 @@ class AnimatedButton extends Component {
       const buttonPart3_right = buttonElement.children[2].children[1];
 
       // Activate hover effect
-      buttonTimeline.to(buttonText, 0.25, { scale: 1.05, ease: Power1.easeOut }, '0.25');
-      buttonTimeline.to(buttonPart3_left, 0.25, { xPercent: 100, ease: Power1.easeOut }, '0.25');
-      buttonTimeline.to(buttonPart3_right, 0.25, { xPercent: -100, ease: Power1.easeOut }, '0.25');
+      // buttonTimeline.to(buttonText, 0.25, { scale: 1.05, ease: this.customEase }, '0.25');
+      buttonTimeline.to(buttonPart3_left, 0.25, { xPercent: 100, ease: this.customEase }, '0.25');
+      buttonTimeline.to(buttonPart3_right, 0.25, { xPercent: -100, ease: this.customEase }, '0.25');
     }
   }
 
@@ -84,9 +140,9 @@ class AnimatedButton extends Component {
       const buttonPart3_right = buttonElement.children[2].children[1];
 
       // Activate hover effect
-      buttonTimeline.to(buttonText, 0.25, { scale: 1, ease: Power3.easeOut }, '0.25');
-      buttonTimeline.to(buttonPart3_left, 0.25, { xPercent: 0, ease: Power2.easeOut }, '0.25');
-      buttonTimeline.to(buttonPart3_right, 0.25, { xPercent: 0, ease: Power2.easeOut }, '0.25');
+      // buttonTimeline.to(buttonText, 0.25, { scale: 1, ease: this.customEase }, '0.25');
+      buttonTimeline.to(buttonPart3_left, 0.25, { xPercent: 0, ease: this.customEase }, '0.25');
+      buttonTimeline.to(buttonPart3_right, 0.25, { xPercent: 0, ease: this.customEase }, '0.25');
     }
   }
 
@@ -111,7 +167,7 @@ class AnimatedButton extends Component {
 
     if(this.props.href) {
       button = (
-        <Link href={this.props.href}>
+        <Link href={`${this.props.href}?slug=${this.props.slug}&apiRoute=${this.props.apiRoute}`} as={this.props.href}>
           <button className={`${this.props.className} ${this.state.buttonClass}`}
                   id={this.props.id}
                   ref={this.buttonRef}
