@@ -128,7 +128,7 @@ exports.handler = (event, context, callback) => {
   event.requestContext = {}
   const { req, res } = reqResMapper(event, callback);
   // event.pathにはリライトされたURLが入る(ex. /posts/2)
-  const match = event.path.match(/posts\/(\d+)/)
+  const match = event.path.match(/post\/(\d+)/)
   console.log("[render] ", event.path, match)
   console.log(match)
   if (!match) {
@@ -138,8 +138,8 @@ exports.handler = (event, context, callback) => {
     })
   }
   req.query = {
-    id: match[1]
+    slug: match[1]
   }
-  console.log('[header]', event.queryStringParameters, req.query, req.query['id'])
+  console.log('[header]', event.queryStringParameters, req.query, req.query['slug'])
   page.render(req, res);
 };

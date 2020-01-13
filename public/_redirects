@@ -1,2 +1,4 @@
-/ /.netlify/functions/index 200
-/post/:slug /.netlify/functions/post/:slug 200
+/ /.netlify/functions/netlify-nextjs.js 200
+/:slug /.netlify/functions/netlify-nextjs 200
+/post/:slug /.netlify/functions/netlify-nextjs 200
+/contact /.netlify/functions/netlify-nextjs 200
