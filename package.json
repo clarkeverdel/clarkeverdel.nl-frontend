@@ -5,6 +5,7 @@
     "main": "index.js",
     "scripts": {
         "dev": "node server.js",
+        "now-build": "next build",
         "build:next": "next build",
         "build": "yarn build:next && cp -a public/_next/serverless/pages src/functions/ && netlify-lambda build src/functions",
         "start": "NODE_ENV=production node server.js",

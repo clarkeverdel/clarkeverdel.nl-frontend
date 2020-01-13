@@ -6,7 +6,7 @@
 
 const mailer = require('../../mailer');
 
-export default (req, res) => {
+module.exports = (req, res) => {
   const { email = '', name = '', reason = '', description = '' } = req.body;
   const emailHeading = `<p><strong>Reason of contacting: ${reason}</strong></p>`;
   const emailBody = `<p>${description}</p>`;
