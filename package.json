@@ -51,6 +51,7 @@
         "react-inlinesvg": "^1.1.7",
         "react-loaders": "^3.0.1",
         "react-router-dom": "^4.3.1",
+        "react-ssr-prepass": "^1.0.8",
         "reactstrap": "^6.4.0",
         "serverless-http": "^2.3.0",
         "stylelint": "^9.9.0"
