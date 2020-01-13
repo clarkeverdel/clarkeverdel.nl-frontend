@@ -1,0 +1,2 @@
+/ /.netlify/functions/index 200
+/post/:slug /.netlify/functions/post/:slug 200
