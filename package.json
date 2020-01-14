@@ -6,7 +6,7 @@
     "scripts": {
         "dev": "node server.js",
         "now-build": "next build",
-        "build": "next build",
+        "build": "netlify-lambda build functions",
         "build-aws": "yarn build:next && cp -a public/_next/serverless/pages src/functions/ && netlify-lambda build src/functions",
         "start": "NODE_ENV=production node server.js",
         "export": "next build && next export",
