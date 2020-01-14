@@ -21,7 +21,7 @@ app
         //   res.send('success')
         // })
 
-        server.post('/api/contact', (req, res) => {
+        server.post(process.env.MAILER_ENDPOINT, (req, res) => {
           const { email = '', name = '', reason = '', description = '' } = req.body;
           const emailHeading = `<p><strong>Reason of contacting: ${reason}</strong></p>`;
           const emailBody = `<p>${description}</p>`;

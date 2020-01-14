@@ -13,6 +13,7 @@ module.exports = withBundleAnalyzer(withTM({
   env: {
     // Reference a variable that was defined in the .env file and make it available at Build Time
     API_URL: process.env.API_URL,
+    MAILER_ENDPOINT: process.env.MAILER_ENDPOINT
   },
 
   transpileModules: ['gsap', 'gsap/CSSRulePlugin'],

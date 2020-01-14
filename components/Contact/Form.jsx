@@ -80,7 +80,7 @@ class ContactForm extends Component {
     }else {
       const data = this.state.userInfo;
 
-      fetch('/api/contact', {
+      fetch(process.env.MAILER_ENDPOINT, {
         method: 'post',
         headers: {
           Accept: 'application/json, text/plain, */*',
