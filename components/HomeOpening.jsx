@@ -88,11 +88,11 @@ class HomeOpening extends Component {
       GSDevTools.getById('main').kill();
     }
 
-    GSDevTools.create({
-      id: 'main',
-      animation: 'homeAnimationTimeline',
-      paused: true,
-    });
+    // GSDevTools.create({
+    //   id: 'main',
+    //   animation: 'homeAnimationTimeline',
+    //   paused: true,
+    // });
   }
 
   componentWillUnmount() {
@@ -293,13 +293,6 @@ class HomeOpening extends Component {
       duration: 1.5,
       ease: this.customEase,
     }, 0);
-    // this.homeAnimationTimeline.from(cross, {
-    //   scale: 2,
-    //   duration: 1.5,
-    //   ease: this.customEase,
-    // }, 0);
-
-
 
     // Enable arrow animation -- Starting on page load
     this.animateArrows();
