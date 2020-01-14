@@ -1,4 +1,4 @@
-const mailer = require('../../mailer');
+const mailer = require('../mailer');
 
 module.exports = (req, res) => {
   const { email = '', name = '', reason = '', description = '' } = req.body;
