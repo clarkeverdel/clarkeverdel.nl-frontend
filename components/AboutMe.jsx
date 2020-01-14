@@ -37,7 +37,7 @@ class AboutMe extends Component {
             </p>
           </div>
         </div>
-        <AnimatedButton color="dark" text="Contact" slug="contact" apiRoute="page" href="/contact" className="about-me__button"/>
+        <AnimatedButton color="dark" text="Contact" href="/contact?slug=contact&apiRoute=page"  as="/contact" className="about-me__button"/>
       </section>
     );
   }

@@ -1,6 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {gsap, Power4, TimelineMax} from 'gsap';
-
+import {gsap} from 'gsap';
 import CustomEase from 'gsap/CustomEase';
 
 import CarouselArrow from '../public/static/images/carousel_arrow.svg';
@@ -162,7 +161,6 @@ class Carousel extends Component {
   };
 
   doSliding = (direction, position) => {
-
     if(this.state.lockButton){
       return;
     }else {
@@ -170,6 +168,8 @@ class Carousel extends Component {
         lockButton: true
       })
     }
+
+
 
     const animationDuration = .950;
     const sortedItems = this.getChildren();
@@ -185,7 +185,10 @@ class Carousel extends Component {
     const fifthItem = sortedItems[this.itemPositionOrder[4]].ref.current;
     const fifthItemPosition = fifthItem.getBoundingClientRect();
 
-    let myAnimation = new TimelineMax();
+    let myAnimation = gsap.timeline({
+      id: 'sliderTimeline'
+    });
+
 
     myAnimation.to(firstItem, {
       xPercent: -200,

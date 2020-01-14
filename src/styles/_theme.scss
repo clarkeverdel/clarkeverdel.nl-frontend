@@ -13,8 +13,6 @@ body {
   &.blue-bg {
     background-color: $theme-color-blue;
   }
-
-
 }
 
 .loader:empty {
@@ -108,7 +106,6 @@ a {
     font-size: rem(18);
   }
 }
-
 
 .gs-dev-tools {
   z-index: 999;

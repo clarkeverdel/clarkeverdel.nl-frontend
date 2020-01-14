@@ -182,7 +182,7 @@ class AnimatedButton extends Component {
 
     if(this.props.href) {
       button = (
-        <Link href={`${this.props.href}?slug=${this.props.slug}&apiRoute=${this.props.apiRoute}`} as={this.props.href}>
+        <Link href={`${this.props.href}`} as={this.props.as}>
           <button className={`${this.props.className} ${this.state.buttonClass}`}
                   id={this.props.id}
                   ref={this.buttonRef}

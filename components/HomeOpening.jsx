@@ -419,12 +419,11 @@ class HomeOpening extends Component {
                   <div id="home-word-2" ref={this.homeOpeningHomeWord2}>Development</div>
                 </h1>
                 <div className="home-opening__subtitle" ref={this.homeOpeningSubtitle}>
-                  <span className="label">design</span>
-                  <Cross className="cross" ref={this.crossRef} />
+                  <span className="label">design <Cross className="cross" ref={this.crossRef} /></span>
                   <span className="label">technical brilliance</span>
                 </div>
 
-                <AnimatedButton className="home-opening__button" color="dark" text="Find out more" slug="services" apiRoute="post" href="/services" />
+                <AnimatedButton className="home-opening__button" color="dark" text="Find out more" href="/post?slug=services&apiRoute=page" as="/services" />
 
               </div>
             </div>

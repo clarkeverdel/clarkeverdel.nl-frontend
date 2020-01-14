@@ -1,6 +1,16 @@
 .about-me {
   padding: rem(100) 8.75vw;
 
+  @include media-breakpoint-down(md){
+    padding: rem(50) $body-margin-md;
+  }
+  @include media-breakpoint-down(sm){
+    padding: rem(50) $body-margin-sm;
+  }
+  @include media-breakpoint-down(xs){
+    padding: rem(50) $body-margin-xs;
+  }
+
   &__wrapper {
     display: flex;
     align-items: flex-start;
@@ -26,6 +36,7 @@
   &__title {
     z-index: 2;
     position: relative;
+    margin: 0 0 rem(50);
   }
 
   &__subtitle {
@@ -40,6 +51,10 @@
     font-weight: $font-weight__medium;
     z-index: 2;
     position: relative;
+
+    @include media-breakpoint-down(md){
+      margin: 0 0 rem(30);
+    }
   }
 
   &__photo {

@@ -5,6 +5,16 @@
   position: relative;
   overflow: hidden;
 
+  @include media-breakpoint-down(md){
+    padding: rem(50) $body-margin-md;
+  }
+  @include media-breakpoint-down(sm){
+    padding: rem(50) $body-margin-sm;
+  }
+  @include media-breakpoint-down(xs){
+    padding: rem(50) $body-margin-xs;
+  }
+
   &:before {
     content: "";
     position: absolute;
@@ -27,7 +37,7 @@
     &__title {
       //font-size: 4.25vw;
       color: $theme-color-darkgrey;
-      margin: 0 0 3vw;
+      margin: 0 0 rem(50);
     }
   }
 
@@ -37,7 +47,7 @@
     &__wrapper {
       display: flex;
       align-items: start;
-      min-width: 128.5%;
+      //min-width: 128.5%;
 
       @media (max-width: $screen-xs-max) {
         flex-direction: column;
@@ -50,9 +60,7 @@
       grid-gap: 0;
       grid-template-rows: 1fr 1fr;
       grid-template-columns: 1fr 1fr; //26.5% 26.5% 23.5% 23.5%;
-      @media (max-width: $screen-xs-max) {
-        min-width: 128.5%;
-      }
+      min-width: 63.035%;
     }
 
 
@@ -79,7 +87,7 @@
         margin: 0;
         z-index: 1;
         order: 0;
-        min-width: 53.6vw;
+        min-width: 52.572vw;
 
         #{$item}__outside {
           display: flex;
@@ -156,11 +164,17 @@
         color: orange;
         font-size: .9vw;
         line-height: 1rem;
-        font-weight: 500;
+        font-weight: $font-weight__medium;
         word-break: keep-all;
         white-space: nowrap;
         text-transform: uppercase;
         letter-spacing: rem(1.12);
+        transition: color $default-transition-duration $power4;
+
+        &:hover {
+          color: $theme-color-dark;
+          text-decoration: none;
+        }
       }
 
       &__number{
