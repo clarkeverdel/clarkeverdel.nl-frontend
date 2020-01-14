@@ -32,6 +32,10 @@ class AnimatedButton extends Component {
       id: 'buttonTimeline',
       delay: 0,
     });
+    this.buttonHoverTimeline = gsap.timeline({
+      id: 'buttonHoverTimeline',
+      delay: 0,
+    });
 
     CustomEase.create("custom", "M0,0 C0,0 0.0247,0.00211 0.03707,0.00714 0.05152,0.01303 0.06423,0.01886 0.07459,0.03038 0.10351,0.06254 0.12546,0.08977 0.14735,0.12981 0.17564,0.18153 0.18831,0.21797 0.20917,0.2765 0.26882,0.44384 0.29416,0.54487 0.35353,0.70816 0.36667,0.74432 0.37878,0.76627 0.39883,0.79818 0.41618,0.82579 0.42964,0.84466 0.45302,0.8665 0.48414,0.89557 0.50894,0.91582 0.54618,0.93582 0.58624,0.95734 0.61812,0.96822 0.6633,0.97943 0.71261,0.99167 0.74622,0.99524 0.79841,0.99842 0.87552,1.00313 1,1 1,1 ");
     this.customEase = "custom";
@@ -56,6 +60,8 @@ class AnimatedButton extends Component {
     // set button elements for tweening
     const buttonPart1 = buttonElement.children[0];
     const buttonPart2 = buttonElement.children[1];
+    const buttonPart3_left = buttonElement.children[2].children[0];
+    const buttonPart3_right = buttonElement.children[2].children[1];
     const buttonTextContainer = buttonElement.children[3];
     const buttonText = buttonElement.children[3].children[0];
     const buttonArrow = buttonElement.children[3].children[1];
@@ -115,7 +121,7 @@ class AnimatedButton extends Component {
 
   handleHoverOn() {
     if (!this.buttonTimeline.isActive()) {
-      const buttonTimeline = new TimelineMax();
+      const buttonTimeline = this.buttonHoverTimeline.seek(0);
       const buttonElement = this.buttonRef.current;
 
       // set button elements for tweening
@@ -125,14 +131,23 @@ class AnimatedButton extends Component {
 
       // Activate hover effect
       // buttonTimeline.to(buttonText, 0.25, { scale: 1.05, ease: this.customEase }, '0.25');
-      buttonTimeline.to(buttonPart3_left, 0.25, { xPercent: 102, ease: this.customEase }, '0.25');
-      buttonTimeline.to(buttonPart3_right, 0.25, { xPercent: -100, ease: this.customEase }, '0.25');
+      gsap.to(buttonPart3_left, 0.375, { x: "0%", ease: this.customEase }, '0.25');
+      gsap.to(buttonPart3_right,  0.375, { x: "0%", ease: this.customEase }, '0.25');
+
     }
+  }
+
+  handleHoverClick() {
+    setTimeout(() => {
+      this.handleHoverOff();
+    }, 500)
   }
 
   handleHoverOff() {
     if (!this.buttonTimeline.isActive()) {
-      const buttonTimeline = new TimelineMax();
+      const buttonTimeline = this.buttonHoverTimeline;
+      // console.log(buttonTimeline)
+      // buttonTimeline.reverse();
       const buttonElement = this.buttonRef.current;
 
       const buttonText = buttonElement.children[3];
@@ -141,8 +156,8 @@ class AnimatedButton extends Component {
 
       // Activate hover effect
       // buttonTimeline.to(buttonText, 0.25, { scale: 1, ease: this.customEase }, '0.25');
-      buttonTimeline.to(buttonPart3_left, 0.25, { xPercent: 0, ease: this.customEase }, '0.25');
-      buttonTimeline.to(buttonPart3_right, 0.25, { xPercent: 0, ease: this.customEase }, '0.25');
+      gsap.to(buttonPart3_left, 0.375, { x: "-102%", ease: this.customEase }, '0.25');
+      gsap.to(buttonPart3_right, 0.375, { x: "100%", ease: this.customEase }, '0.25');
     }
   }
 
@@ -172,7 +187,8 @@ class AnimatedButton extends Component {
                   id={this.props.id}
                   ref={this.buttonRef}
                   onMouseEnter={this.handleHoverOn.bind(this)}
-                  onMouseLeave={this.handleHoverOff.bind(this)}>
+                  onMouseLeave={this.handleHoverOff.bind(this)}
+                  onClick={this.handleHoverClick.bind(this)}>
             {buttonPart1}
             {buttonPart2}
             {buttonPart3}

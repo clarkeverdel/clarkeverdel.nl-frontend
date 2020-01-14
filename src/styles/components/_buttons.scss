@@ -81,7 +81,7 @@
       &-left {
         flex: 1 1 calc(100% - 48px);
         min-width: calc(100% - 48px);
-        transform: translate(-102%, 0);
+        transform: translateX(-102%);
         z-index: 3;
         -webkit-backface-visibility: hidden;
         position: relative;
@@ -110,7 +110,7 @@
         min-width: calc(50px + 31px);
         left: -33px;
         position: relative;
-        transform: translate(100%, 0);
+        transform: translateX(100%);
         //right: 0;
         z-index: 4;
         -webkit-backface-visibility: hidden;

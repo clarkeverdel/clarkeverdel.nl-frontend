@@ -110,6 +110,17 @@ $mobile-logo-width: 132px;
   flex-direction: column;
   overflow-y: scroll;
 
+  @include media-breakpoint-down(md){
+    padding: 0 $body-margin-md;
+  }
+  @include media-breakpoint-down(sm){
+    padding: 0 $body-margin-sm;
+
+  }
+  @include media-breakpoint-down(xs){
+    padding: 0 $body-margin-xs;
+  }
+
   &.visible {
     opacity: 1;
     visibility: visible;

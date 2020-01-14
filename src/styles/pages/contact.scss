@@ -86,7 +86,6 @@
   $default-padding: 8.75vw;
 
   @media only screen AND (max-width: $screen-sm-max){
-    transform: scale(.7);
     left: 0;
     background-clip: padding-box;
     --default-width: 240px;
@@ -113,6 +112,15 @@
     left: calc(var(--default-width) + #{$default-padding} + 2vw);
     top: -150px;
     will-change: transform;
+  }
+
+  .circle,
+  .triangle,
+  .cross {
+    @media only screen AND (max-width: $screen-sm-max){
+      width: auto;
+      height: 30px;
+    }
   }
 }
 

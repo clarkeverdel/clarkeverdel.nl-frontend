@@ -199,7 +199,8 @@
     }
 
     // Active transitions
-    &:hover {
+    &:hover,
+    &:active{
       #AboutMe_svg__aboutme_text,
       #RecentWork_svg__recentwork_text {
         .AboutMe_svg__st0,
@@ -399,6 +400,11 @@
     .cross {
       z-index: 3;
       filter: blur(0);
+
+      @include media-breakpoint-down(sm){
+        width: auto;
+        height: 30px;
+      }
     }
   }
 
@@ -489,23 +495,28 @@
     }
 
     // Active transitions
-    &:hover {
+    @media (hover: hover) {
+      &:hover,
+      &:focus {
 
-      #AboutMe_svg__aboutme_text,
-      #RecentWork_svg__recentwork_text {
-        .AboutMe_svg__st0,
-        .RecentWork_svg__st0{
-          fill: $theme-color-light;
-          background-position: 0;
+        #AboutMe_svg__aboutme_text,
+        #RecentWork_svg__recentwork_text {
+          .AboutMe_svg__st0,
+          .RecentWork_svg__st0 {
+            fill: $theme-color-light;
+            background-position: 0;
+          }
         }
-      }
-      .aboutme__arrow,
-      .recentwork__arrow {
-        path {
-          fill: $theme-color-blue;
+
+        .aboutme__arrow,
+        .recentwork__arrow {
+          path {
+            fill: $theme-color-blue;
+          }
         }
       }
     }
+
   }
 }
 
