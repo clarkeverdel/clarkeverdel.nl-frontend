@@ -1,7 +1,7 @@
 const nodemailer = require('nodemailer');
 
-const username = "hello@clarkeverdel.nl";
-const password = "Hon76564";
+const username = process.env.MAIL_USER;
+const password = process.env.MAIL_PASSWORD;
 
 const transporter = nodemailer.createTransport({
   host: 'smtp.office365.com', // Office 365 server
@@ -17,7 +17,7 @@ const transporter = nodemailer.createTransport({
 });
 
 const send = ({ email, name, text }) => {
-  const senderEmail = "hello@clarkeverdel.nl";
+  const senderEmail = process.env.MAIL_USER;
   const senderName = "Clarke Verdel";
   const from = name && senderEmail ? `${name} <${senderEmail}>` : `${name || senderEmail}`;
   const to = senderName && senderEmail ? `${senderName} <${senderEmail}>` : `${senderName || senderEmail}`;
