@@ -37,4 +37,4 @@ const send = ({ email, name, text }) => {
   });
 };
 
-module.exports = send;
+exports.handler = send;
