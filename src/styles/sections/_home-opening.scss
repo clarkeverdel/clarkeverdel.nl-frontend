@@ -13,6 +13,12 @@
   color: $theme-color-black;
   overflow: hidden;
 
+  min-height: calc(606px + (96px*2) );
+
+  @include media-breakpoint-down(md){
+    min-height: calc(50vw + (156px*2.5) );
+  }
+
   &__logofull {
     padding-left: rem(10);
 
@@ -31,6 +37,22 @@
     justify-content: center;
     top: 0;
     left: 0;
+    padding: rem(96) rem(64);
+
+    @include media-breakpoint-down(lg){
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    @include media-breakpoint-down(md){
+      padding: rem(64) $body-margin-md;
+    }
+    @include media-breakpoint-down(sm){
+      padding: rem(64) $body-margin-sm;
+
+    }
+    @include media-breakpoint-down(xs){
+      padding: rem(64) $body-margin-xs;
+    }
 
     svg {
       height: 75px;
@@ -44,11 +66,32 @@
     color: $theme-color-black;
     font-size: rem(160);
     line-height: 1;
+
+    @include media-breakpoint-down(lg) {
+      font-size: vw(200);
+    }
+    @include media-breakpoint-down(xs) {
+      font-size: rem(56);
+    }
+    @media only screen AND (max-width: 400px){
+      font-size: rem(45);
+    }
+
   }
   &__subtitle {
     color: $theme-color-black;
     font-size: rem(48);
     font-weight: 300;
+
+    @include media-breakpoint-down(lg) {
+      font-size: vw(70);
+    }
+    @include media-breakpoint-down(xs){
+      font-size: rem(35);
+    }
+    @media only screen AND (max-width: 400px){
+      font-size: rem(28);
+    }
   }
 
   &__code {
@@ -58,6 +101,9 @@
     transform: translateX(12vw);
     font-size: rem(14);
 
+    @include media-breakpoint-down(lg) {
+      margin: rem(50) 0 0;
+    }
     &__wrapper {
       display: inline-flex;
       flex-direction: column;
@@ -84,17 +130,31 @@
     }
 
     &.left-side {
-      left: 20px;
+      left: rem(40);
+
+      @include media-breakpoint-down(md){
+        display: none;
+      }
     }
 
     &.right-side {
-      right: 20px;
+      right: rem(40);
+
+      @include media-breakpoint-down(sm){
+        left: $body-margin-sm;
+        right: auto;
+        top: 200px;
+      }
+      @include media-breakpoint-down(xs){
+        left: $body-margin-xs;
+      }
     }
 
     // about me
     .aboutme__text {
       height: 68px;
       margin-bottom: 30px;
+      width: auto;
     }
 
     .aboutme__arrow {
@@ -106,6 +166,7 @@
     .recentwork__text {
       height: 84px;
       margin-bottom: 30px;
+      width: auto;
     }
 
     .recentwork__arrow {
@@ -166,6 +227,11 @@
   height: 100vh;
   background-color: $theme-color-dark;
   clip-path: inset(0% 0% 100% 0%);
+  min-height: calc(606px + (96px*2) );
+
+  @include media-breakpoint-down(md){
+    min-height: calc(50vw + (156px*2.5) );
+  }
 
   &__background {
     width: 100%;
@@ -190,7 +256,22 @@
     justify-content: center;
     top: 0;
     left: 0;
-    margin: 0 rem(32);
+    padding: rem(96) rem(64);
+
+    @include media-breakpoint-down(lg){
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    @include media-breakpoint-down(md){
+      padding: rem(64) $body-margin-md;
+    }
+    @include media-breakpoint-down(sm){
+      padding: rem(64) $body-margin-sm;
+
+    }
+    @include media-breakpoint-down(xs){
+      padding: rem(64) $body-margin-xs;
+    }
 
     svg {
       height: 75px;
@@ -201,12 +282,18 @@
   }
 
   &__title {
-    font-size: 9vw;
+    font-size: rem(113);
     line-height: 1;
     position: relative;
 
-    @include media-breakpoint-up(xl) {
-      font-size: rem(113);
+    @include media-breakpoint-down(lg) {
+      font-size: vw(200);
+    }
+    @include media-breakpoint-down(xs) {
+      font-size: rem(56);
+    }
+    @media only screen AND (max-width: 400px){
+      font-size: rem(45);
     }
 
     span {
@@ -217,6 +304,42 @@
       position: relative;
       z-index: 4;
     }
+  }
+
+  &__subtitle {
+    font-weight: 300;
+    margin-top: vw(40);
+    z-index: 4;
+    position: relative;
+    font-size: rem(46);
+    margin-top: rem(30);
+
+    @include media-breakpoint-down(lg) {
+      font-size: vw(70);
+    }
+    @include media-breakpoint-down(xs){
+      font-size: rem(35);
+    }
+    @media only screen AND (max-width: 400px){
+      font-size: rem(28);
+    }
+
+    .label {
+      position: relative;
+      z-index: 4;
+    }
+  }
+
+  &__button {
+    margin: rem(30) auto 0;
+
+    @include media-breakpoint-down(lg) {
+      margin: vw(70) auto vw(70);
+    }
+    @include media-breakpoint-down(xs) {
+      margin: rem(80) auto 0;
+    }
+
   }
 
   &__container {
@@ -231,12 +354,8 @@
     flex: 0 0 100%;
     align-items: center;
 
-    .btn {
-      margin-top: vw(40);
-
-      @include media-breakpoint-up(xl) {
-        margin-top: rem(30);
-      }
+    @include media-breakpoint-down(md){
+      transform: translateY(40px);
     }
 
     .circle {
@@ -287,28 +406,6 @@
     transform: translateY((115/2)+px);
   }
 
-  &__subtitle {
-    font-weight: 300;
-    font-size: 3.2857142857vw;
-    margin-top: vw(40);
-    z-index: 4;
-    position: relative;
-
-    @include media-breakpoint-up(xl) {
-      font-size: rem(46);
-      margin-top: rem(30);
-    }
-
-    .label {
-      position: relative;
-      z-index: 4;
-    }
-  }
-
-  &__button {
-    margin: 0px auto;
-  }
-
   &__vertical-link {
     position: absolute;
 
@@ -325,17 +422,31 @@
     }
 
     &.left-side {
-      left: 20px;
+      left: rem(40);
+
+      @include media-breakpoint-down(sm){
+        display: none;
+      }
     }
 
     &.right-side {
-      right: 20px;
+      right: rem(40);
+
+      @include media-breakpoint-down(sm){
+        left: $body-margin-sm;
+        right: auto;
+        top: 200px;
+      }
+      @include media-breakpoint-down(xs){
+        left: $body-margin-xs;
+      }
     }
 
     // about me
     .aboutme__text {
       height: 68px;
       margin-bottom: 30px;
+      width: auto;
     }
 
     .aboutme__arrow {
@@ -346,6 +457,7 @@
     .recentwork__text {
       height: 84px;
       margin-bottom: 30px;
+      width: auto;
     }
 
     .recentwork__arrow {

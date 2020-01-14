@@ -49,6 +49,7 @@
     overflow: visible;
     display: flex;
     justify-content: center;
+    align-items: flex-start;
 
     @include media-breakpoint-up(lg) {
       position: absolute;

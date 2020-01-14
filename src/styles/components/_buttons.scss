@@ -76,14 +76,15 @@
 
     .slide {
       display: flex;
-      position: absolute;
       height: 100%;
 
       &-left {
-        width: calc(100% - (44px));
-        transform: translate(calc(-100% - 1%), 0);
+        flex: 1 1 calc(100% - 48px);
+        min-width: calc(100% - 48px);
+        transform: translate(-102%, 0);
         z-index: 3;
         -webkit-backface-visibility: hidden;
+        position: relative;
 
         &:before {
           content: "";
@@ -106,9 +107,11 @@
       }
 
       &-right {
-        width: calc(47px + 31px);
-        transform: translate(calc(100%), 0);
-        right: 0;
+        min-width: calc(50px + 31px);
+        left: -33px;
+        position: relative;
+        transform: translate(100%, 0);
+        //right: 0;
         z-index: 4;
         -webkit-backface-visibility: hidden;
 
@@ -125,7 +128,7 @@
 
         &:after {
           content: "";
-          width: 47px;
+          width: 50px;
           height: 100%;
           background-color: $theme-color-blue;
           display: inline-block;

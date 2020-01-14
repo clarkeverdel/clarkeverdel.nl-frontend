@@ -125,7 +125,7 @@ class AnimatedButton extends Component {
 
       // Activate hover effect
       // buttonTimeline.to(buttonText, 0.25, { scale: 1.05, ease: this.customEase }, '0.25');
-      buttonTimeline.to(buttonPart3_left, 0.25, { xPercent: 100, ease: this.customEase }, '0.25');
+      buttonTimeline.to(buttonPart3_left, 0.25, { xPercent: 102, ease: this.customEase }, '0.25');
       buttonTimeline.to(buttonPart3_right, 0.25, { xPercent: -100, ease: this.customEase }, '0.25');
     }
   }

@@ -88,11 +88,11 @@ class HomeOpening extends Component {
       GSDevTools.getById('main').kill();
     }
 
-    // GSDevTools.create({
-    //   id: 'main',
-    //   animation: 'homeAnimationTimeline',
-    //   paused: true,
-    // });
+    GSDevTools.create({
+      id: 'main',
+      animation: 'homeAnimationTimeline',
+      paused: true,
+    });
   }
 
   componentWillUnmount() {
@@ -167,6 +167,7 @@ class HomeOpening extends Component {
 
     this.homeAnimationTimeline.to(homeOpening, {
       clipPath: 'inset(0% 0% 0% 0%)',
+      webkitClipPath: 'inset(0% 0% 0% 0%)',
       duration: 1.5,
       ease: this.customEase
     }, 0);
@@ -197,6 +198,7 @@ class HomeOpening extends Component {
     // Animate Left Arrow "About me"
     this.homeAnimationTimeline.to(homeBareboneArrow1_Svg, {
       clipPath: 'inset(185px 0 0 0)',
+      webkitClipPath: 'inset(185px 0 0 0)',
       // ease: this.customEase,
       duration: .3
     }, 0);
@@ -216,6 +218,7 @@ class HomeOpening extends Component {
     // Animate Right Arrow "Recent Work"
     this.homeAnimationTimeline.to(homeBareboneArrow2_Svg, {
       clipPath: 'inset(85px 0 0 0)',
+      webkitClipPath: 'inset(85px 0 0 0)',
       // ease: this.customEase,
       duration: .3
     }, 0);
@@ -406,7 +409,7 @@ class HomeOpening extends Component {
         <div className="home-opening" ref={this.homeOpening} onMouseMove={this.onMouseMove.bind(this)}>
 
           <div className="home-opening__logo" ref={this.homeOpeningLogoContainer}>
-            <BgIcon  ref={this.homeOpeningLogo}/>
+              <BgIcon  ref={this.homeOpeningLogo}/>
           </div>
 
           <div className="home-opening__content">
@@ -428,7 +431,7 @@ class HomeOpening extends Component {
                   <span className="label">technical brilliance</span>
                 </div>
 
-                <AnimatedButton className="home-opening__button" color="dark" text="Find out more" slug="services" apiRoute="page" href="/services" />
+                <AnimatedButton className="home-opening__button" color="dark" text="Find out more" slug="services" apiRoute="post" href="/services" />
 
               </div>
             </div>
