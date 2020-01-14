@@ -49,6 +49,7 @@
         "nodemailer": "^4.6.8",
         "nodemon": "^2.0.2",
         "prop-types": "^15.7.2",
+        "querystring": "^0.2.0",
         "react": "16.9",
         "react-body-classname": "^1.2.0",
         "react-inlinesvg": "^1.1.7",

@@ -1,4 +1,0 @@
-/ /.netlify/src/functions/netlify-nextjs.js 200
-/:slug /.netlify/src/functions/netlify-nextjs 200
-/post/:slug /.netlify/src/functions/netlify-nextjs 200
-/contact /.netlify/src/functions/netlify-nextjs 200

@@ -3,6 +3,7 @@ node_modules
 .idea
 .env
 /out
+.netlify
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
