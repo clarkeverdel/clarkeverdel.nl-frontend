@@ -4,8 +4,8 @@ const nodemailer = require("nodemailer");
 const querystring = require('querystring');
 
 exports.handler = function(event, context, callback) {
-  const user = process.env.MAIL_USER;       // some@mail.com
-  const pass = process.env.MAIL_PASSWORD;   // 42isthecoolestnumber
+  const username = process.env.MAIL_USER;
+  const password = process.env.MAIL_PASSWORD;
   const payload = querystring.parse(event.body);
   const { name, email, reason, description } = payload;
   const emailHeading = `<p><strong>Reason of contacting: ${reason}</strong></p>`;
