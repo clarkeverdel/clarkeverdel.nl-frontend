@@ -6,8 +6,8 @@ const querystring = require('querystring');
 exports.handler = function(event, context, callback) {
   const username = process.env.MAIL_USER;
   const password = process.env.MAIL_PASSWORD;
-  const payload = querystring.parse(event.body);
-  const { name, email, reason, description } = payload;
+  const requestBody = JSON.parse(event.body);
+  const { name, email, reason, description } = requestBody;
   const emailHeading = `<p><strong>Reason of contacting: ${reason}</strong></p>`;
   const emailBody = `<p>${description}</p>`;
 
@@ -25,7 +25,7 @@ exports.handler = function(event, context, callback) {
   });
 
   // make sure we have data and email
-  if (!payload || !email) {
+  if (!requestBody || !email) {
     return callback(null, {
       statusCode: 400,
       body: 'Mailing details not provided'
