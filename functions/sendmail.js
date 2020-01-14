@@ -24,11 +24,8 @@ exports.handler = function(event, context, callback) {
     }
   });
 
-  // Parse data sent in form hook (email, name etc)
-  const { data } = JSON.parse(event.body);
-
   // make sure we have data and email
-  if (!data || !data.email) {
+  if (!payload || !email) {
     return callback(null, {
       statusCode: 400,
       body: 'Mailing details not provided'
