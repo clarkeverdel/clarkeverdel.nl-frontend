@@ -15,7 +15,7 @@ exports.handler = (req, res) => {
       res.send(status);
     });
   }else {
-    return "I am sorry. I can't send an email without knowing an address."
+    status = "I am sorry. I can't send an email without knowing an address."
   }
 
 
