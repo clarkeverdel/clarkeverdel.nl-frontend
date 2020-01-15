@@ -40,16 +40,15 @@ class Menu extends Component {
     });
   }
 
-  render() {
-    const { menu, router } = this.props;
+  menuItems(mobile){
+    const {menu} = this.props;
     const self = this;
-
     const menuItems = menu.items.map((item, index) => {
       if (item.object === 'custom') {
         return (
           <NavItem className="d-flex align-items-center" key={item.ID}>
             <Link href={item.url} key={item.ID}>
-              <a className="nav-link">{item.title}</a>
+              <a className="nav-link"><span>{item.title}</span></a>
             </Link>
           </NavItem>
         );
@@ -69,26 +68,22 @@ class Menu extends Component {
             activeClassName="active"
           >
             <a className="nav-link contact-nav-link">
-              {(slug === 'contact' ? <MailIcon /> : item.title)}
+              {(!mobile && slug === 'contact' ? <MailIcon /> : <span>{item.title}</span>)}
             </a>
           </Link>
         </NavItem>
       );
-
-      //
-      // return (
-      //   <NavItem className="d-flex align-items-center nav-item-text" key={item.ID}>
-      //     <Link
-      //       as={`/${slug}`}
-      //       href={`/${actualPage}?slug=${slug}&apiRoute=${item.object}`}
-      //       key={item.ID}
-      //       activeClassName="active"
-      //     >
-      //       <a className="nav-link">{item.title}</a>
-      //     </Link>
-      //   </NavItem>
-      // );
     });
+
+    return menuItems;
+  }
+
+  render() {
+    const { menu, router } = this.props;
+    const self = this;
+    const menuItems = this.menuItems();
+    const menuItemsMobile = this.menuItems(true);
+
 
     return (
 
@@ -114,7 +109,9 @@ class Menu extends Component {
               <Nav className="ml-auto" navbar>
                 <NavItem className="d-flex align-items-center" key={0}>
                   <Link href="/" key={0}>
-                    <a className="nav-link">About me</a>
+                    <a className="nav-link">
+                      <span>About me</span>
+                    </a>
                   </Link>
                 </NavItem>
                 {menuItems}
@@ -141,11 +138,13 @@ class Menu extends Component {
           <ul className="mobile-menu__container">
             <NavItem className="d-flex align-items-center">
               <Link href="/">
-                <a className="nav-link">Home</a>
+                <a className="nav-link">
+                  <span>Home</span>
+                </a>
               </Link>
             </NavItem>
 
-            {menuItems}
+            {menuItemsMobile}
           </ul>
         </div>
 
