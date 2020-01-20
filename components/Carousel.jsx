@@ -12,6 +12,7 @@ class Carousel extends Component {
       position: 0,
       sliding: false,
       lockButton: false,
+      direction: null,
     };
 
     // props.children.map((child, index) => {
@@ -39,6 +40,7 @@ class Carousel extends Component {
 
   componentDidUpdate(){
     const {refs} = this.props;
+    const {direction} = this.state;
 
     if(this.state.sliding){
       const sortedItems = this.getChildren();
@@ -73,9 +75,7 @@ class Carousel extends Component {
       gsap.set(fifthItem, {
         clearProps: "x,y"
       });
-      gsap.set(fifthItem, {
-        xPercent: 50,
-      });
+
 
       gsap.from(firstItemCtaBackground, {
         xPercent: 100,
@@ -89,34 +89,63 @@ class Carousel extends Component {
         duration: .75
       });
 
-      if(window.innerWidth < 767){
-        gsap.from(firstItemNumber, {
-          y: 0,
-          ease: this.customEase,
-          duration: .75
+
+
+      if(direction === 'next'){
+
+        // Different animations per screenwidth for labels of first item in carousel
+        if(window.innerWidth < 767){
+          gsap.from(firstItemNumber, {
+            y: 0,
+            ease: this.customEase,
+            duration: .75
+          });
+          gsap.from(firstItemLabel, {
+            y: 0,
+            ease: this.customEase,
+            duration: .75
+          });
+        }else {
+          gsap.from(firstItemOutside, {
+            xPercent: -100,
+            ease: this.customEase,
+            duration: .75
+          });
+        }
+
+        gsap.set(fifthItem, {
+          xPercent: 50,
         });
-        gsap.from(firstItemLabel, {
-          y: 0,
+        gsap.to(fifthItem, {
+          xPercent: 0,
+          yPercent: 0,
+          x: 0,
+          opacity: 1,
+          clearProps: "x,xPercent,yPercent",
           ease: this.customEase,
-          duration: .75
+          duration: .750
         });
-      }else {
-        gsap.from(firstItemOutside, {
-          xPercent: -100,
+      }else if(direction === 'prev'){
+        // gsap.set(firstItem, {
+        //   xPercent: -200,
+        //   yPercent: 100,
+        //   rotate: -45,
+        //   opacity: 0.5,
+        //   clearProps: "rotate,opacity",
+        //   ease: this.customEase,
+        //   duration: .750
+        // });
+        gsap.from(firstItem, {
+          xPercent: -200,
+          yPercent: 100,
+          rotate: -45,
+          opacity: 0.5,
+          clearProps: "rotate,opacity",
           ease: this.customEase,
-          duration: .75
+          duration: .750
         });
       }
 
-      gsap.to(fifthItem, {
-        xPercent: 0,
-        yPercent: 0,
-        x: 0,
-        opacity: 1,
-        clearProps: "x,xPercent,yPercent",
-        ease: this.customEase,
-        duration: .950
-      });
 
       setTimeout(() => {
         this.setState({
@@ -187,11 +216,17 @@ class Carousel extends Component {
       })
     }
 
-    const animationDuration = .950;
+    const animationDuration = .750;
     const sortedItems = this.getChildren();
 
+    const first = sortedItems[this.itemPositionOrder[0]];
     const firstItem = sortedItems[this.itemPositionOrder[0]].ref.current;
     const firstItemPosition = firstItem.getBoundingClientRect();
+    const firstItemCtaBackground = first.props.refs[`item_cta-background_${first.key}`].current;
+    const firstItemCtaArrow = first.props.refs[`item_cta-arrow_${first.key}`].current;
+    const firstItemOutside = first.props.refs[`item_outside_${first.key}`].current;
+    const firstItemNumber = first.props.refs[`item_number_${first.key}`].current;
+    const firstItemLabel = first.props.refs[`item_label_${first.key}`].current;
     const secondItem = sortedItems[this.itemPositionOrder[1]].ref.current;
     const secondItemPosition = secondItem.getBoundingClientRect();
     const thirdItem = sortedItems[this.itemPositionOrder[2]].ref.current;
@@ -206,59 +241,142 @@ class Carousel extends Component {
     });
 
 
-    myAnimation.to(firstItem, {
-      xPercent: -200,
-      yPercent: 100,
-      rotate: -45,
-      opacity: 0.5,
-      clearProps: "rotate,opacity",
-      ease: this.customEase,
-      force3D: false,
-      duration: animationDuration,
-    }, 0);
+    if(direction === 'next') {
+      myAnimation.to(firstItem, {
+        xPercent: -200,
+        yPercent: 100,
+        rotate: -45,
+        opacity: 0.5,
+        clearProps: "rotate,opacity",
+        ease: this.customEase,
+        force3D: false,
+        duration: animationDuration,
+      }, 0);
 
-    myAnimation.to(secondItem, {
-      x: (firstItemPosition.left - secondItemPosition.left), //-(1- (1/(firstItemPosition.width / secondItemPosition.width))) * secondItemPosition.x
-      y: firstItemPosition.top - secondItemPosition.top,
-      // height: firstItemPosition.height,
-      // width: firstItemPosition.width,
-      scale: firstItemPosition.width / secondItemPosition.width,
-      // clearProps: "",
-      ease: "power4",
-      force3D: false,
-      duration: animationDuration,
-    }, 0);
+      myAnimation.to(secondItem, {
+        x: (firstItemPosition.left - secondItemPosition.left), //-(1- (1/(firstItemPosition.width / secondItemPosition.width))) * secondItemPosition.x
+        y: firstItemPosition.top - secondItemPosition.top,
+        // height: firstItemPosition.height,
+        // width: firstItemPosition.width,
+        scale: firstItemPosition.width / secondItemPosition.width,
+        // clearProps: "",
+        ease: "power4",
+        force3D: false,
+        duration: animationDuration,
+      }, 0);
 
-    myAnimation.to(thirdItem, {
-      x: secondItemPosition.x - thirdItemPosition.x,
-      y: secondItemPosition.y - thirdItemPosition.y,
-      ease: this.customEase,
-      duration: animationDuration,
-    }, 0);
+      myAnimation.to(thirdItem, {
+        x: secondItemPosition.x - thirdItemPosition.x,
+        y: secondItemPosition.y - thirdItemPosition.y,
+        ease: this.customEase,
+        duration: animationDuration,
+      }, 0);
 
-    myAnimation.to(fourthItem, {
-      x: thirdItemPosition.x - fourthItemPosition.x,
-      y: thirdItemPosition.y - fourthItemPosition.y,
-      ease: this.customEase,
-      duration: animationDuration,
-    }, 0);
+      myAnimation.to(fourthItem, {
+        x: thirdItemPosition.x - fourthItemPosition.x,
+        y: thirdItemPosition.y - fourthItemPosition.y,
+        ease: this.customEase,
+        duration: animationDuration,
+      }, 0);
 
-    myAnimation.to(fifthItem, {
-      x: fourthItemPosition.x - fifthItemPosition.x,
-      y: fourthItemPosition.y - fifthItemPosition.y,
-      ease: this.customEase,
-      duration: animationDuration,
-    }, 0);
+      myAnimation.to(fifthItem, {
+        x: fourthItemPosition.x - fifthItemPosition.x,
+        y: fourthItemPosition.y - fifthItemPosition.y,
+        ease: this.customEase,
+        duration: animationDuration,
+      }, 0);
 
-    setTimeout(() => {
-      this.setState({
-        direction,
-        position,
-        sliding: true
-      });
-      myAnimation.to(firstItem, {opacity: 0});
+      setTimeout(() => {
+        this.setState({
+          direction,
+          position,
+          sliding: true
+        });
+        myAnimation.to(firstItem, {opacity: 0});
 
-    }, animationDuration * 1000);
+      }, animationDuration * 1000);
+    }else if(direction === 'prev'){
+      // First item
+      myAnimation.to(firstItem, {
+        x: (secondItemPosition.left - firstItemPosition.left), //-(1- (1/(firstItemPosition.width / secondItemPosition.width))) * secondItemPosition.x
+        y: secondItemPosition.top - firstItemPosition.top,
+        // height: firstItemPosition.height,
+        // width: firstItemPosition.width,
+        scale: secondItemPosition.width / firstItemPosition.width,
+        // clearProps: "",
+        ease: "power4",
+        force3D: false,
+        duration: animationDuration,
+      }, 0);
+      myAnimation.to(firstItemCtaBackground, {
+        xPercent: 100,
+        ease: this.customEase,
+        duration: .75
+      }, 0);
+      myAnimation.to(firstItemCtaArrow, {
+        yPercent: 0,
+        height: 0,
+        ease: this.customEase,
+        duration: .75
+      }, 0);
+
+      // Different animations per screenwidth for labels of first item in carousel
+      if(window.innerWidth < 767){
+        gsap.to(firstItemNumber, {
+          y: 0,
+          ease: this.customEase,
+          duration: .75
+        });
+        gsap.to(firstItemLabel, {
+          y: 0,
+          ease: this.customEase,
+          duration: .75
+        });
+      }else {
+        gsap.to(firstItemOutside, {
+          xPercent: -100,
+          ease: this.customEase,
+          duration: .75
+        });
+      }
+
+      myAnimation.to(secondItem, {
+        x: thirdItemPosition.x - secondItemPosition.x,
+        y: thirdItemPosition.y - secondItemPosition.y,
+        ease: this.customEase,
+        duration: animationDuration,
+      }, 0);
+
+      myAnimation.to(thirdItem, {
+        x: fourthItemPosition.x - thirdItemPosition.x,
+        y: fourthItemPosition.y - thirdItemPosition.y,
+        ease: this.customEase,
+        duration: animationDuration,
+      }, 0);
+
+      myAnimation.to(fourthItem, {
+        x: fifthItemPosition.x - fourthItemPosition.x,
+        y: fifthItemPosition.y - fourthItemPosition.y,
+        ease: this.customEase,
+        duration: animationDuration,
+      }, 0);
+
+      myAnimation.to(fifthItem, {
+        xPercent: 50,
+        ease: this.customEase,
+        duration: animationDuration,
+      }, 0);
+
+      setTimeout(() => {
+        this.setState({
+          direction,
+          position,
+          sliding: true
+        });
+        myAnimation.to(firstItem, {opacity: 0});
+
+      }, animationDuration * 1000);
+    }
 
   };
 

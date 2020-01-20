@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import Link from './Link';
-import {
-  TimelineMax,  Power0, Power1, Power2, Power3, gsap,
-} from 'gsap';
+import {gsap} from 'gsap';
 import CustomEase from 'gsap/CustomEase';
 import GSDevTools from 'gsap/GSDevTools';
 
@@ -102,7 +100,6 @@ class AnimatedButton extends Component {
     buttonTimeline.fromTo(buttonTextContainer, {width: '20%', x: -23}, { width: '100%', x: 0}, '0.6');
     buttonTimeline.fromTo(buttonText, { clipPath: 'inset(0% 0% 0% 100%)' }, { duration: 0.4, ease: this.customEase, clipPath: 'inset(0% 0% 0% 0%)',}, '0.6');
     buttonTimeline.fromTo(buttonArrow, {x: 0 }, { duration: 0.75, x: 0 }, '0.5');
-    // buttonTimeline.set(buttonElement, { border: '1px solid rgba(27,29,31,.4)'});
 
     this.buttonTimeline.play();
 
@@ -131,8 +128,8 @@ class AnimatedButton extends Component {
 
       // Activate hover effect
       // buttonTimeline.to(buttonText, 0.25, { scale: 1.05, ease: this.customEase }, '0.25');
-      gsap.to(buttonPart3_left, 0.375, { x: "0%", ease: this.customEase }, '0.25');
-      gsap.to(buttonPart3_right,  0.375, { x: "0%", ease: this.customEase }, '0.25');
+      gsap.to(buttonPart3_left, { x: "0%", ease: this.customEase, duration: .375, delay: .25 });
+      gsap.to(buttonPart3_right, { x: "0%", ease: this.customEase, duration: .375, delay: .25 });
 
     }
   }
@@ -146,8 +143,6 @@ class AnimatedButton extends Component {
   handleHoverOff() {
     if (!this.buttonTimeline.isActive()) {
       const buttonTimeline = this.buttonHoverTimeline;
-      // console.log(buttonTimeline)
-      // buttonTimeline.reverse();
       const buttonElement = this.buttonRef.current;
 
       const buttonText = buttonElement.children[3];
@@ -156,8 +151,8 @@ class AnimatedButton extends Component {
 
       // Activate hover effect
       // buttonTimeline.to(buttonText, 0.25, { scale: 1, ease: this.customEase }, '0.25');
-      gsap.to(buttonPart3_left, 0.375, { x: "-102%", ease: this.customEase }, '0.25');
-      gsap.to(buttonPart3_right, 0.375, { x: "100%", ease: this.customEase }, '0.25');
+      gsap.to(buttonPart3_left, { x: "-102%", ease: this.customEase, duration: .375, delay: .25 });
+      gsap.to(buttonPart3_right, { x: "100%", ease: this.customEase, duration: .375, delay: .25 });
     }
   }
 
