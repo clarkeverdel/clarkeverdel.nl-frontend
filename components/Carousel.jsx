@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import {gsap} from 'gsap';
 import CustomEase from 'gsap/CustomEase';
 
@@ -49,6 +49,8 @@ class Carousel extends Component {
       const firstItemCtaBackground = first.props.refs[`item_cta-background_${first.key}`].current;
       const firstItemCtaArrow = first.props.refs[`item_cta-arrow_${first.key}`].current;
       const firstItemOutside = first.props.refs[`item_outside_${first.key}`].current;
+      const firstItemNumber = first.props.refs[`item_number_${first.key}`].current;
+      const firstItemLabel = first.props.refs[`item_label_${first.key}`].current;
       const secondItem = sortedItems[this.itemPositionOrder[1]].ref.current;
       const secondItemPosition = secondItem.getBoundingClientRect();
       const thirdItem = sortedItems[this.itemPositionOrder[2]].ref.current;
@@ -78,17 +80,33 @@ class Carousel extends Component {
       gsap.from(firstItemCtaBackground, {
         xPercent: 100,
         ease: this.customEase,
+        duration: .75
       });
       gsap.from(firstItemCtaArrow, {
         yPercent: 10,
         height: 0,
         ease: this.customEase,
-      },.75);
-      gsap.from(firstItemOutside, {
-        xPercent: -100,
+        duration: .75
+      });
 
-        ease: this.customEase,
-      },.75);
+      if(window.innerWidth < 767){
+        gsap.from(firstItemNumber, {
+          y: 0,
+          ease: this.customEase,
+          duration: .75
+        });
+        gsap.from(firstItemLabel, {
+          y: 0,
+          ease: this.customEase,
+          duration: .75
+        });
+      }else {
+        gsap.from(firstItemOutside, {
+          xPercent: -100,
+          ease: this.customEase,
+          duration: .75
+        });
+      }
 
       gsap.to(fifthItem, {
         xPercent: 0,
@@ -169,8 +187,6 @@ class Carousel extends Component {
       })
     }
 
-
-
     const animationDuration = .950;
     const sortedItems = this.getChildren();
 
@@ -240,9 +256,8 @@ class Carousel extends Component {
         position,
         sliding: true
       });
-
       myAnimation.to(firstItem, {opacity: 0});
-      // myAnimation.pause();
+
     }, animationDuration * 1000);
 
   };
@@ -287,8 +302,6 @@ class Carousel extends Component {
           ))}
           </div>
         </div>
-
-
       </div>
     );
   }

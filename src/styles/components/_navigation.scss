@@ -74,15 +74,14 @@ $mobile-logo-width: 132px;
     padding: 0 8.75vw;
 
     @include media-breakpoint-down(md){
-      padding: 0 rem(48);
+      padding: 0 $body-margin-md;
     }
-
     @include media-breakpoint-down(sm){
-      padding: 0 rem(32);
-    }
+      padding: 0 $body-margin-sm;
 
+    }
     @include media-breakpoint-down(xs){
-      padding: 0 rem(16);
+      padding: 0 $body-margin-xs;
     }
   }
 
@@ -94,6 +93,7 @@ $mobile-logo-width: 132px;
 }
 
 .mobile-menu {
+  $parent: &;
   opacity: 0;
   visiblity: hidden;
   transition: all ease-in-out 300ms;
@@ -119,12 +119,6 @@ $mobile-logo-width: 132px;
   }
   @include media-breakpoint-down(xs){
     padding: 0 $body-margin-xs;
-  }
-
-  &.visible {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: inherit;
   }
 
   &__header {
@@ -171,11 +165,63 @@ $mobile-logo-width: 132px;
       line-height: 1.2;
       margin: rem(12) 0;
       flex: 1;
+
+      // Loop from 1-9.
+      @for $i from 1 through 9 {
+        // :nth-child(1-9)
+        &:nth-child(#{$i}) {
+          .nav-link {
+            span {
+              // Delay the animation. Delay increases as items loop.
+              @if($i == 1) {
+                animation-delay: 1s;
+              }
+              @else {
+                animation-delay: $i * (1s / 18);
+              }
+
+            }
+          }
+        }
+      }
     }
     .nav-link {
       padding: rem(6) ;
       text-align: center;
+      overflow: hidden;
+
+      span {
+        display: block;
+        transform: translateY(100%);
+        //transition: transform $default-transition-duration $power4;
+        animation: $default-transition-duration $power4 1 slideUp;
+      }
     }
+  }
+
+  &.visible {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: inherit;
+
+    #{$parent}__container {
+      .nav-link {
+        span {
+          transform: translateY(0);
+        }
+      }
+    }
+
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(100%)
+  }
+
+  100% {
+    transform: translateY(0);
   }
 }
 

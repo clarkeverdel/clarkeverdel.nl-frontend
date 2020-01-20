@@ -22,10 +22,15 @@
     width: 100%;
     height: 100%;
     background-color: $theme-color-grey;
-    clip-path: polygon(0 0, 35% 0, 15% 100%, 0 100%);
+    clip-path: polygon(0 0, 59% 0, 15% 100%, 0 100%);
     left: 0;
-    bottom: 0;
+    top: 0;
     z-index: 0;
+
+    @include media-breakpoint-down(sm){
+      height: 100%;
+      clip-path: polygon(0 0, 100% 0, 0% 90%, 0 100%);
+    }
   }
 
 
@@ -67,19 +72,13 @@
     &__item {
       $item: &;
       $grid-gap: 1vw;
+      $grid-gap-mobile: 2.475vw;
+
       position: relative;
       box-shadow: 0 0 21px 0px rgba(0,0,0,.16);
       z-index: 0;
       transform-origin: 0 0;
-      //will-change: auto;
       background: none;
-
-      //@for $i from 0 through 5 {
-      //  &:nth-child(#{$i}) {
-      //    order: #{$i - 1};
-      //  }
-      //}
-
 
       &[order^="0"] {
         grid-column: span 2;
@@ -117,24 +116,40 @@
         z-index: 2;
         order: 1;
         margin: 0 ($grid-gap/2) ($grid-gap/2) 0;
+
+        @include media-breakpoint-down(sm){
+          margin: 0 ($grid-gap-mobile/2) ($grid-gap-mobile/2) 0;
+        }
       }
 
       &[order^="2"]{
         z-index: 3;
         order: 2;
         margin: 0 0 ($grid-gap/2) ($grid-gap/2);
+
+        @include media-breakpoint-down(sm){
+          margin: 0 0 ($grid-gap-mobile/2) ($grid-gap-mobile/2);
+        }
       }
 
       &[order^="3"]{
         order: 3;
         z-index: 4;
         margin: ($grid-gap/2) ($grid-gap/2) 0 0;
+
+        @include media-breakpoint-down(sm){
+          margin: ($grid-gap-mobile/2) ($grid-gap-mobile/2) 0 0;
+        }
       }
 
       &[order^="4"]{
         z-index: 5;
         order: 4;
         margin: ($grid-gap/2) 0 0 ($grid-gap/2);
+
+        @include media-breakpoint-down(sm){
+          margin: ($grid-gap-mobile/2) 0 0 ($grid-gap-mobile/2);
+        }
       }
 
       &__inner {
@@ -149,27 +164,40 @@
         align-items: flex-start;
         justify-content: flex-end;
         text-align: right;
-        width: $outside-width;
         padding: 0 0 0 .75vw;
-        //transition: transform 1000ms $power4;
         z-index: 0;
         opacity: 0;
         visibility: hidden;
+
+        @include media-breakpoint-up(md) {
+          width: $outside-width;
+        }
+        @include media-breakpoint-down(sm){
+          right: 0;
+        }
       }
 
       &__label {
         position: relative;
-        writing-mode: vertical-rl;
-        transform: rotate(180deg);
         color: orange;
         font-size: .9vw;
         line-height: 1rem;
         font-weight: $font-weight__medium;
         word-break: keep-all;
         white-space: nowrap;
-        text-transform: uppercase;
         letter-spacing: rem(1.12);
         transition: color $default-transition-duration $power4;
+
+        @include media-breakpoint-up(md) {
+          writing-mode: vertical-rl;
+          transform: rotate(180deg);
+          text-transform: uppercase;
+        }
+        @include media-breakpoint-down(sm){
+          font-size: 2.415vw;
+          line-height: 1.2;
+          transform: translateY(4vw);
+        }
 
         &:hover {
           color: $theme-color-dark;
@@ -184,6 +212,14 @@
         color: orange;
         position: relative;
         margin: 0 0 3vw;
+
+        @include media-breakpoint-down(sm) {
+          flex: 1;
+          align-self: flex-end;
+          font-size: 4.83vw;
+          line-height: 1.2;
+          transform: translateY(-6vw);
+        }
       }
 
       &__image {
@@ -209,6 +245,11 @@
         align-items: flex-end;
         justify-content: flex-end;
 
+        @include media-breakpoint-down(sm){
+          height: 50%;
+          width: 19%;
+        }
+
         &-background {
           content: "";
           width: 0;
@@ -219,6 +260,10 @@
           position: absolute;
           //transform: translateX(100%);
           //transition: all 1000ms $power4;
+
+          @include media-breakpoint-down(sm){
+            border-width: 0 0 28.5vw 16.67vw;
+          }
         }
         &-arrow {
           position: relative;
@@ -229,6 +274,11 @@
           overflow: hidden;
           text-align: center;
 
+          @include media-breakpoint-down(sm){
+            width: 73%;
+            transform: translateY(-3.5vw);
+          }
+
           &:before {
             content: "";
             margin: 0px auto;
@@ -236,6 +286,10 @@
             border-style: solid;
             border-width: 0.7145vw 0 0.7145vw 1.215vw;
             border-color: transparent transparent transparent white;
+
+            @include media-breakpoint-down(sm){
+              border-width: (2.65vw/2) 0 (2.65vw/2) 2.17vw;
+            }
           }
         }
       }
@@ -258,6 +312,11 @@
       justify-content: flex-end;
       align-items: center;
       margin: 2vw 0;
+
+      @include media-breakpoint-down(sm){
+        justify-content: center;
+        margin: 6vw 0;
+      }
     }
 
     &__button {
@@ -274,6 +333,11 @@
       svg {
         width: 2vw;
         height: 2.3vw;
+
+        @include media-breakpoint-down(sm){
+          width: 3.2vw;
+          height: 3.71vw;
+        }
 
         path {
           @include fill-transition();
@@ -299,6 +363,10 @@
       }
       &-next {
         margin-left: 5.7vw;
+
+        @include media-breakpoint-down(sm){
+          margin-left: 26.98vw;
+        }
       }
     }
   }

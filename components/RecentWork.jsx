@@ -15,6 +15,8 @@ class RecentWork extends Component {
           [`item_cta-background_${child.id}`]: React.createRef(),
           [`item_cta-arrow_${child.id}`]: React.createRef(),
           [`item_outside_${child.id}`]: React.createRef(),
+          [`item_number_${child.id}`]: React.createRef(),
+          [`item_label_${child.id}`]: React.createRef(),
         }
     });
   }
@@ -48,8 +50,8 @@ class RecentWork extends Component {
             </a>
           </Link>
           <div className="recent-work__slider__item__outside" ref={dataset[index][`item_outside_${id}`]}>
-            <span className="recent-work__slider__item__number">{this.pad(number, 2)}</span>
-            <Link href={href} as={realSlug}><a className="recent-work__slider__item__label">View project</a></Link>
+            <span className="recent-work__slider__item__number" ref={dataset[index][`item_number_${id}`]}>{this.pad(number, 2)}</span>
+            <Link href={href} as={realSlug}><a className="recent-work__slider__item__label" ref={dataset[index][`item_label_${id}`]}>View project</a></Link>
           </div>
         </div>
       );
