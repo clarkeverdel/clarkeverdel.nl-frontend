@@ -15,24 +15,10 @@ class Carousel extends Component {
       direction: null,
     };
 
-    // props.children.map((child, index) => {
-    //   // this[`${child.key}_ref`] = React.createRef();
-    //   //console.log(child);
-    //   return child;
-    // });
-
-    // var firstRefs = refs.filter(obj => {
-    //   //console.log(obj[`${first.key}_ref`]);
-    //   return typeof obj[`${first.key}_ref`] !== 'undefined'
-    // });
-    //
-    // console.log(refs[this.itemPositionOrder[0]], first.key);
-    //
-    //
-
-
     this.itemPositionOrder = [0,1,3,4,2];
     this.getChildren = this.getChildren.bind(this);
+    this.afterDoSliding = this.afterDoSliding.bind(this);
+    this.afterComponentDidUpdate = this.afterComponentDidUpdate.bind(this);
 
     CustomEase.create("custom", "M0,0 C0,0 0.0247,0.00211 0.03707,0.00714 0.05152,0.01303 0.06423,0.01886 0.07459,0.03038 0.10351,0.06254 0.12546,0.08977 0.14735,0.12981 0.17564,0.18153 0.18831,0.21797 0.20917,0.2765 0.26882,0.44384 0.29416,0.54487 0.35353,0.70816 0.36667,0.74432 0.37878,0.76627 0.39883,0.79818 0.41618,0.82579 0.42964,0.84466 0.45302,0.8665 0.48414,0.89557 0.50894,0.91582 0.54618,0.93582 0.58624,0.95734 0.61812,0.96822 0.6633,0.97943 0.71261,0.99167 0.74622,0.99524 0.79841,0.99842 0.87552,1.00313 1,1 1,1 ");
     this.customEase = "custom";
@@ -76,7 +62,6 @@ class Carousel extends Component {
         clearProps: "x,y"
       });
 
-
       gsap.from(firstItemCtaBackground, {
         xPercent: 100,
         ease: this.customEase,
@@ -89,10 +74,7 @@ class Carousel extends Component {
         duration: .75
       });
 
-
-
       if(direction === 'next'){
-
         // Different animations per screenwidth for labels of first item in carousel
         if(window.innerWidth < 767){
           gsap.from(firstItemNumber, {
@@ -123,18 +105,10 @@ class Carousel extends Component {
           opacity: 1,
           clearProps: "x,xPercent,yPercent",
           ease: this.customEase,
-          duration: .750
+          duration: .750,
+          onComplete: this.afterComponentDidUpdate
         });
       }else if(direction === 'prev'){
-        // gsap.set(firstItem, {
-        //   xPercent: -200,
-        //   yPercent: 100,
-        //   rotate: -45,
-        //   opacity: 0.5,
-        //   clearProps: "rotate,opacity",
-        //   ease: this.customEase,
-        //   duration: .750
-        // });
         gsap.from(firstItem, {
           xPercent: -200,
           yPercent: 100,
@@ -142,19 +116,18 @@ class Carousel extends Component {
           opacity: 0.5,
           clearProps: "rotate,opacity",
           ease: this.customEase,
-          duration: .750
+          duration: .750,
+          onComplete: this.afterComponentDidUpdate
         });
       }
-
-
-      setTimeout(() => {
-        this.setState({
-          sliding: false,
-          lockButton: false
-        });
-      }, 1000);
-
     }
+  }
+
+  afterComponentDidUpdate(){
+    this.setState({
+      sliding: false,
+      lockButton: false
+    });
   }
 
   getChildren(){
@@ -185,7 +158,7 @@ class Carousel extends Component {
     const numItems = children.length || 1;
 
     if (itemIndex - position < 0) {
-      return this.itemPositionOrder[numItems - Math.abs(itemIndex- position)];
+      return this.itemPositionOrder[numItems - Math.abs(itemIndex - position)];
     }
 
     return this.itemPositionOrder[itemIndex - position];
@@ -284,26 +257,17 @@ class Carousel extends Component {
         y: fourthItemPosition.y - fifthItemPosition.y,
         ease: this.customEase,
         duration: animationDuration,
+        onComplete: this.afterDoSliding,
+        onCompleteParams: [direction, position]
       }, 0);
 
-      setTimeout(() => {
-        this.setState({
-          direction,
-          position,
-          sliding: true
-        });
-        myAnimation.to(firstItem, {opacity: 0});
 
-      }, animationDuration * 1000);
     }else if(direction === 'prev'){
       // First item
       myAnimation.to(firstItem, {
         x: (secondItemPosition.left - firstItemPosition.left), //-(1- (1/(firstItemPosition.width / secondItemPosition.width))) * secondItemPosition.x
         y: secondItemPosition.top - firstItemPosition.top,
-        // height: firstItemPosition.height,
-        // width: firstItemPosition.width,
         scale: secondItemPosition.width / firstItemPosition.width,
-        // clearProps: "",
         ease: "power4",
         force3D: false,
         duration: animationDuration,
@@ -365,20 +329,21 @@ class Carousel extends Component {
         xPercent: 50,
         ease: this.customEase,
         duration: animationDuration,
+        onComplete: this.afterDoSliding,
+        onCompleteParams: [direction, position, myAnimation, firstItem]
       }, 0);
-
-      setTimeout(() => {
-        this.setState({
-          direction,
-          position,
-          sliding: true
-        });
-        myAnimation.to(firstItem, {opacity: 0});
-
-      }, animationDuration * 1000);
     }
 
   };
+
+  afterDoSliding(direction, position, timeline, firstItem){
+      this.setState({
+        direction,
+        position,
+        sliding: true
+      });
+      if(direction === 'prev') timeline.to(firstItem, {opacity: 0});
+  }
 
   render() {
     const { children, refs } = this.props;
