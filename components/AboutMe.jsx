@@ -33,7 +33,10 @@ class AboutMe extends Component {
           </div>
           <div className="about-me__content">
             <p>
-              Sed quat. Icia inim vendis ut pelescid maio eicipsant atemquia im essin et pliquodis eum vendam sequibus autectur, cuptaqui cum faccum exeror as qui tesendam, to quia ex et aut occumqu odisitatur? Ceperem faceperore secus verruptatum dicias vel et quianda nosti qui que duciisi molendit earis a dolestium ex exerovitae mollupt ataquunt.
+              I'm a passionate developer who likes to build high performant, awesome looking websites. I have been working as a front-end developer since 2012 and having worked on many cool projects I can say that I love my job. Helping businesses reaching their online success is my motivation in delivering awesome stuff.
+            </p>
+            <p>
+              Are you looking for someone that take things to the next level? Check out my latest projects and send me a message.
             </p>
           </div>
         </div>
