@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import fetch from 'isomorphic-unfetch';
 import Error from 'next/error';
 import BodyClassName from 'react-body-classname';
-import { gsap, Power4, Power3, Power0 } from 'gsap';
+import { gsap, Power4, Power3 } from 'gsap';
 
 import Layout from '../components/Layout';
 import PageWrapper from '../components/PageWrapper';
@@ -59,16 +59,10 @@ class Contact extends Component {
     const triangle = this.triangleRef.current;
     const circle = this.circleRef.current;
 
-    if (e.pageX < (screen.width / 2)) {
-      rotation = (x / 30);
-    }
-
     // TODO: Use a QuickSetter from Gsap Docs to boost performance
-    gsap.to(circle,{duration: 2.5, css: {x: (x / 20), y: (y / 5)}, ease: Power4.easeOut });
-    gsap.to(triangle,{duration: 2.5, css: {x: (x / 30), y: (y / 10)}, ease: Power3.easeOut });
-    gsap.to(triangle,{duration: 2.5, css: {rotation}, ease: Power0.easeOut });
-    gsap.to(cross,{duration: 2.5, css: {x: (x / 30), y: (y / 10)}, ease: Power4.easeOut });
-    gsap.to(cross,{duration: 2.5, css: {rotation}, ease: Power4.easeOut });
+    gsap.to(circle,{duration: 2.5, x: (x / 20), y: (y / 5), ease: Power4.easeOut });
+    gsap.to(triangle,{duration: 2.5, x: (x / 30), y: (y / 10), rotation, ease: Power3.easeOut });
+    gsap.to(cross,{duration: 2.5, x: (x / 30), y: (y / 10), rotation, ease: Power4.easeOut });
   }
 
   submitForm(e) {
@@ -112,16 +106,11 @@ class Contact extends Component {
     const tl = gsap.timeline({ repeat: 0});
     const darkIconColor = 'rgb(23,18,32)';
 
-
-    // Change logo color
-    tl.to('#navbar-brand-img .CV_LOGO_svg__stroke-me stop', { css: {stopColor: darkIconColor}, duration: 1}, 0 );
-    tl.to('#navbar-brand-img .CV_LOGO_svg__st4', { css: {fill: darkIconColor}, duration: 1}, 0);
-
     // Change mail icon color
-    tl.to('.MAIL_BTN_svg__mail_btn .MAIL_BTN_svg__st0', { css: {fill: darkIconColor, duration: 1}}, 0);
+    tl.to('.MAIL_BTN_svg__mail_btn .MAIL_BTN_svg__st0', { fill: darkIconColor, duration: 1}, 0);
 
     // Change hamburger icon color
-    tl.to('#HAMBURGER_svg__Group_7 path', { css: {fill: darkIconColor, duration: 1}}, 0);
+    tl.to('#HAMBURGER_svg__Group_7 path', { fill: darkIconColor, duration: 1}, 0);
 
   }
 

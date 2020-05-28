@@ -18,8 +18,8 @@ export default class MyApp extends App {
 
     return (
       <div>
-        <PageTransition timeout={800} classNames="page-transition">
-          <Component {...pageProps} key={router.query.slug} />
+        <PageTransition timeout={750} classNames="page-transition">
+          <Component {...pageProps} key={router.route} />
         </PageTransition>
         <style jsx global>
           {`
