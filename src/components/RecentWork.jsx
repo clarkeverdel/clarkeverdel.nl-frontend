@@ -35,7 +35,7 @@ class RecentWork extends Component {
             number = index + 1,
             featuredMedia = project._embedded['wp:featuredmedia'],
             image = (featuredMedia && featuredMedia[0].media_details) ? project._embedded['wp:featuredmedia'][0].media_details.sizes.full : null,
-            href = `/project?slug=${project.slug}&apiRoute=project`,
+            href = `/project/${project.slug}`,
             realSlug = `/project/${project.slug}`;
 
       return (

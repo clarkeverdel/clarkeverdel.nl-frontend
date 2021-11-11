@@ -12,7 +12,7 @@ module.exports = (req, res) => {
   const emailBody = `<p>${description}</p>`;
   let status = '';
 
-  mailer({ email, name, text: emailHeading + emailBody }).then((response) => {
+  mailer.send({ email, name, text: emailHeading + emailBody }).then((response) => {
     status = 'Successfully sent an email via the contact form.';
     res.send(status);
   }).catch((error) => {

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {gsap} from 'gsap';
 import CustomEase from 'gsap/CustomEase';
 
-import CarouselArrow from '../public/static/images/carousel_arrow.svg';
+import CarouselArrow from '../../public/static/images/carousel_arrow.svg';
 gsap.registerPlugin(CustomEase);
 
 class Carousel extends Component {

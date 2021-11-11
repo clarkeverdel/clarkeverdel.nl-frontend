@@ -1,133 +1,133 @@
-@import "../variables";
-@import "../bootstrap-variables";
+.page-contact {
+  .navbar {
+    min-height: 115px;
 
-.navbar {
-  min-height: 115px;
+    @media (max-width: $screen-xs-max) {
+      min-height: 0;
+    }
 
-  @media (max-width: $screen-xs-max) {
-    min-height: 0;
-  }
+    .navbar-nav {
+      > .nav-item {
+        margin-left: 64px;
 
-  .navbar-nav {
-    > .nav-item {
-      margin-left: 64px;
+        &.nav-item-text {
+          overflow: hidden;
+        }
 
-      &.nav-item-text {
-        overflow: hidden;
-      }
+        > .nav-link {
+          font-weight: 700;
+          font-size: 0.875rem;
+          color: #FFF;
 
-      > .nav-link {
-        font-weight: 700;
-        font-size: 0.875rem;
-        color: #FFF;
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-image: linear-gradient(
+                          to right,
+                          rgb(23,18,32),
+                          rgb(23,18,32) 50%,
+                          #FFF 50%);
+          background-size: 200% 100%;
+          background-position: 100%;
 
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-image: linear-gradient(
-                        to right,
-                        rgb(23,18,32),
-                        rgb(23,18,32) 50%,
-                        #FFF 50%);
-        background-size: 200% 100%;
-        background-position: 100%;
-
-        &:hover,
-        &:focus {
-          color: rgb(23,18,32);
-          background-position: 0%;
+          &:hover,
+          &:focus {
+            color: rgb(23,18,32);
+            background-position: 0%;
+          }
         }
       }
     }
   }
-}
 
-.contact-heading {
-  margin-top: 3vw;
-  position: relative;
-  z-index: 1;
+  .contact-heading {
+    margin-top: 3vw;
+    position: relative;
+    z-index: 1;
 
-  &__title {
-    max-width: 330px;
-
-    @media only screen AND (max-width: $screen-lg-max){
-      max-width: 300px;
-    }
-    @media only screen AND (max-width: $screen-md-max){
-      max-width: 270px;
-    }
-    @media only screen AND (max-width: $screen-sm-max){
-      max-width: 230px;
-    }
-  }
-
-  &__subtitle {
-    max-width: 400px;
-
-    @media only screen AND (max-width: $screen-lg-max){
-      max-width: 360px;
-    }
-    @media only screen AND (max-width: $screen-md-max){
+    &__title {
       max-width: 330px;
+
+      @media only screen AND (max-width: $screen-lg-max){
+        max-width: 300px;
+      }
+      @media only screen AND (max-width: $screen-md-max){
+        max-width: 270px;
+      }
+      @media only screen AND (max-width: $screen-sm-max){
+        max-width: 230px;
+      }
     }
+
+    &__subtitle {
+      max-width: 400px;
+
+      @media only screen AND (max-width: $screen-lg-max){
+        max-width: 360px;
+      }
+      @media only screen AND (max-width: $screen-md-max){
+        max-width: 330px;
+      }
+      @media only screen AND (max-width: $screen-sm-max){
+        max-width: 300px;
+      }
+    }
+  }
+
+
+  .floating-elements-container {
+
+    position: absolute;
+
+    --default-width: 300px;
+
+    $default-width: 300px;
+    $default-padding: 8.75vw;
+
     @media only screen AND (max-width: $screen-sm-max){
-      max-width: 300px;
+      left: 0;
+      background-clip: padding-box;
+      --default-width: 240px;
+    }
+
+    @media only screen AND (max-width: $screen-xs-max){
+      display: none;
+    }
+
+    .circle {
+      position: absolute;
+      left: calc(var(--default-width) + #{$default-padding} + 43vw);
+      top: -100px;
+      will-change: transform;
+    }
+    .triangle {
+      position: absolute;
+      left: calc(var(--default-width) + #{$default-padding} + 25vw);
+      will-change: transform;
+    }
+    .cross {
+      position: absolute;
+      display: inline-block;
+      left: calc(var(--default-width) + #{$default-padding} + 2vw);
+      top: -150px;
+      will-change: transform;
+    }
+
+    .circle,
+    .triangle,
+    .cross {
+      @media only screen AND (max-width: $screen-sm-max){
+        width: auto;
+        height: 30px;
+      }
     }
   }
+
+
+  .form--contact{
+    padding: 5vw 0 8vw;
+    position: relative;
+    z-index: 3;
+  }
+
+
 }
-
-
-.floating-elements-container {
-
-  position: absolute;
-
-  --default-width: 300px;
-
-  $default-width: 300px;
-  $default-padding: 8.75vw;
-
-  @media only screen AND (max-width: $screen-sm-max){
-    left: 0;
-    background-clip: padding-box;
-    --default-width: 240px;
-  }
-
-  @media only screen AND (max-width: $screen-xs-max){
-    display: none;
-  }
-
-  .circle {
-    position: absolute;
-    left: calc(var(--default-width) + #{$default-padding} + 43vw);
-    top: -100px;
-    will-change: transform;
-  }
-  .triangle {
-    position: absolute;
-    left: calc(var(--default-width) + #{$default-padding} + 25vw);
-    will-change: transform;
-  }
-  .cross {
-    position: absolute;
-    display: inline-block;
-    left: calc(var(--default-width) + #{$default-padding} + 2vw);
-    top: -150px;
-    will-change: transform;
-  }
-
-  .circle,
-  .triangle,
-  .cross {
-    @media only screen AND (max-width: $screen-sm-max){
-      width: auto;
-      height: 30px;
-    }
-  }
-}
-
-
-.form--contact{
-  padding: 5vw 0 8vw;
-  position: relative;
-  z-index: 3;
-}
-

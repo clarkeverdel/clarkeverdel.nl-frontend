@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import AnimatedButton from './AnimatedButton';
 
 // Images
-import Triangle from '../public/static/images/TRIANGLE.svg';
-import Circle from '../public/static/images/CIRCLE.svg';
+import Triangle from '../../public/static/images/TRIANGLE.svg';
+import Circle from '../../public/static/images/CIRCLE.svg';
 
 class AboutMe extends Component {
   constructor(props) {

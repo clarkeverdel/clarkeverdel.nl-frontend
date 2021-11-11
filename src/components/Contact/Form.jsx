@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import fetch from 'isomorphic-unfetch';
-import FormValidators from '../../functions/formValidators';
+import FormValidators from '../../../functions/formValidators';
 
 import {
   Button, Form, Input, FormGroup, Label, FormFeedback, Col

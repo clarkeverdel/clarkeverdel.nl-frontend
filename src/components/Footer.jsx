@@ -1,6 +1,5 @@
 import SVG from 'react-inlinesvg';
 import React from 'react';
-import Link from './Link';
 
 const hrStyle = {
   marginTop: 75,

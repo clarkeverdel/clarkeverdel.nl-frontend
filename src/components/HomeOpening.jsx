@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 
 import {
-  gsap, TweenMax, TimelineMax, Power0, Sine, Power3, Power4,
+  gsap, TweenMax, TimelineMax,
+  Power0, Sine, Power3, Power4
 } from 'gsap';
+
 import CustomEase from 'gsap/CustomEase';
 import RoughEase from 'gsap/EasePack';
 
@@ -10,20 +12,19 @@ import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import CSSRulePlugin from 'gsap/CSSRulePlugin';
 import GSDevTools from 'gsap/GSDevTools';
 
-import Link from './Link';
 import AnimatedButton from './AnimatedButton';
 
 // SVG files
-import BgIcon from '../public/static/images/BG_ICON.svg';
-import AboutMe from '../public/static/images/AboutMe.svg';
-import AboutMeArrow from '../public/static/images/ARROW_DOWN_1.svg';
-import RecentWork from '../public/static/images/RecentWork.svg';
-import RecentWorkArrow from '../public/static/images/ARROW_DOWN_2.svg';
-import Cross from '../public/static/images/CROSS.svg';
-import Triangle from '../public/static/images/TRIANGLE.svg';
-import Circle from '../public/static/images/CIRCLE.svg';
-import LogoNegative from '../public/static/images/CV_LOGO_BLACK.svg';
-import CodeArrow from '../public/static/images/code_arrow.svg';
+import BgIcon from '../../public/static/images/BG_ICON.svg';
+import AboutMe from '../../public/static/images/AboutMe.svg';
+import AboutMeArrow from '../../public/static/images/ARROW_DOWN_1.svg';
+import RecentWork from '../../public/static/images/RecentWork.svg';
+import RecentWorkArrow from '../../public/static/images/ARROW_DOWN_2.svg';
+import Cross from '../../public/static/images/CROSS.svg';
+import Triangle from '../../public/static/images/TRIANGLE.svg';
+import Circle from '../../public/static/images/CIRCLE.svg';
+import LogoNegative from '../../public/static/images/CV_LOGO_BLACK.svg';
+import CodeArrow from '../../public/static/images/code_arrow.svg';
 
 // Register gsap modules
 gsap.registerPlugin(CSSRulePlugin, ScrollToPlugin, GSDevTools, RoughEase, CustomEase);

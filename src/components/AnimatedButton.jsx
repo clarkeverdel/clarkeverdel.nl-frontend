@@ -5,7 +5,7 @@ import CustomEase from 'gsap/CustomEase';
 import GSDevTools from 'gsap/GSDevTools';
 
 // Register gsap modules
-gsap.registerPlugin(GSDevTools, CustomEase);
+gsap.registerPlugin(GSDevTools);
 
 
 class AnimatedButton extends Component {

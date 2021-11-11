@@ -58,7 +58,8 @@ $mobile-logo-width: 132px;
         background-position: 100%;
 
         &:hover,
-        &:focus {
+        &:focus,
+        &--active {
           color: #FFF;
           background-position: 0%;
         }
@@ -95,7 +96,7 @@ $mobile-logo-width: 132px;
 .mobile-menu {
   $parent: &;
   opacity: 0;
-  visiblity: hidden;
+  visibility: hidden;
   transition: all ease-in-out 300ms;
   background-color: $theme-color-dark;
   position: fixed;
@@ -158,44 +159,48 @@ $mobile-logo-width: 132px;
     flex-direction: column;
     flex: 1;
     min-height: calc(100% - 200px);
+  }
 
-    .nav-item {
-      justify-content: center;
-      font-size: rem(27);
-      line-height: 1.2;
-      margin: rem(12) 0;
-      flex: 1;
+  .nav-item {
+    justify-content: center;
+    font-size: rem(27);
+    line-height: 1.2;
+    margin: rem(12) 0;
+    flex: 1;
 
-      // Loop from 1-9.
-      @for $i from 1 through 9 {
-        // :nth-child(1-9)
-        &:nth-child(#{$i}) {
-          .nav-link {
-            span {
-              // Delay the animation. Delay increases as items loop.
-              @if($i == 1) {
-                animation-delay: 1s;
-              }
-              @else {
-                animation-delay: $i * (1s / 18);
-              }
-
+    // Loop from 1-9.
+    @for $i from 1 through 9 {
+      // :nth-child(1-9)
+      &:nth-child(#{$i}) {
+        .nav-link {
+          span {
+            // Delay the animation. Delay increases as items loop.
+            @if($i == 1) {
+              animation-delay: 1s;
             }
+            @else {
+              animation-delay: $i * (1s / 18);
+            }
+
           }
         }
       }
     }
-    .nav-link {
-      padding: rem(6) ;
-      text-align: center;
-      overflow: hidden;
+  }
+  .nav-link {
+    padding: rem(6) ;
+    text-align: center;
+    overflow: hidden;
 
-      span {
-        display: block;
-        transform: translateY(100%);
-        //transition: transform $default-transition-duration $power4;
-        animation: $default-transition-duration $power4 1 slideUp;
-      }
+    span {
+      display: block;
+      transform: translateY(100%);
+      //transition: transform $default-transition-duration $power4;
+      animation: $default-transition-duration $power4 1 slideUp;
+    }
+
+    &--active {
+      color: #FFF;
     }
   }
 
@@ -224,28 +229,3 @@ $mobile-logo-width: 132px;
     transform: translateY(0);
   }
 }
-
-// .main-menu-container {
-//   .logo {
-//     display: block;
-//     margin: 20px auto;
-//     width:400px;
-//     text-align: center;
-//
-//     .loader-active {
-//       display: inline-block;
-//     }
-//
-//     svg {
-//       margin: 0px auto;
-//
-//     }
-//   }
-//
-//   .main-menu {
-//     a {
-//       text-decoration: none;
-//     }
-//   }
-//
-// }

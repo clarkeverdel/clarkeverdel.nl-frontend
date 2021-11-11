@@ -4,12 +4,11 @@ import Error from 'next/error';
 import BodyClassName from 'react-body-classname';
 import { gsap, Power4, Power3 } from 'gsap';
 
-import Layout from '../components/Layout';
-import PageWrapper from '../components/PageWrapper';
-import Menu from '../components/Menu';
-import ContactForm from '../components/Contact/Form';
+import Layout from '../src/components/Layout';
+import PageWrapper from '../src/components/PageWrapper';
+import Menu from '../src/components/Menu';
+import ContactForm from '../src/components/Contact/Form';
 import { Config } from '../config';
-import stylesheet from '../src/styles/pages/contact.scss';
 
 import Cross from '../public/static/images/CROSS_DARK.svg';
 import Triangle from '../public/static/images/TRIANGLE_DARK.svg';
@@ -93,15 +92,6 @@ class Contact extends Component {
     this.setState({ validate });
   }
 
-  static async getInitialProps(context) {
-    const { slug, apiRoute } = context.query;
-    const res = await fetch(
-      `${Config.apiUrl}/wp-json/postlight/v1/${apiRoute}?slug=${slug}`,
-    );
-    const post = await res.json();
-    return { post };
-  }
-
   componentDidMount() {
     const tl = gsap.timeline({ repeat: 0});
     const darkIconColor = 'rgb(23,18,32)';
@@ -116,42 +106,52 @@ class Contact extends Component {
 
 
   render() {
-    const { post, headerMenu } = this.props;
+    const { post } = this.props;
 
     if (!post.title) return <Error statusCode={404} />;
 
     return (
 
-      <BodyClassName className="blue-bg">
+      <BodyClassName className="page-contact blue-bg">
+        <PageWrapper>
+          <Layout onMouseMove={this.onMouseMove.bind(this)} title={post.title.rendered}>
 
-        <Layout onMouseMove={this.onMouseMove.bind(this)} title={post.title.rendered}>
-          <style dangerouslySetInnerHTML={{ __html: stylesheet }} />
+            <div className="contact-heading container-fluid">
+              <h1 className="contact-heading__title" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
+              <div
+                className="text-dark lead contact-heading__subtitle"
+                dangerouslySetInnerHTML={{
+                  __html: post.content.rendered,
+                }}
+              />
+            </div>
+            <div className="container-fluid floating-elements-container">
+              <Cross className="cross" ref={this.crossRef} />
+              <Triangle className="triangle" ref={this.triangleRef} />
+              <Circle className="circle" ref={this.circleRef} />
+            </div>
 
-          <Menu menu={headerMenu} />
+            <ContactForm />
 
-          <div className="contact-heading container-fluid">
-            <h1 className="contact-heading__title" dangerouslySetInnerHTML={{ __html: post.title.rendered }} />
-            <div
-              className="text-dark lead contact-heading__subtitle"
-              dangerouslySetInnerHTML={{
-                __html: post.content.rendered,
-              }}
-            />
-          </div>
-          <div className="container-fluid floating-elements-container">
-            <Cross className="cross" ref={this.crossRef} />
-            <Triangle className="triangle" ref={this.triangleRef} />
-            <Circle className="circle" ref={this.circleRef} />
-          </div>
-
-          <ContactForm />
-
-        </Layout>
-
+          </Layout>
+        </PageWrapper>
       </BodyClassName>
 
     );
   }
 }
 
-export default PageWrapper(Contact);
+export async function getStaticProps() {
+  const res = await fetch(
+    `${Config.apiUrl}/wp-json/postlight/v1/page?slug=contact`,
+  );
+  const post = await res.json();
+
+  return {
+    props: {
+      post
+    }
+  };
+}
+
+export default Contact;
