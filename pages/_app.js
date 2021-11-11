@@ -1,6 +1,5 @@
 import React from 'react';
 import { PageTransition } from 'next-page-transitions';
-import { NavigationProvider } from '../src/providers/NavigationProvider';
 
 import '../src/styles/style.scss';
 
