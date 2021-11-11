@@ -2390,6 +2390,11 @@
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/@emotion/weak-memoize/-/weak-memoize-0.1.3.tgz#b700d97385fa91affed60c71dfd51c67e9dad762"
 
+"@gsap/shockingly@^3.8.0", "gsap@npm:@gsap/shockingly":
+  version "3.8.0"
+  resolved "https://npm.greensock.com/@gsap%2fshockingly/-/shockingly-3.8.0.tgz#be3f68364a4b90943ff3138a137b4189cca2ff86"
+  integrity sha512-2Lzw+4dgLYLfV+a0EYk8zuO1jyAseh3QoubjTPVPVDEWJwe7SSrrPWpTiapExcxT6zXDojwM0v0FpoNdb6e7Tg==
+
 "@hapi/accept@5.0.2":
   version "5.0.2"
   resolved "https://registry.yarnpkg.com/@hapi/accept/-/accept-5.0.2.tgz#ab7043b037e68b722f93f376afb05e85c0699523"
@@ -7944,11 +7949,6 @@ graceful-fs@^4.2.3, graceful-fs@^4.2.4:
   version "4.2.8"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
   integrity sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==
-
-"gsap@npm:@gsap/shockingly":
-  version "3.8.0"
-  resolved "https://npm.greensock.com/@gsap%2fshockingly/-/shockingly-3.8.0.tgz#be3f68364a4b90943ff3138a137b4189cca2ff86"
-  integrity sha512-2Lzw+4dgLYLfV+a0EYk8zuO1jyAseh3QoubjTPVPVDEWJwe7SSrrPWpTiapExcxT6zXDojwM0v0FpoNdb6e7Tg==
 
 gzip-size@5.0.0:
   version "5.0.0"
