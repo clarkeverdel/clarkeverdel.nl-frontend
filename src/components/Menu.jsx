@@ -43,11 +43,6 @@ const Menu = () => {
       }
 
       const slug = getSlug(item.url);
-      let actualPage = item.object === 'category' ? 'category' : 'post';
-
-      if(slug === 'contact'){
-        actualPage = 'contact';
-      }
 
       return (
         <NavItem className="d-flex align-items-center" key={item.ID}>
@@ -77,7 +72,7 @@ const Menu = () => {
             <div className="logo position-relative img-fluid">
               <Link href="/">
                 <div>
-                  {(router.route === '/contact' ?
+                  {(router.asPath === '/contact' ?
                     <InvertedLogo id="navbar-brand-img" />
                   : <Logo id="navbar-brand-img" />)}
 

@@ -227,7 +227,7 @@ class ContactForm extends Component {
                     />
                     { this.displayValidationErrors('email') }
                     <FormFeedback valid>
-                      That's a tasty looking email you've got there.
+                      That&apos;s a tasty looking email you&apos;ve got there.
                     </FormFeedback>
                     <FormFeedback>
                       Uh oh! Looks like there is an issue with your email. Please input a correct email.

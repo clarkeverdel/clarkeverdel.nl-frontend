@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
+import parse from 'html-react-parser';
 
 class Header extends Component {
 
@@ -23,7 +24,7 @@ class Header extends Component {
 
           <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" />
 
-          <title>{title}</title>
+          <title>{parse(title)}</title>
         </Head>
       </div>
     );

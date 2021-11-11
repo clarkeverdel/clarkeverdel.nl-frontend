@@ -48,7 +48,7 @@ export async function getStaticPaths(){
         slug: page.slug
       }
     }
-  });
+  }).filter( ({slug}) => slug === 'contact');
 
   return {
     paths: allPages,

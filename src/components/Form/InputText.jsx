@@ -25,7 +25,7 @@ class InputText extends Component {
     return (
 
       <div className="form-group">
-        <label for={name}>{label}</label>
+        <label htmlFor={name}>{label}</label>
         <input
           type={(!type && "text")}
           name={name}

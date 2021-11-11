@@ -42,17 +42,19 @@ class Category extends Component {
     //   </ul>
     // ));
     return (
-      <Layout>
-        <Menu menu={headerMenu} />
-        <h1>
-          {categories[0].name}
-          {' '}
-Posts
-        </h1>
-        {posts}
-      </Layout>
+      <PageWrapper>
+        <Layout>
+          <Menu menu={headerMenu} />
+          <h1>
+            {categories[0].name}
+            {' '}
+  Posts
+          </h1>
+          {posts}
+        </Layout>
+      </PageWrapper>
     );
   }
 }
 
-export default PageWrapper(Category);
+export default Category;

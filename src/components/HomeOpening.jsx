@@ -362,7 +362,7 @@ class HomeOpening extends Component {
               <div className="home-barebone__code" ref={this.homeBareboneCode}>
                 <div className="home-barebone__code__wrapper">
                   <span><CodeArrow style={{width: 14, transform: 'rotate(180deg)', marginRight: 5}}/>script<CodeArrow style={{width: 14, marginLeft: 5}}/></span>
-                  <span>const initHomepage = &#40;<strong>magic</strong>&#41; => &#123;</span>
+                  <span>const initHomepage = &#40;<strong>magic</strong>&#41; =&gt; &#123;</span>
                   <span style={{marginLeft: 10}}>this.renderBlock(magic)</span>
                   <span style={{marginLeft: 10}}>this.doSomeGsap(magic)</span>
                   <span>&#125;&#41;</span>
