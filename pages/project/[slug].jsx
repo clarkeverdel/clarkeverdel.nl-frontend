@@ -1,5 +1,4 @@
 import React from 'react';
-import fetch from 'isomorphic-unfetch';
 import Error from 'next/error';
 import Layout from '../../src/components/Layout';
 import PageWrapper from '../../src/components/PageWrapper';

@@ -67,7 +67,7 @@ a {
 }
 
 .container {
-  max-width: calc(815px + (8.75vw * 2);
+  max-width: calc(815px + (8.75vw * 2));
   padding: 0 8.75vw;
 
   @include media-breakpoint-down(md){

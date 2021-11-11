@@ -1,5 +1,4 @@
 import React from 'react';
-import fetch from 'isomorphic-unfetch';
 import BodyClassName from 'react-body-classname';
 import Layout from '../src/components/Layout';
 import PageWrapper from '../src/components/PageWrapper';

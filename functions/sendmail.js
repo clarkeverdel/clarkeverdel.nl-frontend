@@ -1,7 +1,6 @@
 require("dotenv").config(); // read .env file if present.
 
 const nodemailer = require("nodemailer");
-const querystring = require('querystring');
 
 exports.handler = function(event, context, callback) {
   const username = process.env.MAIL_USER;

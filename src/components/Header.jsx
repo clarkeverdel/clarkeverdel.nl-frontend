@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
 
-// ES Modules
-import parse from 'html-react-parser';
-
 class Header extends Component {
 
   render() {
@@ -26,9 +23,7 @@ class Header extends Component {
 
           <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900" rel="stylesheet" />
 
-          {/* <style dangerouslySetInnerHTML={{ __html: stylesheet }} /> */}
-
-          <title>{parse(title)}</title>
+          <title>{title}</title>
         </Head>
       </div>
     );

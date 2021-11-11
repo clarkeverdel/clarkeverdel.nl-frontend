@@ -29,7 +29,6 @@ import CodeArrow from '../../public/static/images/code_arrow.svg';
 // Register gsap modules
 gsap.registerPlugin(CSSRulePlugin, ScrollToPlugin, GSDevTools, RoughEase, CustomEase);
 
-
 class HomeOpening extends Component {
   constructor(props) {
     super(props);

@@ -1,7 +1,3 @@
-const path = require('path')
-const glob = require('glob')
-const webpack = require('webpack')
-const fetch = require('isomorphic-unfetch')
 const withTM = require('next-transpile-modules')(['gsap']);
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',

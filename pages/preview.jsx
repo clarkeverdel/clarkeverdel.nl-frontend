@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import fetch from 'isomorphic-unfetch';
 import Error from 'next/error';
-import Layout from '../src/components/Layout';
-import PageWrapper from '../src/components/PageWrapper';
-import Menu from '../src/components/Menu';
+import Layout from '../components/Layout';
+import PageWrapper from '../components/PageWrapper';
+import Menu from '../components/Menu';
 import { Config } from '../config';
 
 class Preview extends Component {
