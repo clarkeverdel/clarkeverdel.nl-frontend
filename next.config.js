@@ -18,6 +18,10 @@ module.exports = withBundleAnalyzer(withTM({
     dirs: ['pages', 'src/components', 'src/js'], // Only run ESLint on the 'pages' and 'utils' directories during production builds (next build)
   },
 
+  experimental: {
+    urlImports: ['https://cdn.skypack.dev']
+  },
+
   webpack: (config, options) => {
     config.module.rules.push(
       {

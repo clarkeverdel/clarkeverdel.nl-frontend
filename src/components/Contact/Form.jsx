@@ -7,6 +7,8 @@ import {
 
 import AnimatedButton from "../AnimatedButton";
 
+import confetti from 'https://cdn.skypack.dev/canvas-confetti';
+
 
 class ContactForm extends Component {
   constructor(props) {
@@ -166,6 +168,42 @@ class ContactForm extends Component {
     this.resetValidators();
   }
 
+  fireConfetti() {
+    var count = 200;
+    var defaults = {
+      origin: { y: 0.7 }
+    };
+
+    function fire(particleRatio, opts) {
+      confetti(Object.assign({}, defaults, opts, {
+        particleCount: Math.floor(count * particleRatio)
+      }));
+    }
+
+    fire(0.25, {
+      spread: 26,
+      startVelocity: 55,
+    });
+    fire(0.2, {
+      spread: 60,
+    });
+    fire(0.35, {
+      spread: 100,
+      decay: 0.91,
+      scalar: 0.8
+    });
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 25,
+      decay: 0.92,
+      scalar: 1.2
+    });
+    fire(0.1, {
+      spread: 120,
+      startVelocity: 45,
+    });
+  }
+
   render() {
     const { userInfo, message, formIsValid, buttonClicked } = this.state;
     let {showForm} = this.state;
@@ -178,6 +216,9 @@ class ContactForm extends Component {
           Your message has been sent. I will contact you shortly.
         </p>
       );
+
+      this.fireConfetti();
+
     } else if(message === 'error') {
       // Do an extra live check to hide this message once fields are ready again
       if(!this.isFormValid()){
