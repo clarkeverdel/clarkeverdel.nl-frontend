@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import FormValidators from '../../../functions/formValidators';
 
 import {
@@ -10,124 +10,140 @@ import AnimatedButton from "../AnimatedButton";
 import confetti from 'https://cdn.skypack.dev/canvas-confetti';
 
 
-class ContactForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      userInfo: {
+const ContactForm = () => {
+    const initialState = {
+      fields: {
         name: '',
         email: '',
         reason: '',
-        description: '',
+        description: ''
       },
       submitted: false,
       message: '',
       showForm: true,
       buttonClicked: false,
+      loading: false
     };
 
-    // Set of validators for signin form
-    this.validators = FormValidators;
+    const [formState, setFormState] = useState(initialState)
 
-    // This resets our form when navigating between views
-    this.resetValidators();
+    const validators = FormValidators;
 
-    // Correctly Bind class methods to reacts class instance
-    this.handleInputChange = this.handleInputChange.bind(this);
-    this.displayValidationErrors = this.displayValidationErrors.bind(this);
-    this.updateValidators = this.updateValidators.bind(this);
-    this.resetValidators = this.resetValidators.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.isFormValid = this.isFormValid.bind(this);
-    this.resetForm = this.resetForm.bind(this);
-
-    // this.handleChange = this.handleChange.bind(this);
-    // this.resetForm = this.resetForm.bind(this);
-  }
-
+    useEffect(() => {
+        // This resets our form when navigating between views
+        resetValidators();
+    }, []);
 
   /**
    * This function is called whenever a form input is changed
    * Which in turn updates the state of this component and validators
    */
-  handleInputChange(event, inputPropName) {
-    const self = this;
-    const value = event.target.value;
+  const handleInputChange = (event, inputPropName) => {
+    const { value }  = event.target;
 
-    let newState = Object.assign({}, this.state);
+    // Variable object
+    setFormState({
+      ...formState,
+      fields: {
+        [inputPropName]: value
+      }
+    });
 
-    newState.userInfo[inputPropName] = value;
-
-    this.setState(newState);
-
-    self.updateValidators(inputPropName, value);
+    updateValidators(inputPropName, value);
   }
 
   /**
    * This function handles the logic when submiting the form.
    * @TODO make an API request to authenticate the user
    */
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
-    if(!this.isFormValid()){
-      Object.keys(this.state.userInfo).forEach((fieldName) => {
-        if(!this.validators[fieldName].valid){
-          console.log('Error found, please fix the following field: ' + fieldName);
-        }
-      });
-      this.setState({submitted: true, message: 'error'});
-    }else {
-      const data = this.state.userInfo;
+    // console.log(e.target.name.value, e.target.email.value, e.target.reason.value, e.target.description.value)
 
-      fetch(process.env.MAILER_ENDPOINT, {
-        method: 'post',
-        headers: {
-          Accept: 'application/json, text/plain, */*',
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      }).then((res) => {
-        res.status === 200 ? this.setState({ submitted: true, message: 'success' }) : '';
+    if(!isFormValid()){
+      Object.keys(formState.fields).forEach((fieldName) => {
+        updateValidators(fieldName, formState.fields[fieldName])
       });
+      setFormState({
+        ...formState,
+        submitted: true,
+        message: 'error'
+      });
+    }else {
+
+      setFormState({
+        ...formState,
+        loading: true
+      });
+
+      const fieldData = {
+          name: e.target.name.value,
+          email: e.target.email.value,
+          reason: e.target.reason.value,
+          description: e.target.description.value
+      };
+
+      setTimeout(() => {
+        fetch(process.env.MAILER_ENDPOINT, {
+          method: 'post',
+          headers: {
+            Accept: 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(fieldData),
+        }).then((res) => {
+          if(res.status === 200){
+            setFormState({
+              ...formState,
+              fields: fieldData,
+              submitted: true,
+              message: 'success',
+              showForm: false,
+              loading: false
+            })
+            fireConfetti();
+          }
+        });
+      }, 3000)
+
     }
   }
 
   /**
    * This function updates the state of the validator for the specified validator
    */
-  updateValidators(fieldName, value) {
-    this.validators[fieldName].errors = [];
-    this.validators[fieldName].state = value;
-    this.validators[fieldName].valid = true;
-    this.validators[fieldName].rules.forEach((rule) => {
+  const updateValidators = (fieldName, value) => {
+    validators[fieldName].errors = [];
+    validators[fieldName].state = value;
+    validators[fieldName].valid = true;
+    validators[fieldName].rules.forEach((rule) => {
       if (rule.test instanceof RegExp) {
         if (!rule.test.test(value)) {
-          this.validators[fieldName].errors = [rule.message];
-          this.validators[fieldName].valid = false;
+          validators[fieldName].errors = [rule.message];
+          validators[fieldName].valid = false;
         }
       } else if (typeof rule.test === 'function') {
         if (!rule.test(value)) {
-          this.validators[fieldName].errors = [rule.message];
-          this.validators[fieldName].valid = false;
+          validators[fieldName].errors = [rule.message];
+          validators[fieldName].valid = false;
         }
       }
     });
   }
 
   // This function resets all validators for this form to the default state
-  resetValidators() {
-    Object.keys(this.validators).forEach((fieldName) => {
-      this.validators[fieldName].errors = [];
-      this.validators[fieldName].state = '';
-      this.validators[fieldName].valid = false;
+  const resetValidators = () => {
+    Object.keys(validators).forEach((fieldName) => {
+      validators[fieldName].errors = [];
+      validators[fieldName].state = '';
+      validators[fieldName].valid = false;
     });
   }
 
   // This function displays the validation errors for a given input field
-  displayValidationErrors(fieldName) {
-    const validator = this.validators[fieldName];
-    const result = '';
+  const displayValidationErrors = (fieldName) => {
+    const validator = validators[fieldName];
     if (validator && !validator.valid) {
       const errors = validator.errors.map((info, index) => {
         return <span className="form__element__error" key={index}>* {info}</span>;
@@ -139,42 +155,33 @@ class ContactForm extends Component {
         </div>
       );
     }
-    return result;
+
+    return '';
   }
 
   // This method checks to see if the validity of all validators are true
-  isFormValid() {
+  const isFormValid = () => {
     let status = true;
-    Object.keys(this.validators).forEach((field) => {
-      if (!this.validators[field].valid) {
+    Object.keys(validators).forEach((field) => {
+      if (!validators[field].valid) {
         status = false;
       }
     });
     return status;
   }
 
-  resetForm() {
-    let userInfo = {};
-    Object.keys(this.validators).forEach((fieldName) => {
-      Object.assign(userInfo,{[fieldName]: ''});
-    });
-
-    let state = this.setState({
-      showForm: true,
-      message: '',
-      userInfo: userInfo
-    });
-
-    this.resetValidators();
+  const resetForm = () => {
+    setFormState(initialState);
+    resetValidators();
   }
 
-  fireConfetti() {
+  const fireConfetti = () => {
     var count = 200;
     var defaults = {
       origin: { y: 0.7 }
     };
 
-    function fire(particleRatio, opts) {
+    const fire = (particleRatio, opts) => {
       confetti(Object.assign({}, defaults, opts, {
         particleCount: Math.floor(count * particleRatio)
       }));
@@ -204,182 +211,188 @@ class ContactForm extends Component {
     });
   }
 
-  render() {
-    const { userInfo, message, formIsValid, buttonClicked } = this.state;
-    let {showForm} = this.state;
-    let showMessage;
+
+  const showMessage = () => {
+    const { message } = formState;
 
     if(message === 'success') {
-      showForm = false;
-      showMessage = (
+      fireConfetti();
+
+      return (
         <p className="lead text-center">
           Your message has been sent. I will contact you shortly.
         </p>
       );
 
-      this.fireConfetti();
-
     } else if(message === 'error') {
       // Do an extra live check to hide this message once fields are ready again
-      if(!this.isFormValid()){
-        showMessage = (
+      if(!isFormValid()){
+        return (
           <div className="text-center">
             There are some errors in your form. Please check them before submitting again.
           </div>
         );
       }
 
-    }else {
-      showMessage = '';
     }
 
-    return (
-      <div className="container">
-        { showForm
-          ? (
-            <Form className="form form--contact form--animated" onSubmit={(e) => { this.handleSubmit(e); }} noValidate>
-              <FormGroup row>
-                <Col md={6} className="form__element form__element--overflow">
-                  <div className="form__element--slide-from-bottom">
-                    <Label for="name" className="form__label">Name</Label>
-                    <Input
-                      value={this.state.name}
-                      type="text"
-                      name="name"
-                      id="name"
-                      placeholder="What's your name?"
-                      required
-                      onChange={e => this.handleInputChange(e, 'name')}
-                    />
-                    { this.displayValidationErrors('name') }
-                  </div>
-                </Col>
-                <Col md={6} className="form__element form__element--overflow">
-                  <div className="form__element--slide-from-bottom form__element--delay-1">
-                    <Label for="email" className="form__label">Email</Label>
-                    <Input
-                      value={this.state.email}
-                      type="email"
-                      name="email"
-                      id="email"
-                      placeholder="What's your email address?"
-                      required
-                      onChange={event => this.handleInputChange(event, 'email')}
-                    />
-                    { this.displayValidationErrors('email') }
-                    <FormFeedback valid>
-                      That&apos;s a tasty looking email you&apos;ve got there.
-                    </FormFeedback>
-                    <FormFeedback>
-                      Uh oh! Looks like there is an issue with your email. Please input a correct email.
-                    </FormFeedback>
-                  </div>
-                </Col>
-              </FormGroup>
-              <FormGroup row tag="fieldset" className="form-group-radios form__element form__element--overflow">
-                <Col md={12}>
-                  <div className="form__element--slide-from-bottom form__element--delay-2">
-                    <legend className="form__legend">Clarke, I need you for</legend>
-                    <FormGroup check>
-                      <Label check>
-                        <Input
-                          type="radio"
-                          name="reason"
-                          value="React"
-                          onClick={(e) => {
-                            this.handleInputChange(e, 'reason');
-                          }}
-                          required />{' '}
-                        <span>React</span>
-                      </Label>
-                    </FormGroup>
-                    <FormGroup check>
-                      <Label check>
-                        <Input
-                          type="radio"
-                          name="reason"
-                          value="Magento"
-                          onClick={(e) => {
-                            this.handleInputChange(e, 'reason');
-                          }}
-                          required />{' '}
-                        <span>Magento</span>
-                      </Label>
-                    </FormGroup>
-                    <FormGroup check>
-                      <Label check>
-                        <Input
-                          type="radio"
-                          name="reason"
-                          value="Wordpress"
-                          onClick={(e) => {
-                            this.handleInputChange(e, 'reason');
-                          }}
-                          required />{' '}
-                        <span>Wordpress</span>
-                      </Label>
-                    </FormGroup>
-                    <FormGroup check>
-                      <Label check>
-                        <Input
-                          type="radio"
-                          name="reason"
-                          value="Consultancy"
-                          onClick={(e) => {
-                            this.handleInputChange(e,  'reason');
-                          }}
-                          required />{' '}
-                        <span>Consultancy</span>
-                      </Label>
-                    </FormGroup>
-                    <FormGroup check>
-                      <Label check>
-                        <Input
-                          type="radio"
-                          name="reason"
-                          value="Emergency Support"
-                          onClick={(e) => {
-                            this.handleInputChange(e,  'reason');
-                          }}
-                          required />{' '}
-                        <span>Emergency Support</span>
-                      </Label>
-                    </FormGroup>
-
-                    { this.displayValidationErrors('reason') }
-                  </div>
-                </Col>
-              </FormGroup>
-
-              <FormGroup row className="form-group-radios form__element form__element--overflow">
-                <Col md={12}>
-                  <div className="form__element--slide-from-bottom form__element--delay-3">
-                    <Label for="description" className="form__label">Description</Label>
-                    <Input type="textarea"
-                           name="description"
-                           rows="6"
-                           placeholder="Place your questions here and I'll get back to you shortly"
-                           onChange={e => this.handleInputChange(e, 'description')}
-                           required
-                    />
-                    { this.displayValidationErrors('description') }
-                  </div>
-                </Col>
-              </FormGroup>
-
-              {showMessage}
-
-              <AnimatedButton className="form__button" color="blue" text="Send message" />
-            </Form>
-          )
-          : <div style={{padding: '5vw 0'}} className='text-center'>
-              {showMessage}
-              <Button color="dark" onClick={this.resetForm}>Send another mail</Button>
-            </div>}
-      </div>
-
-    );
+    return '';
   }
+
+  return (
+    <div className="container">
+      { formState.showForm && !formState.loading && (
+          <Form className="form form--contact form--animated" onSubmit={handleSubmit} noValidate>
+            <FormGroup row>
+              <Col md={6} className="form__element form__element--overflow">
+                <div className="form__element--slide-from-bottom">
+                  <Label for="name" className="form__label">Name</Label>
+                  <Input
+                    value={formState.fields.name}
+                    type="text"
+                    name="name"
+                    id="name"
+                    placeholder="What's your name?"
+                    required
+                    onChange={e => handleInputChange(e, 'name')}
+                  />
+                  { displayValidationErrors('name') }
+                </div>
+              </Col>
+              <Col md={6} className="form__element form__element--overflow">
+                <div className="form__element--slide-from-bottom form__element--delay-1">
+                  <Label for="email" className="form__label">Email</Label>
+                  <Input
+                    value={formState.fields.email}
+                    type="email"
+                    name="email"
+                    id="email"
+                    placeholder="What's your email address?"
+                    required
+                    onChange={e => handleInputChange(e, 'email')}
+                  />
+                  { displayValidationErrors('email') }
+                  <FormFeedback valid>
+                    That&apos;s a tasty looking email you&apos;ve got there.
+                  </FormFeedback>
+                  <FormFeedback>
+                    Uh oh! Looks like there is an issue with your email. Please input a correct email.
+                  </FormFeedback>
+                </div>
+              </Col>
+            </FormGroup>
+            <FormGroup row tag="fieldset" className="form-group-radios form__element form__element--overflow">
+              <Col md={12}>
+                <div className="form__element--slide-from-bottom form__element--delay-2">
+                  <legend className="form__legend">Clarke, I need you for</legend>
+                  <FormGroup check>
+                    <Label check>
+                      <Input
+                        type="radio"
+                        name="reason"
+                        value="React"
+                        onClick={(e) => {
+                          handleInputChange(e, 'reason');
+                        }}
+                        required />{' '}
+                      <span>React</span>
+                    </Label>
+                  </FormGroup>
+                  <FormGroup check>
+                    <Label check>
+                      <Input
+                        type="radio"
+                        name="reason"
+                        value="Magento"
+                        onClick={(e) => {
+                          handleInputChange(e, 'reason');
+                        }}
+                        required />{' '}
+                      <span>Magento</span>
+                    </Label>
+                  </FormGroup>
+                  <FormGroup check>
+                    <Label check>
+                      <Input
+                        type="radio"
+                        name="reason"
+                        value="Wordpress"
+                        onClick={(e) => {
+                          handleInputChange(e, 'reason');
+                        }}
+                        required />{' '}
+                      <span>Wordpress</span>
+                    </Label>
+                  </FormGroup>
+                  <FormGroup check>
+                    <Label check>
+                      <Input
+                        type="radio"
+                        name="reason"
+                        value="Consultancy"
+                        onClick={(e) => {
+                          handleInputChange(e,  'reason');
+                        }}
+                        required />{' '}
+                      <span>Consultancy</span>
+                    </Label>
+                  </FormGroup>
+                  <FormGroup check>
+                    <Label check>
+                      <Input
+                        type="radio"
+                        name="reason"
+                        value="Emergency Support"
+                        onClick={(e) => {
+                          handleInputChange(e,  'reason');
+                        }}
+                        required />{' '}
+                      <span>Emergency Support</span>
+                    </Label>
+                  </FormGroup>
+
+                  { displayValidationErrors('reason') }
+                </div>
+              </Col>
+            </FormGroup>
+
+            <FormGroup row className="form-group-radios form__element form__element--overflow">
+              <Col md={12}>
+                <div className="form__element--slide-from-bottom form__element--delay-3">
+                  <Label for="description" className="form__label">Description</Label>
+                  <Input type="textarea"
+                          name="description"
+                          rows="6"
+                          placeholder="Place your questions here and I'll get back to you shortly"
+                          onChange={e => handleInputChange(e, 'description')}
+                          required
+                  />
+                  { displayValidationErrors('description') }
+                </div>
+              </Col>
+            </FormGroup>
+
+            {showMessage}
+
+            <AnimatedButton className="form__button" color="blue" text="Send message" />
+          </Form>
+        )}
+
+        {!formState.showForm && (
+            <div className='form--result'>
+              {showMessage}
+              <Button color="dark" onClick={resetForm}>Send another mail</Button>
+            </div>
+        )}
+
+        {formState.loading && (
+          <div className='form--result'>
+            <div className="loader-ripple"><div></div><div></div></div>
+          </div>
+        )}
+
+    </div>
+  );
 }
 
 export default ContactForm;

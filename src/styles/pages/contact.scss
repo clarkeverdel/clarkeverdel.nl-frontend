@@ -122,11 +122,19 @@
     }
   }
 
-
   .form--contact{
     padding: 5vw 0 8vw;
     position: relative;
     z-index: 3;
+  }
+
+  .form--result {
+    height: 40vw;
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
   }
 
 
