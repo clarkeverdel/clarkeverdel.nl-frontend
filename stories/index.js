@@ -1,9 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import AnimatedButton from '../src/components/AnimatedButton.js'
-
-import { withBackgrounds } from '@storybook/addon-backgrounds';
+import AnimatedButton from '../src/components/AnimatedButton';
 
 const bodyStyle = {
     padding: '20px',
