@@ -190,11 +190,11 @@ class Carousel extends Component {
 
     const animationDuration = .750;
     const sortedItems = this.getChildren();
-
     const first = sortedItems[this.itemPositionOrder[0]];
+
     const firstItem = sortedItems[this.itemPositionOrder[0]].ref.current;
     const firstItemPosition = firstItem.getBoundingClientRect();
-    const firstItemCtaBackground = first[`item_cta-background_${first.key}`].current;
+    const firstItemCtaBackground = first.props['data-refs'][`item_cta-background_${first.key}`].current;
     const firstItemCtaArrow = first.props['data-refs'][`item_cta-arrow_${first.key}`].current;
     const firstItemOutside = first.props['data-refs'][`item_outside_${first.key}`].current;
     const firstItemNumber = first.props['data-refs'][`item_number_${first.key}`].current;
