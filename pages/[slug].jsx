@@ -37,7 +37,7 @@ export async function getStaticProps(context) {
   };
 }
 
-export async function getStaticPaths(){
+export async function getStaticPaths() {
   const pagesRes = await fetch(
     `${Config.apiUrl}/wp-json/wp/v2/pages?_embed`,
   );
@@ -48,7 +48,7 @@ export async function getStaticPaths(){
         slug: page.slug
       }
     }
-  }).filter( ({params}) => {
+  }).filter(({ params }) => {
     return params.slug !== 'contact'
   });
 

@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useRef, useState } from 'react';
 import Error from 'next/error';
 import BodyClassName from 'react-body-classname';
-import { gsap, Power4, Power3, CustomEase } from 'gsap';
+import { gsap, Power4, Power3 } from 'gsap';
 
 import Layout from '../src/components/Layout';
 import PageWrapper from '../src/components/PageWrapper';
@@ -11,8 +11,6 @@ import { Config } from '../config';
 import Cross from '../public/static/images/CROSS_DARK.svg';
 import Triangle from '../public/static/images/TRIANGLE_DARK.svg';
 import Circle from '../public/static/images/CIRCLE_DARK.svg';
-
-gsap.registerPlugin(CustomEase);
 
 const Contact = (props) => {
   const { post } = props;
