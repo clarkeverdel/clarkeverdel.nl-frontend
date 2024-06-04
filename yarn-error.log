@@ -1,30 +1,30 @@
 Arguments: 
-  /Users/clarkeverdel/.nvm/versions/node/v8.14.0/bin/node /usr/local/Cellar/yarn/1.19.1/libexec/bin/yarn.js add gsap-bonus.tgz
+  /Users/clarkeverdel/.nvm/versions/node/v21.1.0/bin/node /opt/homebrew/Cellar/yarn/1.22.19/libexec/bin/yarn.js add @gsap/CLUB-LEVEL gsap@npm:@gsap/CLUB-LEVEL
 
 PATH: 
-  /Users/clarkeverdel/.nvm/versions/node/v8.14.0/bin:/Users/clarkeverdel/.platformsh/bin:/usr/local/opt/valet-php@7.3/bin:/usr/local/mysql/bin:/usr/local/sbin:/usr/local/bin:/usr/local/Cellar/openssl/1.0.1h/bin:/Users/clarkeverdel/.rvm/gems/ruby-2.1.2/bin:/Users/clarkeverdel/.rvm/gems/ruby-2.1.2@global/bin:/Users/clarkeverdel/.rvm/rubies/ruby-2.1.2/bin:/Users/clarkeverdel/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/clarkeverdel/.rvm/bin:/Users/clarkeverdel/.composer/vendor/bin:/Users/clarkeverdel/.composer/vendor/bin
+  /Users/clarkeverdel/.nvm/versions/node/v21.1.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/usr/local/bin:/System/Cryptexes/App/usr/bin:/usr/bin:/bin:/usr/sbin:/sbin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/local/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/bin:/var/run/com.apple.security.cryptexd/codex.system/bootstrap/usr/appleinternal/bin:/Library/Apple/usr/bin:/usr/local/MacGPG2/bin:/Users/clarkeverdel/.nvm/versions/node/v21.1.0/bin:/opt/homebrew/bin:/opt/homebrew/sbin:/Users/clarkeverdel/.fzf/bin
 
 Yarn version: 
-  1.19.1
+  1.22.19
 
 Node version: 
-  8.14.0
+  21.1.0
 
 Platform: 
-  darwin x64
+  darwin arm64
 
 Trace: 
-  Error: https://registry.yarnpkg.com/gsap-bonus.tgz: Request failed "404 Not Found"
-      at ResponseError.ExtendableBuiltin (/usr/local/Cellar/yarn/1.19.1/libexec/lib/cli.js:696:66)
-      at new ResponseError (/usr/local/Cellar/yarn/1.19.1/libexec/lib/cli.js:802:124)
-      at Request.<anonymous> (/usr/local/Cellar/yarn/1.19.1/libexec/lib/cli.js:66996:16)
-      at emitOne (events.js:116:13)
-      at Request.emit (events.js:211:7)
-      at Request.module.exports.Request.onRequestResponse (/usr/local/Cellar/yarn/1.19.1/libexec/lib/cli.js:141441:10)
-      at emitOne (events.js:116:13)
-      at ClientRequest.emit (events.js:211:7)
-      at HTTPParser.parserOnIncomingClient (_http_client.js:558:21)
-      at HTTPParser.parserOnHeadersComplete (_http_common.js:119:17)
+  Error: https://npm.greensock.com/@gsap%2fCLUB-LEVEL: no such package available
+      at params.callback [as _callback] (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:66145:18)
+      at self.callback (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:140890:22)
+      at Request.emit (node:events:515:28)
+      at Request.<anonymous> (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:141862:10)
+      at Request.emit (node:events:515:28)
+      at Gunzip.<anonymous> (/opt/homebrew/Cellar/yarn/1.22.19/libexec/lib/cli.js:141784:12)
+      at Object.onceWrapper (node:events:629:28)
+      at Gunzip.emit (node:events:515:28)
+      at endReadableNT (node:internal/streams/readable:1589:12)
+      at process.processTicksAndRejections (node:internal/process/task_queues:82:21)
 
 npm manifest: 
   {
