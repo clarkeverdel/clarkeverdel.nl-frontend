@@ -11,13 +11,13 @@ class RecentWork extends Component {
 
     this.dataset = props.projects.map((child) => {
       return {
-          [`${child.id}_ref`]: React.createRef(),
-          [`item_cta-background_${child.id}`]: React.createRef(),
-          [`item_cta-arrow_${child.id}`]: React.createRef(),
-          [`item_outside_${child.id}`]: React.createRef(),
-          [`item_number_${child.id}`]: React.createRef(),
-          [`item_label_${child.id}`]: React.createRef(),
-        }
+        [`${child.id}_ref`]: React.createRef(),
+        [`item_cta-background_${child.id}`]: React.createRef(),
+        [`item_cta-arrow_${child.id}`]: React.createRef(),
+        [`item_outside_${child.id}`]: React.createRef(),
+        [`item_number_${child.id}`]: React.createRef(),
+        [`item_label_${child.id}`]: React.createRef(),
+      }
     });
   }
 
@@ -29,20 +29,20 @@ class RecentWork extends Component {
 
   render() {
     const projects = this.props.projects.map((project, index) => {
-    const {dataset} = this;
+      const { dataset } = this;
 
       const id = project.id,
-            number = index + 1,
-            featuredMedia = project._embedded['wp:featuredmedia'],
-            image = (featuredMedia && featuredMedia[0].media_details) ? project._embedded['wp:featuredmedia'][0].media_details.sizes.full : null,
-            href = `/project/${project.slug}`,
-            realSlug = `/project/${project.slug}`;
+        number = index + 1,
+        featuredMedia = project._embedded['wp:featuredmedia'],
+        image = (featuredMedia && featuredMedia[0].media_details) ? project._embedded['wp:featuredmedia'][0].media_details.sizes.full : null,
+        href = `/project/${project.slug}`,
+        realSlug = `/project/${project.slug}`;
 
       return (
-        <div className={`${htmlClass}__slider__item__inner`} key={id} ref={dataset[index][`${id}_ref`]} refs={dataset[index]}>
+        <div className={`${htmlClass}__slider__item__inner`} key={id} ref={dataset[index][`${id}_ref`]} data-refs={dataset[index]}>
           {featuredMedia && image
             ? <img className={`${htmlClass}__slider__item__image`} src={image.source_url} />
-            : null }
+            : null}
           <Link href={href} as={realSlug}>
             <a className="recent-work__slider__item__cta">
               <div className="recent-work__slider__item__cta-background" ref={dataset[index][`item_cta-background_${id}`]}></div>

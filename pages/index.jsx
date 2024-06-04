@@ -8,9 +8,12 @@ import Opening from '../src/components/HomeOpening';
 import RecentWork from '../src/components/RecentWork';
 import AboutMe from '../src/components/AboutMe';
 
-// import stylesheet from '../src/styles/pages/homepage.module.scss';
+import { gsap } from 'gsap'
+import CustomEase from 'gsap/CustomEase';
 
-const Index = ({projects, page}) => {
+gsap.registerPlugin(CustomEase);
+
+const Index = ({ projects, page }) => {
 
   return (
     <BodyClassName className="page-home">
@@ -50,4 +53,4 @@ export async function getStaticProps() {
   };
 }
 
-export default Index; // ;
+export default Index;

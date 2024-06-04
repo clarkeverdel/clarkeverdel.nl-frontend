@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps, router }) {
       <PageTransition timeout={750} classNames="page-transition">
         <Component {...pageProps} key={router.route} />
       </PageTransition>
-      <style jsx global>
+      <style>
         {`
         .page-transition-enter .menu-panel {
           transform: translateX(-100%);

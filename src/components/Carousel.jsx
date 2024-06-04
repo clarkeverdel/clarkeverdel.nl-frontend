@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {gsap} from 'gsap';
+import { gsap } from 'gsap';
 import CustomEase from 'gsap/CustomEase';
 
 import CarouselArrow from '../../public/static/images/carousel_arrow.svg';
@@ -15,7 +15,7 @@ class Carousel extends Component {
       direction: null,
     };
 
-    this.itemPositionOrder = [0,1,3,4,2];
+    this.itemPositionOrder = [0, 1, 3, 4, 2];
     this.getChildren = this.getChildren.bind(this);
     this.afterDoSliding = this.afterDoSliding.bind(this);
     this.afterComponentDidUpdate = this.afterComponentDidUpdate.bind(this);
@@ -24,21 +24,20 @@ class Carousel extends Component {
     this.customEase = "custom";
   }
 
-  componentDidUpdate(){
-    const {refs} = this.props;
-    const {direction} = this.state;
+  componentDidUpdate() {
+    const { direction } = this.state;
 
-    if(this.state.sliding){
+    if (this.state.sliding) {
       const sortedItems = this.getChildren();
 
       const first = sortedItems[this.itemPositionOrder[0]];
       const firstItem = first.ref.current;
       const firstItemPosition = firstItem.getBoundingClientRect();
-      const firstItemCtaBackground = first.props.refs[`item_cta-background_${first.key}`].current;
-      const firstItemCtaArrow = first.props.refs[`item_cta-arrow_${first.key}`].current;
-      const firstItemOutside = first.props.refs[`item_outside_${first.key}`].current;
-      const firstItemNumber = first.props.refs[`item_number_${first.key}`].current;
-      const firstItemLabel = first.props.refs[`item_label_${first.key}`].current;
+      const firstItemCtaBackground = first.props['data-refs'][`item_cta-background_${first.key}`].current;
+      const firstItemCtaArrow = first.props['data-refs'][`item_cta-arrow_${first.key}`].current;
+      const firstItemOutside = first.props['data-refs'][`item_outside_${first.key}`].current;
+      const firstItemNumber = first.props['data-refs'][`item_number_${first.key}`].current;
+      const firstItemLabel = first.props['data-refs'][`item_label_${first.key}`].current;
       const secondItem = sortedItems[this.itemPositionOrder[1]].ref.current;
       const secondItemPosition = secondItem.getBoundingClientRect();
       const thirdItem = sortedItems[this.itemPositionOrder[2]].ref.current;
@@ -74,9 +73,9 @@ class Carousel extends Component {
         duration: .75
       });
 
-      if(direction === 'next'){
+      if (direction === 'next') {
         // Different animations per screenwidth for labels of first item in carousel
-        if(window.innerWidth < 767){
+        if (window.innerWidth < 767) {
           gsap.from(firstItemNumber, {
             y: 0,
             ease: this.customEase,
@@ -87,7 +86,7 @@ class Carousel extends Component {
             ease: this.customEase,
             duration: .75
           });
-        }else {
+        } else {
           gsap.from(firstItemOutside, {
             xPercent: -100,
             ease: this.customEase,
@@ -108,7 +107,7 @@ class Carousel extends Component {
           duration: .750,
           onComplete: this.afterComponentDidUpdate
         });
-      }else if(direction === 'prev'){
+      } else if (direction === 'prev') {
         gsap.from(firstItem, {
           xPercent: -200,
           yPercent: 100,
@@ -123,15 +122,15 @@ class Carousel extends Component {
     }
   }
 
-  afterComponentDidUpdate(){
+  afterComponentDidUpdate() {
     this.setState({
       sliding: false,
       lockButton: false
     });
   }
 
-  getChildren(){
-    let { children, refs } = this.props;
+  getChildren() {
+    let { children } = this.props;
 
     // Get position from item
     let items = children.map((child, index) => ({
@@ -141,11 +140,11 @@ class Carousel extends Component {
 
     // Sort items by position so it easy to pick the item by position like:
     // item[0] for first item and  item[1] for second item
-    const sortedItems = items.sort(function(a,b) {
+    const sortedItems = items.sort(function (a, b) {
       const positionA = a.position;
       const positionB = b.position;
-      if(positionA < positionB) return -1;
-      if(positionA > positionB) return 1;
+      if (positionA < positionB) return -1;
+      if (positionA > positionB) return 1;
       return 0;
     });
 
@@ -181,9 +180,9 @@ class Carousel extends Component {
   };
 
   doSliding = (direction, position) => {
-    if(this.state.lockButton){
+    if (this.state.lockButton) {
       return;
-    }else {
+    } else {
       this.setState({
         lockButton: true
       })
@@ -195,11 +194,11 @@ class Carousel extends Component {
     const first = sortedItems[this.itemPositionOrder[0]];
     const firstItem = sortedItems[this.itemPositionOrder[0]].ref.current;
     const firstItemPosition = firstItem.getBoundingClientRect();
-    const firstItemCtaBackground = first.props.refs[`item_cta-background_${first.key}`].current;
-    const firstItemCtaArrow = first.props.refs[`item_cta-arrow_${first.key}`].current;
-    const firstItemOutside = first.props.refs[`item_outside_${first.key}`].current;
-    const firstItemNumber = first.props.refs[`item_number_${first.key}`].current;
-    const firstItemLabel = first.props.refs[`item_label_${first.key}`].current;
+    const firstItemCtaBackground = first[`item_cta-background_${first.key}`].current;
+    const firstItemCtaArrow = first.props['data-refs'][`item_cta-arrow_${first.key}`].current;
+    const firstItemOutside = first.props['data-refs'][`item_outside_${first.key}`].current;
+    const firstItemNumber = first.props['data-refs'][`item_number_${first.key}`].current;
+    const firstItemLabel = first.props['data-refs'][`item_label_${first.key}`].current;
     const secondItem = sortedItems[this.itemPositionOrder[1]].ref.current;
     const secondItemPosition = secondItem.getBoundingClientRect();
     const thirdItem = sortedItems[this.itemPositionOrder[2]].ref.current;
@@ -214,7 +213,7 @@ class Carousel extends Component {
     });
 
 
-    if(direction === 'next') {
+    if (direction === 'next') {
       myAnimation.to(firstItem, {
         xPercent: -200,
         yPercent: 100,
@@ -262,7 +261,7 @@ class Carousel extends Component {
       }, 0);
 
 
-    }else if(direction === 'prev'){
+    } else if (direction === 'prev') {
       // First item
       myAnimation.to(firstItem, {
         x: (secondItemPosition.left - firstItemPosition.left), //-(1- (1/(firstItemPosition.width / secondItemPosition.width))) * secondItemPosition.x
@@ -285,7 +284,7 @@ class Carousel extends Component {
       }, 0);
 
       // Different animations per screenwidth for labels of first item in carousel
-      if(window.innerWidth < 767){
+      if (window.innerWidth < 767) {
         gsap.to(firstItemNumber, {
           y: 0,
           ease: this.customEase,
@@ -296,7 +295,7 @@ class Carousel extends Component {
           ease: this.customEase,
           duration: .75
         });
-      }else {
+      } else {
         gsap.to(firstItemOutside, {
           xPercent: -100,
           ease: this.customEase,
@@ -336,17 +335,17 @@ class Carousel extends Component {
 
   };
 
-  afterDoSliding(direction, position, timeline, firstItem){
-      this.setState({
-        direction,
-        position,
-        sliding: true
-      });
-      if(direction === 'prev') timeline.to(firstItem, {opacity: 0});
+  afterDoSliding(direction, position, timeline, firstItem) {
+    this.setState({
+      direction,
+      position,
+      sliding: true
+    });
+    if (direction === 'prev') timeline.to(firstItem, { opacity: 0 });
   }
 
   render() {
-    const { children, refs } = this.props;
+    const { children } = this.props;
 
     let items = children.map((child, index) => ({
       ...child,
@@ -355,11 +354,11 @@ class Carousel extends Component {
 
     // Sort items by position so it easy to pick the item by position like:
     // item[0] for first item and  item[1] for second item
-    const sortedItems = items.sort(function(a,b) {
+    const sortedItems = items.sort(function (a, b) {
       const positionA = a.position;
       const positionB = b.position;
-      if(positionA < positionB) return -1;
-      if(positionA > positionB) return 1;
+      if (positionA < positionB) return -1;
+      if (positionA > positionB) return 1;
       return 0;
     });
 
@@ -367,22 +366,22 @@ class Carousel extends Component {
       <div className="recent-work__slider">
         <div className="recent-work__slider__wrapper">
           <div className="recent-work__slider__main">
-            { sortedItems.slice(0,1).map((child, index) => (
-              <div className={`recent-work__slider__item${this.state.sliding ? ' sliding' : ''}${!this.state.isLocked ? ' finished' : ''}`}  order={child.position} style={{order: child.position}}  key={child.key} ref={child.props.refs[`${child.key}_ref`]}>
+            {sortedItems.slice(0, 1).map((child, index) => (
+              <div className={`recent-work__slider__item${this.state.sliding ? ' sliding' : ''}${!this.state.isLocked ? ' finished' : ''}`} order={child.position} style={{ order: child.position }} key={child.key} ref={child.props['data-refs'][`${child.key}_ref`]}>
                 {child}
               </div>
             ))}
             <div className="recent-work__slider__navigation">
-                <button className="recent-work__slider__button recent-work__slider__button-prev" onClick={() => this.prevSlide()}><CarouselArrow /></button>
-                <button className="recent-work__slider__button recent-work__slider__button-next" onClick={() => this.nextSlide()}><CarouselArrow /></button>
+              <button className="recent-work__slider__button recent-work__slider__button-prev" onClick={() => this.prevSlide()}><CarouselArrow /></button>
+              <button className="recent-work__slider__button recent-work__slider__button-next" onClick={() => this.nextSlide()}><CarouselArrow /></button>
             </div>
           </div>
           <div className="recent-work__slider__thumbnails">
-          { sortedItems.slice(1,5).map((child, index) => (
-            <div className={`recent-work__slider__item${this.state.sliding ? ' sliding' : ''}${!this.state.isLocked ? ' finished' : ''}`}  order={child.position} style={{order: child.position}}  key={child.key} ref={child.props.refs[`${child.key}_ref`]}>
-              {child}
-            </div>
-          ))}
+            {sortedItems.slice(1, 5).map((child, index) => (
+              <div className={`recent-work__slider__item${this.state.sliding ? ' sliding' : ''}${!this.state.isLocked ? ' finished' : ''}`} order={child.position} style={{ order: child.position }} key={child.key} ref={child.props['data-refs'][`${child.key}_ref`]}>
+                {child}
+              </div>
+            ))}
           </div>
         </div>
       </div>
