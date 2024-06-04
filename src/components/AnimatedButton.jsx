@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import Link from './Link';
-import {gsap} from 'gsap';
+import { gsap } from 'gsap';
 import CustomEase from 'gsap/CustomEase';
-import GSDevTools from 'gsap/GSDevTools';
-
-// Register gsap modules
-gsap.registerPlugin(GSDevTools);
-
 
 class AnimatedButton extends Component {
   constructor(props) {
@@ -41,16 +36,6 @@ class AnimatedButton extends Component {
 
   componentDidMount() {
 
-    if (GSDevTools.getById('buttonTool')) {
-      GSDevTools.getById('buttonTool').kill();
-    }
-
-    // GSDevTools.create({
-    //   id: 'buttonTool',
-    //   animation: 'buttonTimeline',
-    //   paused: false,
-    // });d
-
     const buttonTimeline = this.buttonTimeline;
     const buttonElement = this.buttonRef.current;
     const buttonElementPosition = buttonElement.getBoundingClientRect();
@@ -67,16 +52,16 @@ class AnimatedButton extends Component {
     // Button animation
     // 52px is the width of the arrow + padding in the 2nd part
     buttonTimeline.fromTo(buttonElement,
-    {
-       x: '-50',
-      textAlign: 'right'
-    },
-     {
-      duration: 0.75,
-      x: 0,
-      textAlign: 'center',
-      ease: this.customEase
-    },
+      {
+        x: '-50',
+        textAlign: 'right'
+      },
+      {
+        duration: 0.75,
+        x: 0,
+        textAlign: 'center',
+        ease: this.customEase
+      },
       '0.5');
 
     buttonTimeline.fromTo(buttonPart1,
@@ -85,7 +70,7 @@ class AnimatedButton extends Component {
         duration: 0.75, x: 0,
         ease: this.customEase
       }
-    , '.5');
+      , '.5');
 
     buttonTimeline.fromTo(buttonPart2, {
       left: -30,
@@ -97,9 +82,9 @@ class AnimatedButton extends Component {
       clipPath: `inset(0% 0% 0% 0px)`
     }, '0.5');
 
-    buttonTimeline.fromTo(buttonTextContainer, {width: '20%', x: -23}, { width: '100%', x: 0}, '0.6');
-    buttonTimeline.fromTo(buttonText, { clipPath: 'inset(0% 0% 0% 100%)' }, { duration: 0.4, ease: this.customEase, clipPath: 'inset(0% 0% 0% 0%)',}, '0.6');
-    buttonTimeline.fromTo(buttonArrow, {x: 0 }, { duration: 0.75, x: 0 }, '0.5');
+    buttonTimeline.fromTo(buttonTextContainer, { width: '20%', x: -23 }, { width: '100%', x: 0 }, '0.6');
+    buttonTimeline.fromTo(buttonText, { clipPath: 'inset(0% 0% 0% 100%)' }, { duration: 0.4, ease: this.customEase, clipPath: 'inset(0% 0% 0% 0%)', }, '0.6');
+    buttonTimeline.fromTo(buttonArrow, { x: 0 }, { duration: 0.75, x: 0 }, '0.5');
 
     this.buttonTimeline.play();
 
@@ -107,12 +92,6 @@ class AnimatedButton extends Component {
       this.setState({
         buttonClass: `btn btn-action btn-animated btn-${this.buttonColor}`,
       });
-    }
-  }
-
-  componentWillUnmount() {
-    if (GSDevTools.getById('buttonTool')) {
-      GSDevTools.getById('buttonTool').kill();
     }
   }
 
@@ -175,15 +154,15 @@ class AnimatedButton extends Component {
     );
 
 
-    if(this.props.href) {
+    if (this.props.href) {
       button = (
         <Link href={`${this.props.href}`} as={this.props.as}>
           <button className={`${this.props.className} ${this.state.buttonClass}`}
-                  id={this.props.id}
-                  ref={this.buttonRef}
-                  onMouseEnter={this.handleHoverOn.bind(this)}
-                  onMouseLeave={this.handleHoverOff.bind(this)}
-                  onClick={this.handleHoverClick.bind(this)}>
+            id={this.props.id}
+            ref={this.buttonRef}
+            onMouseEnter={this.handleHoverOn.bind(this)}
+            onMouseLeave={this.handleHoverOff.bind(this)}
+            onClick={this.handleHoverClick.bind(this)}>
             {buttonPart1}
             {buttonPart2}
             {buttonPart3}
@@ -191,14 +170,14 @@ class AnimatedButton extends Component {
           </button>
         </Link>
       );
-    }else {
+    } else {
       button = (
         <button type="submit"
-                className={`${this.props.className} ${this.state.buttonClass}`}
-                id={this.props.id}
-                ref={this.buttonRef}
-                onMouseEnter={this.handleHoverOn.bind(this)}
-                onMouseLeave={this.handleHoverOff.bind(this)}>
+          className={`${this.props.className} ${this.state.buttonClass}`}
+          id={this.props.id}
+          ref={this.buttonRef}
+          onMouseEnter={this.handleHoverOn.bind(this)}
+          onMouseLeave={this.handleHoverOff.bind(this)}>
           {buttonPart1}
           {buttonPart2}
           {buttonPart3}
@@ -207,7 +186,7 @@ class AnimatedButton extends Component {
       );
     }
 
-    return(button);
+    return (button);
   }
 }
 

@@ -10,7 +10,6 @@ import RoughEase from 'gsap/EasePack';
 
 import ScrollToPlugin from 'gsap/ScrollToPlugin';
 import CSSRulePlugin from 'gsap/CSSRulePlugin';
-import GSDevTools from 'gsap/GSDevTools';
 
 import AnimatedButton from './AnimatedButton';
 
@@ -27,7 +26,7 @@ import LogoNegative from '../../public/static/images/CV_LOGO_BLACK.svg';
 import CodeArrow from '../../public/static/images/code_arrow.svg';
 
 // Register gsap modules
-gsap.registerPlugin(CSSRulePlugin, ScrollToPlugin, GSDevTools, RoughEase, CustomEase);
+gsap.registerPlugin(CSSRulePlugin, ScrollToPlugin, RoughEase, CustomEase);
 
 class HomeOpening extends Component {
   constructor(props) {
@@ -83,22 +82,6 @@ class HomeOpening extends Component {
 
     /** New timeline starts here * */
     this.startHomeAnimation();
-
-    if (GSDevTools.getById('main')) {
-      GSDevTools.getById('main').kill();
-    }
-
-    // GSDevTools.create({
-    //   id: 'main',
-    //   animation: 'homeAnimationTimeline',
-    //   paused: true,
-    // });
-  }
-
-  componentWillUnmount() {
-    if (GSDevTools.getById('main')) {
-      GSDevTools.getById('main').kill();
-    }
   }
 
   handleArrowHover(e) {
@@ -269,13 +252,13 @@ class HomeOpening extends Component {
       filter: 'blur(5px)',
       duration: 1.5,
       ease: this.customEase,
-    },0);
+    }, 0);
     this.homeAnimationTimeline.from(homeOpeningSubtitle, {
       scale: 1.5,
       filter: 'blur(5px)',
       duration: 1.5,
       ease: this.customEase,
-    },0);
+    }, 0);
 
     this.homeAnimationTimeline.from(triangle, {
       scale: 2.75,
@@ -336,17 +319,15 @@ class HomeOpening extends Component {
 
   render() {
     return (
-
       <div className="wrapper">
-
         <div className="home-barebone align-content-center">
           <div className="home-barebone__logo" ref={this.homeBareboneLogoContainer}>
-            <BgIcon ref={this.homeBareboneLogo}/>
+            <BgIcon ref={this.homeBareboneLogo} />
           </div>
           <div className="home-barebone__container container-fluid">
             <div className="home-barebone__block">
               <div className="home-barebone__logofull">
-                <LogoNegative ref={this.homeBareboneLogoFull}/>
+                <LogoNegative ref={this.homeBareboneLogoFull} />
               </div>
               <h1 className="home-barebone__title" ref={this.homeBareboneTitle}>
                 <div className="home-barebone__title__line-1">
@@ -361,13 +342,13 @@ class HomeOpening extends Component {
               </div>
               <div className="home-barebone__code" ref={this.homeBareboneCode}>
                 <div className="home-barebone__code__wrapper">
-                  <span><CodeArrow style={{width: 14, transform: 'rotate(180deg)', marginRight: 5}}/>script<CodeArrow style={{width: 14, marginLeft: 5}}/></span>
+                  <span><CodeArrow style={{ width: 14, transform: 'rotate(180deg)', marginRight: 5 }} />script<CodeArrow style={{ width: 14, marginLeft: 5 }} /></span>
                   <span>const initHomepage = &#40;<strong>magic</strong>&#41; =&gt; &#123;</span>
-                  <span style={{marginLeft: 10}}>this.renderBlock(magic)</span>
-                  <span style={{marginLeft: 10}}>this.doSomeGsap(magic)</span>
+                  <span style={{ marginLeft: 10 }}>this.renderBlock(magic)</span>
+                  <span style={{ marginLeft: 10 }}>this.doSomeGsap(magic)</span>
                   <span>&#125;&#41;</span>
                   ... ... ...
-                  <span><CodeArrow style={{width: 14, marginRight: 5, transform: 'rotate(180deg)'}}/>/script<CodeArrow style={{width: 14, marginLeft: 5}}/></span>
+                  <span><CodeArrow style={{ width: 14, marginRight: 5, transform: 'rotate(180deg)' }} />/script<CodeArrow style={{ width: 14, marginLeft: 5 }} /></span>
                 </div>
               </div>
             </div>
@@ -380,8 +361,8 @@ class HomeOpening extends Component {
             onMouseLeave={this.handleArrowLeave}
           >
             <a href="#about-me" onClick={(e) => { this.scrollToSection(e, '#about-me'); }}>
-              <AboutMe className="aboutme__text" ref={this.homeBareboneArrow1_Txt}/>
-              <AboutMeArrow className="aboutme__arrow" ref={this.homeBareboneArrow1_Svg}/>
+              <AboutMe className="aboutme__text" ref={this.homeBareboneArrow1_Txt} />
+              <AboutMeArrow className="aboutme__arrow" ref={this.homeBareboneArrow1_Svg} />
             </a>
           </div>
 
@@ -394,7 +375,7 @@ class HomeOpening extends Component {
           >
             <a href="#recent-work" onClick={(e) => { this.scrollToSection(e, '#recent-work'); }}>
               <RecentWork className="recentwork__text" ref={this.homeBareboneArrow2_Txt} />
-              <RecentWorkArrow className="recentwork__arrow" ref={this.homeBareboneArrow2_Svg}/>
+              <RecentWorkArrow className="recentwork__arrow" ref={this.homeBareboneArrow2_Svg} />
             </a>
           </div>
         </div>
@@ -402,7 +383,7 @@ class HomeOpening extends Component {
         <div className="home-opening" ref={this.homeOpening} onMouseMove={this.onMouseMove.bind(this)}>
 
           <div className="home-opening__logo" ref={this.homeOpeningLogoContainer}>
-              <BgIcon  ref={this.homeOpeningLogo}/>
+            <BgIcon ref={this.homeOpeningLogo} />
           </div>
 
           <div className="home-opening__content">
@@ -411,9 +392,9 @@ class HomeOpening extends Component {
                 <h1 className="home-opening__title" ref={this.homeOpeningTitle}>
                   <div id="home-word-1" ref={this.homeOpeningHomeWord1}>
 
-                      <span className="label">Creative</span>
-                      <Circle className="circle" ref={this.circleRef} />
-                      <Triangle className="triangle" ref={this.triangleRef} />
+                    <span className="label">Creative</span>
+                    <Circle className="circle" ref={this.circleRef} />
+                    <Triangle className="triangle" ref={this.triangleRef} />
 
                   </div>
                   <div id="home-word-2" ref={this.homeOpeningHomeWord2}>Development</div>

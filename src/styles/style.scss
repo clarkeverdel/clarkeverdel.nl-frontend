@@ -1,41 +1,41 @@
 // Variables will be set globally
-@import 'variables';
+@import "variables";
 
 // Start with Third Party Imports
-@import 'bootstrap-variables';
-@import '~bootstrap/scss/bootstrap';
+@import "bootstrap-variables";
+@import "~bootstrap/scss/bootstrap";
 
 // Loaders css for preloading svg
-@import '~loaders.css/src/animations/ball-clip-rotate-multiple';
+@import "~loaders.css/src/animations/ball-clip-rotate-multiple";
 
 // Functions
-@import 'functions/calculate';
+@import "functions/calculate";
 
 // Mixins
-@import 'mixins/placeholder';
-@import 'mixins/transitions';
+@import "mixins/placeholder";
+@import "mixins/transitions";
 
 // Global theme styles
-@import 'theme';
+@import "theme";
 
 // Default styles
-@import 'typography';
+@import "typography";
 
 // components as HTML elements, defined as bootstrap does
-@import 'components/buttons';
-@import 'components/forms';
-@import 'components/loaders';
-@import 'components/navigation';
-@import 'components/radios';
+@import "components/buttons";
+@import "components/forms";
+@import "components/loaders";
+@import "components/navigation";
+@import "components/radios";
 
 // sections, actually react components
-@import 'sections/footer';
-@import 'sections/header';
-@import 'sections/about-me';
-@import 'sections/home-opening';
-@import 'sections/recent-work';
+@import "sections/footer";
+@import "sections/header";
+@import "sections/about-me";
+@import "sections/home-opening";
+@import "sections/recent-work";
 
 // pages
 // Convert to css module in future
-@import 'pages/homepage';
-@import 'pages/contact';
+@import "pages/homepage";
+@import "pages/contact";
