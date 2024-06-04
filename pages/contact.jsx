@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useRef, useState } from 'react';
 import Error from 'next/error';
 import BodyClassName from 'react-body-classname';
-import { gsap, Power4, Power3 } from 'gsap';
+import { gsap, Power4, Power3, CustomEase } from 'gsap';
 
 import Layout from '../src/components/Layout';
 import PageWrapper from '../src/components/PageWrapper';
@@ -11,6 +11,8 @@ import { Config } from '../config';
 import Cross from '../public/static/images/CROSS_DARK.svg';
 import Triangle from '../public/static/images/TRIANGLE_DARK.svg';
 import Circle from '../public/static/images/CIRCLE_DARK.svg';
+
+gsap.registerPlugin(CustomEase);
 
 const Contact = (props) => {
   const { post } = props;
@@ -51,20 +53,20 @@ const Contact = (props) => {
     const circle = circleRef.current;
 
     // TODO: Use a QuickSetter from Gsap Docs to boost performance
-    gsap.to(circle,{duration: 2.5, x: (x / 20), y: (y / 5), ease: Power4.easeOut });
-    gsap.to(triangle,{duration: 2.5, x: (x / 30), y: (y / 10), rotation, ease: Power3.easeOut });
-    gsap.to(cross,{duration: 2.5, x: (x / 30), y: (y / 10), rotation, ease: Power4.easeOut });
+    gsap.to(circle, { duration: 2.5, x: (x / 20), y: (y / 5), ease: Power4.easeOut });
+    gsap.to(triangle, { duration: 2.5, x: (x / 30), y: (y / 10), rotation, ease: Power3.easeOut });
+    gsap.to(cross, { duration: 2.5, x: (x / 30), y: (y / 10), rotation, ease: Power4.easeOut });
   }
 
   useEffect(() => {
-    const tl = gsap.timeline({ repeat: 0});
+    const tl = gsap.timeline({ repeat: 0 });
     const darkIconColor = 'rgb(23,18,32)';
 
     // Change mail icon color
-    tl.to('.MAIL_BTN_svg__mail_btn .MAIL_BTN_svg__st0', { fill: darkIconColor, duration: 1}, 0);
+    tl.to('.MAIL_BTN_svg__mail_btn .MAIL_BTN_svg__st0', { fill: darkIconColor, duration: 1 }, 0);
 
     // Change hamburger icon color
-    tl.to('#HAMBURGER_svg__Group_7 path', { fill: darkIconColor, duration: 1}, 0);
+    tl.to('#HAMBURGER_svg__Group_7 path', { fill: darkIconColor, duration: 1 }, 0);
   })
 
   if (!post.title) return <Error statusCode={404} />;
