@@ -4,6 +4,7 @@ node_modules
 .env
 /out
 .netlify
+.npmrc
 
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
