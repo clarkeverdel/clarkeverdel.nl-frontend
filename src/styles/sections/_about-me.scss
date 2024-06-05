@@ -1,13 +1,13 @@
 .about-me {
   padding: rem(100) 8.75vw;
 
-  @include media-breakpoint-down(md){
+  @include media-breakpoint-down(md) {
     padding: rem(50) $body-margin-md;
   }
-  @include media-breakpoint-down(sm){
+  @include media-breakpoint-down(sm) {
     padding: rem(50) $body-margin-sm;
   }
-  @include media-breakpoint-down(xs){
+  @include media-breakpoint-down(xs) {
     padding: rem(50) $body-margin-xs;
   }
 
@@ -52,7 +52,7 @@
     z-index: 2;
     position: relative;
 
-    @include media-breakpoint-down(md){
+    @include media-breakpoint-down(md) {
       margin: 0 0 rem(30);
     }
   }
@@ -68,9 +68,9 @@
 
     @include media-breakpoint-up(lg) {
       position: absolute;
-      width: 43vw;
-      transform: translateX(43%);
-      top: 0;
+      width: 65vw;
+      transform: translateX(15%);
+      top: -2rem;
     }
 
     &__image {
