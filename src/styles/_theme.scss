@@ -6,7 +6,8 @@ body {
     background-color: $theme-color-dark;
   }
 
-  h1, h2 {
+  h1,
+  h2 {
     color: $theme-color-light;
   }
 
@@ -41,7 +42,8 @@ svg {
 }
 
 a {
-  color: #FFF;
+  color: #fff;
+  text-decoration: underline;
 }
 
 .loader-hidden {
@@ -54,14 +56,13 @@ a {
 .container-fluid {
   padding: 0 8.75vw;
 
-  @include media-breakpoint-down(md){
+  @include media-breakpoint-down(md) {
     padding: 0 $body-margin-md;
   }
-  @include media-breakpoint-down(sm){
+  @include media-breakpoint-down(sm) {
     padding: 0 $body-margin-sm;
-
   }
-  @include media-breakpoint-down(xs){
+  @include media-breakpoint-down(xs) {
     padding: 0 $body-margin-xs;
   }
 }
@@ -70,17 +71,16 @@ a {
   max-width: calc(815px + (8.75vw * 2));
   padding: 0 8.75vw;
 
-  @include media-breakpoint-down(md){
+  @include media-breakpoint-down(md) {
     padding: 0 $body-margin-md;
   }
-  @include media-breakpoint-down(sm){
+  @include media-breakpoint-down(sm) {
     padding: 0 $body-margin-sm;
   }
-  @include media-breakpoint-down(xs){
+  @include media-breakpoint-down(xs) {
     padding: 0 $body-margin-xs;
   }
 }
-
 
 // text styles
 .text-dark {
@@ -96,13 +96,13 @@ a {
     line-height: 1.2;
   }
 
-  @media only screen AND (max-width: $screen-lg-max){
+  @media only screen AND (max-width: $screen-lg-max) {
     font-size: rem(22);
   }
-  @media only screen AND (max-width: $screen-md-max){
+  @media only screen AND (max-width: $screen-md-max) {
     font-size: rem(20);
   }
-  @media only screen AND (max-width: $screen-sm-max){
+  @media only screen AND (max-width: $screen-sm-max) {
     font-size: rem(18);
   }
 }
